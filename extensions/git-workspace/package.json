@@ -8,7 +8,7 @@
     "dev": "vite"
   },
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {},
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -81,8 +81,8 @@
       }
     ],
     "marketplace": {
-      "author": "Aekawan",
-      "github": "Aekawan",
+      "author": "Atur Terminal",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": ["git", "source-control", "workspace"],
       "icon": "icon.svg",
