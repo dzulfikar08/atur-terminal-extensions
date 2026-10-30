@@ -33,7 +33,7 @@
 
   h.set("projects.list", async () => [{ id: "p1", name: "acme-web", path: "/home/dev/acme-web", isActive: true }]);
   h.set("gh.user", async () => ({ login: "maya-chen" }));
-  h.set("git.pr.list", async () => prs);
+  h.set("git.pr.list", async () => prs.map((p) => ({ ...p, author: p.author.login })));
   h.set("exec", async (argv) => {
     const ok = (stdout) => ({ stdout, stderr: "", exitCode: 0 });
     if (argv[1] === "repo") return ok(REPO + "\n");
@@ -41,5 +41,18 @@
     if (argv[1] === "pr" && argv[2] === "list") return ok(JSON.stringify(prs));
     if (argv[1] === "issue") return ok("[]");
     return ok("");
+  });
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const until = async (test) => { for (let i = 0; i < 100 && !test(); i += 1) await sleep(100); };
+  window.addEventListener("load", async () => {
+    await until(() => document.querySelector("#search"));
+    document.querySelector("[data-mode=prs]").click();
+    await until(() => document.querySelector("#search")?.placeholder.includes("pull"));
+    await until(() => document.querySelector(".issue"));
+    document.querySelector('.issue[data-num="128"]').click();
+    await until(() => document.querySelector(".detail__title"));
+    await sleep(500);
+    window.__ready = true;
   });
 })();
