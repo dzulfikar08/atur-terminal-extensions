@@ -1,0 +1,19 @@
+{
+  "extension": "beads",
+  "entry": "panel/index.html",
+  "fixtures": [
+    "beads.js"
+  ],
+  "data": {
+    "surface": "tab",
+    "scene": "insights"
+  },
+  "wait": "window.__ready === true",
+  "settle": 1000,
+  "width": 1280,
+  "height": 800,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "fit"
+  }
+}

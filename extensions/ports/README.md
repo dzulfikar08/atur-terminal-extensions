@@ -29,3 +29,7 @@ npm run build   # or: npm run dev
 ```
 
 After rebuilding, click **Reload** in the Atur Terminal Extensions modal to pick up changes.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by mountain1009. Maintained by Atur Terminal.

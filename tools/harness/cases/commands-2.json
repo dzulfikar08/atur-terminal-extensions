@@ -1,0 +1,9 @@
+{
+  "extension": "commands",
+  "entry": "popover/index.html",
+  "fixtures": ["commands.js"],
+  "wait": "window.__ready === true",
+  "width": 280,
+  "height": 330,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
