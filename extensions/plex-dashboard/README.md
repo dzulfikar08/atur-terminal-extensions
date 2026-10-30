@@ -53,3 +53,7 @@ Then load the extension in Atur Terminal's Extensions modal pointed at this dire
 - Bandwidth/transcoder history charts — current snapshot only.
 - Notifications when a new session starts.
 - Shared (non-owned) servers — admin endpoints reject non-owner tokens.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Amado Tejada. Maintained by Atur Terminal.
