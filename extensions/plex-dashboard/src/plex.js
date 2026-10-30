@@ -1,7 +1,7 @@
 import { httpJSON, httpRequest, HttpError, aturExec } from "./http.js";
 
 const PRODUCT = "Atur Terminal Plex Dashboard";
-const VERSION = "0.1.0";
+const VERSION = "0.1.1";
 const PLATFORM = "macOS";
 const DEVICE_NAME = "Atur Terminal";
 

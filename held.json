@@ -1,26 +1,7 @@
 {
   "_comment": "Imported community extensions are in the repo but not auto-published yet: their store listing images still show the previous product. Remove a name once its screenshots are replaced; the next change to it (or a manual Publish run) publishes it.",
   "held": [
-    "ai-session-history",
-    "ai-usage",
-    "beads",
-    "cheatsheets",
     "ci-dashboard",
-    "commands",
-    "focus-timer",
-    "gitlab",
-    "gsd-control-tower",
-    "hermes-agent",
-    "himalaya",
-    "language-packs",
-    "linear",
-    "newapi-usage",
-    "ollama",
-    "plex-dashboard",
-    "ports",
-    "run-deck",
-    "system-monitor",
-    "todos",
-    "web-browser"
+    "language-packs"
   ]
 }

@@ -117,3 +117,7 @@ scripts/resume-picker-entry.js   # palette entry (bundled to IIFE)
 scripts/resume-picker.built.js   # built IIFE for runScript
 test/                            # Bun tests (host-fs, scan, manage, helpers)
 ```
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Appelgriebsch. Maintained by Atur Terminal.
