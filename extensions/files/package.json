@@ -1,6 +1,6 @@
 {
   "name": "files",
-  "version": "1.21.6",
+  "version": "1.21.7",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/copy-build-assets.mjs",
@@ -185,8 +185,8 @@
       }
     ],
     "marketplace": {
-      "author": "Saeed Vaziry",
-      "github": "saeedvaziry",
+      "author": "Atur Terminal",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": [
         "files",

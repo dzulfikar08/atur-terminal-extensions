@@ -35,6 +35,7 @@ for (const name of names) {
     "--height", String(spec.height ?? 800),
     "--theme", spec.theme ?? "dark",
   ];
+  if (spec.allFrames) args.push("--all-frames");
   if (spec.wait) args.push("--wait", spec.wait);
   if (spec.settle != null) args.push("--settle", String(spec.settle));
   if (spec.timeout != null) args.push("--timeout", String(spec.timeout));

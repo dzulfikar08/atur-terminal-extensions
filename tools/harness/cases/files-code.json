@@ -1,0 +1,11 @@
+{
+  "extension": "files",
+  "entry": "__fixtures__/host.html?file=src/lib/session.ts&line=27&column=22&expanded=src,src/lib,src/components,src/hooks,tests&selected=src/lib/session.ts",
+  "fixtures": ["acme-web.js"],
+  "assets": { "host.html": "tools/harness/fixtures/files-host.html" },
+  "allFrames": true,
+  "wait": "(() => { const e = document.getElementById('editor').contentDocument, p = document.getElementById('panel').contentDocument; return !!e && !!p && e.querySelectorAll('.cm-line').length > 20 && !!e.querySelector('.cm-git-added') && p.querySelectorAll('.file-tree-row').length > 14; })()",
+  "settle": 2500,
+  "width": 1600,
+  "height": 1000
+}

@@ -25,3 +25,7 @@ automatically when the panel opens (or click any row), then:
 | `Home` / `End` | Jump to the first / last row |
 | `F2` | Rename the selected item |
 | type a name | Type-ahead to the next matching entry |
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Saeed Vaziry. Maintained by Atur Terminal.

@@ -1,0 +1,11 @@
+{
+  "extension": "files",
+  "entry": "__fixtures__/host.html?file=README.md&icons=material&expanded=.github,src,src/app,src/components,src/lib&selected=README.md",
+  "fixtures": ["acme-web.js"],
+  "assets": { "host.html": "tools/harness/fixtures/files-host.html" },
+  "allFrames": true,
+  "wait": "(() => { const e = document.getElementById('editor').contentDocument, p = document.getElementById('panel').contentDocument; return !!e && !!p && !!e.querySelector('h1') && e.querySelectorAll('pre').length > 0 && p.querySelectorAll('.file-tree-row').length > 14; })()",
+  "settle": 2500,
+  "width": 1600,
+  "height": 1000
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>acme-web</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--atur-background, #1e1e1e); }
+  .layout { display: flex; height: 100%; }
+  iframe { border: 0; height: 100%; display: block; color-scheme: dark; }
+  #editor { flex: 1; min-width: 0; }
+  #panel { width: 300px; flex: none; border-left: 1px solid var(--atur-border, rgba(255, 255, 255, 0.1)); }
+</style>
+<div class="layout"><iframe id="editor"></iframe><iframe id="panel"></iframe></div>
+<script>
+  // Lays the files extension's editor tab beside its tree panel, the way the app shows them.
+  // The query string (file, line, expanded, ...) is forwarded to both pages.
+  const q = location.search;
+  document.getElementById("editor").src = "atur-ext://files/panel/editor.html" + q;
+  document.getElementById("panel").src = "atur-ext://files/panel/index.html" + q;
+</script>
