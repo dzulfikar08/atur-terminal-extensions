@@ -110,3 +110,7 @@ npm run validate
 `npm run build` creates the marketplace package in `dist/`. `npm run validate` checks the manifest, listing assets, permissions, source graph, secret safety, and reproducible build output.
 
 Release history and the marketplace handoff process are documented in [CHANGELOG.md](CHANGELOG.md) and [RELEASING.md](RELEASING.md).
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Gabe. Maintained by Atur Terminal.
