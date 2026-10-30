@@ -1,6 +1,6 @@
 {
   "name": "ollama",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "Ollama servers and models, with one-click agent launches in Atur Terminal",
@@ -99,7 +99,7 @@
     ],
     "marketplace": {
       "author": "Eric Marchand",
-      "github": "phimage",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": ["developer-tools", "ai"],
       "icon": "marketplace-icon.svg",

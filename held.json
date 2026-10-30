@@ -3,24 +3,15 @@
   "held": [
     "ai-session-history",
     "ai-usage",
-    "beads",
     "cheatsheets",
     "ci-dashboard",
     "commands",
-    "focus-timer",
     "gitlab",
-    "gsd-control-tower",
-    "hermes-agent",
     "language-packs",
     "linear",
-    "newapi-usage",
-    "ollama",
     "plex-dashboard",
     "ports",
     "review",
-    "run-deck",
-    "system-monitor",
-    "todos",
     "web-browser"
   ]
 }

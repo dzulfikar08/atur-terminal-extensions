@@ -1,0 +1,22 @@
+{
+  "extension": "atur",
+  "entry": "index.html",
+  "data": {
+    "view": "agents"
+  },
+  "fixtures": [
+    "atur.js",
+    "atur-agents.js"
+  ],
+  "wait": "window.__ready === true",
+  "settle": 800,
+  "width": 1100,
+  "height": 700,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "fit"
+  },
+  "eval": [
+    "JSON.stringify({menu: !!document.querySelector('.menu'), logos: document.querySelectorAll('.menu img.wsicon').length, items: document.querySelectorAll('.menu .mx-menu-item').length, menuPos: document.querySelector('.menu') && getComputedStyle(document.querySelector('.menu')).position, log: window.__log})"
+  ]
+}

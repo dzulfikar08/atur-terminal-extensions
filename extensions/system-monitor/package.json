@@ -1,6 +1,6 @@
 {
   "name": "system-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -61,7 +61,7 @@
     ],
     "marketplace": {
       "author": "Nick Fay",
-      "github": "n14395",
+      "github": "dzulfikar08",
       "categories": ["developer-tools", "utilities"],
       "icon": "assets/icon.svg",
       "screenshots": ["assets/screenshots/1.png",
