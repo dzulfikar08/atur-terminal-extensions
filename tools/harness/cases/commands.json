@@ -1,0 +1,9 @@
+{
+  "extension": "commands",
+  "entry": "tab/index.html",
+  "fixtures": ["commands.js"],
+  "wait": "window.__ready === true",
+  "width": 1280,
+  "height": 900,
+  "compose": { "canvas": "1600x1000", "mode": "fit" }
+}

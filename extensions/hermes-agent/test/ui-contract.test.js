@@ -7,15 +7,15 @@ const root = new URL("../", import.meta.url);
 test("marketplace identity, metadata, and permissions are frozen", async () => {
   const manifest = JSON.parse(await readFile(new URL("package.json", root), "utf8"));
   assert.equal(manifest.name, "hermes-agent");
-  assert.equal(manifest.version, "0.2.0");
+  assert.equal(manifest.version, "0.2.1");
   assert.equal(manifest.engines.node, ">=20");
   assert.equal(Object.keys(manifest.dependencies ?? {}).length, 0);
   assert.deepEqual(manifest["atur-terminal"].marketplace, {
     author: "Gabe",
     categories: ["developer-tools", "productivity"],
-    github: "gabeosx",
+    github: "dzulfikar08",
     icon: "assets/icon.svg",
-    repository: "https://github.com/gabeosx/muxy-hermes-extension",
+    repository: "https://github.com/gabeosx/atur-hermes-extension",
     screenshots: [
       "assets/screenshots/screenshot-1.png",
       "assets/screenshots/screenshot-2.png",

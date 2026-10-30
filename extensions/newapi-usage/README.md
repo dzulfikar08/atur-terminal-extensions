@@ -3,7 +3,7 @@
 Multi-site NewAPI + Sub2API usage monitor for Atur Terminal. Track NewAPI balance,
 consumption, and Sub2API remaining balance/status from one status bar item.
 
-![Screenshot](./src/assets/screenshot.png)
+![Screenshot](./src/assets/screenshot-1.png)
 
 ## Features
 
@@ -126,3 +126,7 @@ Built files go to `dist/`. After rebuilding, click **Reload** in Atur Terminal E
 ## License
 
 MIT
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by isfk. Maintained by Atur Terminal.
