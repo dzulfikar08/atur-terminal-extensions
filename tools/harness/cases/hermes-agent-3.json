@@ -9,8 +9,8 @@
   },
   "wait": "window.__ready === true",
   "settle": 1000,
-  "width": 1440,
-  "height": 900,
+  "width": 1624,
+  "height": 1000,
   "compose": {
     "canvas": "1600x1000",
     "mode": "fit"

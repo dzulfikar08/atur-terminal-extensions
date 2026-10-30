@@ -118,7 +118,6 @@
       await sleep(80);
       this.#event("message.delta", { text: "I'll start with the cart summary component and its tests. " });
       await sleep(60);
-      this.#event("tool.start", { name: "read_file" });
       this.#event("tool.complete", { name: "read_file", summary: "Read src/checkout/CartSummary.tsx (214 lines)" });
       await sleep(60);
       this.#event("tool.complete", { name: "search_files", summary: "Found 3 tests that touch cart totals" });
@@ -151,6 +150,10 @@
       type("#dashboard-password", "demo-password");
     } else if (scene === "board") {
       await until(() => document.querySelector(".board-card"));
+      // Show Ready through Done, the columns that carry the work in flight.
+      const columns = document.querySelector(".board-columns");
+      const cols = document.querySelectorAll(".board-column");
+      columns.scrollLeft = cols[3].getBoundingClientRect().left - cols[0].getBoundingClientRect().left;
     } else {
       await until(() => document.querySelector(".gateway-job-list") && document.querySelector(".gateway-connection-connected"));
       await sleep(500);
