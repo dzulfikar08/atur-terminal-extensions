@@ -6,6 +6,13 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-30
+
+### Changed
+
+- Replaced the marketplace and README screenshots with renders of the current panel using sample data.
+- Credits and listing maintainer updated; Atur Terminal now maintains the marketplace listing.
+
 ## [0.3.0] - 2026-10-18
 
 ### Added
