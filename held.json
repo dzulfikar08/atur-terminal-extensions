@@ -2,7 +2,6 @@
   "_comment": "Imported community extensions are in the repo but not auto-published yet: their store listing images still show the previous product. Remove a name once its screenshots are replaced; the next change to it (or a manual Publish run) publishes it.",
   "held": [
     "ci-dashboard",
-    "language-packs",
-    "review"
+    "language-packs"
   ]
 }

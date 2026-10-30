@@ -77,3 +77,7 @@ preflight` runs the extension through the real `dzulfikar08/atur-terminal-extens
 ## License
 
 MIT
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Mark Huot. Maintained by Atur Terminal.
