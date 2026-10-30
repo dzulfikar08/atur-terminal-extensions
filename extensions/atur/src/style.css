@@ -49,9 +49,9 @@ body {
   border: 1px solid var(--atur-border);
   font-size: 9px; font-weight: 700;
 }
-.menu { position: absolute; top: calc(100% + var(--s2)); min-width: 200px; max-height: 60vh; overflow: auto; z-index: 10; background: var(--atur-surface-solid); }
-.menu--left { left: 0; }
-.menu--right { right: 0; }
+.menuwrap .menu { position: absolute; top: calc(100% + var(--s2)); min-width: 200px; max-height: 60vh; overflow: auto; z-index: 10; background: var(--atur-surface-solid); }
+.menuwrap .menu--left { left: 0; }
+.menuwrap .menu--right { right: 0; }
 .menu .mx-menu-item { gap: var(--s4); }
 .menu .mx-menu-item span:not(.wsicon) { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .menu__who { padding: var(--s3) var(--s5); color: var(--atur-foreground-muted); font-size: var(--font-footnote); }
