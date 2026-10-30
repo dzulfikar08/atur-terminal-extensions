@@ -24,7 +24,7 @@
     { id: "c-acme-dev", name: "acme-web dev", engine: "postgres", group: "acme-web", color: "#61afef", keychain: true,
       net: { host: "127.0.0.1", port: 5432, user: "acme", database: "acme_web_dev", sslMode: "" }, createdAt: now - 90 * 24 * HOUR, lastUsedAt: now - 2 * HOUR },
     { id: "c-acme-staging", name: "acme-web staging", engine: "postgres", group: "acme-web", color: "#e5a56b", keychain: true,
-      net: { host: "staging-db.acme.dev", port: 5432, user: "acme_app", database: "acme_web", sslMode: "require" },
+      net: { host: "stg-db.acme.dev", port: 5432, user: "app", database: "acme_web", sslMode: "require" },
       ssh: { enabled: true, host: "bastion.acme.dev", port: 22, user: "deploy" }, createdAt: now - 80 * 24 * HOUR, lastUsedAt: now - 30 * HOUR },
     { id: "c-acme-prod", name: "acme-web production (read-only)", engine: "postgres", group: "acme-web", color: "#e06c75", keychain: true,
       net: { host: "db.acme.dev", port: 5432, user: "readonly", database: "acme_web", sslMode: "verify-full" },
