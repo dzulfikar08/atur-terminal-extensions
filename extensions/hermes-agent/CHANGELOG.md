@@ -4,6 +4,13 @@ All notable changes to Hermes Agent are documented here. This project follows [K
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-30
+
+### Changed
+
+- Replaced the marketplace and README screenshots with renders of the current panel and board using sample data.
+- Credits and listing maintainer updated; Atur Terminal now maintains the marketplace listing.
+
 ## [0.2.0] - 2026-10-18
 
 ### Added
