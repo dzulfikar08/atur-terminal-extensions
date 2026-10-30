@@ -24,7 +24,7 @@
   const row = (id, key, name, stateKey, ws, extra = {}) => ({
     id, key, name, sequenceId: Number(key.split("-")[1]), priority: "medium", stateKey,
     stateName: states.find((s) => s.key === stateKey).name, stateGroup: "started",
-    projectId: "p-" + ws.slug, projectName: ws.name, projectIdentifier: key.split("-")[0],
+    projectId: "p-" + ws.slug, projectName: ws.slug === "atur" ? "Terminal" : "Operations", projectIdentifier: key.split("-")[0],
     workspaceSlug: ws.slug, workspaceName: ws.name, targetDate: null, updatedAt: iso(3), ...extra,
   });
   const [atur, joyo, waqtu] = workspaces;

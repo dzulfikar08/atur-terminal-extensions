@@ -114,6 +114,7 @@ body {
 .app--tab .split { display: grid; grid-template-columns: minmax(280px, 380px) 1fr; flex: 1; min-height: 0; border-top: 1px solid var(--atur-border); }
 .app--tab .split__list { border-right: 1px solid var(--atur-border); }
 .app--tab .linked { max-width: 560px; }
+.app--tab .views { max-width: 420px; }
 
 /* ---------- detail ---------- */
 .detail { padding: var(--s4) var(--s5) var(--s8); }

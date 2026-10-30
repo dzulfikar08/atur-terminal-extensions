@@ -5,7 +5,6 @@
     await h.until(() => document.querySelector('[data-action="set-view"][data-view="agents"]'));
     document.querySelector('[data-action="set-view"][data-view="agents"]').click();
     await h.until(() => document.querySelectorAll(".row").length >= 2);
-    await h.until(() => document.querySelectorAll("img.wsicon").length >= 1);
     document.querySelector('[data-action="toggle-menu"][data-menu="workspace"]').click();
     await h.until(() => document.querySelectorAll(".menu img.wsicon").length >= 3);
     await h.sleep(500);

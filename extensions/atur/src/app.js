@@ -2,7 +2,7 @@ import { escapeHtml } from "@atur/ui";
 import { createApi } from "./lib/api.js";
 import { SignedOutError, createAuth } from "./lib/auth.js";
 import { createMcp } from "./lib/mcp.js";
-import { STATE_LABELS, agentStateLabel, dueLabel, initials, matchSession, timeAgo } from "./lib/model.js";
+import { STATE_LABELS, agentStateLabel, cleanScreen, dueLabel, initials, matchSession, timeAgo } from "./lib/model.js";
 import { sanitizeHtml } from "./lib/sanitize.js";
 import * as host from "./host.js";
 import { icon } from "./icons.js";
@@ -184,7 +184,7 @@ export function start(root) {
     try {
       const pane = state.linked?.pane || (await host.activePane());
       if (!pane) throw new Error("No terminal is focused.");
-      selected.review.output = await host.readScreen(pane.id);
+      selected.review.output = cleanScreen(await host.readScreen(pane.id));
       selected.review.source = `terminal "${pane.title || "pane"}"`;
     } catch (error) {
       selected.error = `Could not read the terminal: ${error.message}`;
@@ -398,6 +398,7 @@ export function start(root) {
         </button>${menu}
       </div>
       <span class="mx-spacer"></span>
+      ${panel ? `<button class="mx-icon-btn" data-action="open-in-tab" title="Open in a tab" aria-label="Open in a tab">${icon("expand")}</button>` : ""}
       <button class="mx-icon-btn" data-action="refresh" title="Refresh" aria-label="Refresh">${icon("refresh")}</button>
       <div class="menuwrap">
         <button class="mx-icon-btn" data-action="toggle-menu" data-menu="account" title="Account" aria-label="Account" aria-haspopup="menu">${icon("user")}</button>${account}
