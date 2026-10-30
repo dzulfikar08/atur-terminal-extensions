@@ -48,3 +48,7 @@ This submission contains the readable runtime source and assets from [Run Deck 0
 - [Release notes](https://github.com/DarinRowe/run-deck/blob/v0.3.0/docs/releases/0.3.0.md)
 
 [MIT](LICENSE) © 2026 DarinRowe. Developed with OpenAI Codex.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by DarinRowe. Maintained by Atur Terminal.

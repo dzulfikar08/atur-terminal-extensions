@@ -1,6 +1,6 @@
 {
   "name": "newapi-usage",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -44,7 +44,7 @@
     ],
     "marketplace": {
       "author": "isfk",
-      "github": "isfk",
+      "github": "dzulfikar08",
       "categories": ["productivity", "ai"],
       "icon": "assets/icon.svg",
       "screenshots": ["assets/screenshot-1.png"]

@@ -76,3 +76,7 @@ npm test        # parser + launch-command unit tests
 
 Load the checkout with **Load Unpacked** in Settings → Extensions, then press **Reload**
 after each rebuild.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Eric Marchand. Maintained by Atur Terminal.

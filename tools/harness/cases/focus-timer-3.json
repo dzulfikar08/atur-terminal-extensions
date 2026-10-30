@@ -1,0 +1,12 @@
+{
+  "extension": "focus-timer",
+  "entry": "popover/index.html",
+  "fixtures": ["focus-timer.js"],
+  "wait": "window.__ready === true",
+  "eval": [
+    "(async()=>{const b=[...document.querySelectorAll('button.toggle')].find(x=>/settings/.test(x.textContent)); if(b) b.click(); await new Promise(r=>setTimeout(r,600)); return 'settings:'+!!b})()"
+  ],
+  "width": 340,
+  "height": 700,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}

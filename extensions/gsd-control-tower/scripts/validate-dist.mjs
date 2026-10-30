@@ -36,7 +36,7 @@ function expectedAtur() {
     marketplace: {
       author: "Gabe",
       categories: ["developer-tools", "productivity"],
-      github: "gabeosx",
+      github: "dzulfikar08",
       homepage: "https://github.com/gabeosx/muxy-gsd-control-tower",
       repository: "https://github.com/gabeosx/muxy-gsd-control-tower",
       icon: "assets/icon.svg",
@@ -146,7 +146,7 @@ async function validateSchema(manifest) {
 
 function assertManifest(manifest, label) {
   assert.equal(manifest.name, "gsd-control-tower", `${label}: frozen marketplace ID changed`);
-  assert.equal(manifest.version, "0.3.0", `${label}: immutable release version changed`);
+  assert.equal(manifest.version, "0.3.1", `${label}: immutable release version changed`);
   assert.equal(manifest.private, true, `${label}: npm package must remain private`);
   assert.equal(manifest.engines?.node, ">=20", `${label}: Node contract changed`);
   assert.equal(Object.keys(manifest.dependencies ?? {}).length, 0, `${label}: runtime dependencies are forbidden`);
