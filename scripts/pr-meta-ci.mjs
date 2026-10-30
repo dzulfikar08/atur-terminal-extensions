@@ -5,6 +5,7 @@ import {
   compareVersionCores,
   getRepositoryTextFile,
   GitHubAPI,
+  isRepositoryCollaborator,
   listPullRequestFiles,
   parseExtensionManifest,
   pullRequestContextFromEnvironment,
@@ -45,6 +46,13 @@ async function listIssueComments(api, context) {
 async function pingExtensionAuthor(api, context, name, authorGitHub) {
   if (!authorGitHub || authorGitHub.toLowerCase() === context.opener.toLowerCase()) {
     console.log("No extension-author review ping is needed.");
+    return;
+  }
+
+  // Never notify anyone who is not a collaborator here: manifests of imported extensions
+  // may name people who have nothing to do with this repository.
+  if (!(await isRepositoryCollaborator(api, repositoryAPIName(context.baseRepository), authorGitHub))) {
+    console.log("The listed extension author is not a collaborator; nobody is mentioned.");
     return;
   }
 
