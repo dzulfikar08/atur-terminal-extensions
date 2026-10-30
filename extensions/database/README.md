@@ -55,3 +55,7 @@ npm run build
 ```
 
 Then use Load Unpacked in Atur Terminal's Extensions modal and Reload after each rebuild.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Saeed Vaziry. Maintained by Atur Terminal.
