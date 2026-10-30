@@ -1,0 +1,10 @@
+{
+  "extension": "system-monitor",
+  "entry": "modal/settings.html",
+  "fixtures": ["system-monitor.js"],
+  "wait": "document.querySelector('select') !== null",
+  "settle": 500,
+  "width": 460,
+  "height": 500,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}

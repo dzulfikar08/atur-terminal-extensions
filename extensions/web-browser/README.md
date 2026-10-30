@@ -18,3 +18,7 @@ Pages render in a sandboxed iframe, so sites that forbid embedding
 
 - `tabs:write` — required by the `openTab` command action that opens the
   browser tab from the palette and the status bar item.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Jude. Maintained by Atur Terminal.

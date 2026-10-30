@@ -1,0 +1,9 @@
+{
+  "extension": "focus-timer",
+  "entry": "popover/index.html",
+  "fixtures": ["focus-timer.js"],
+  "wait": "window.__ready === true",
+  "width": 340,
+  "height": 470,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
