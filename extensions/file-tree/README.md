@@ -53,3 +53,7 @@ Planned next steps:
 - Add a simple "show ignored files" toggle.
 - Improve loading and error states for large directories.
 - Add optional write actions after the read-only panel is stable.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Theoz. Maintained by Atur Terminal.
