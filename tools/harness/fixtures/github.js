@@ -12,7 +12,7 @@
       createdAt: ago(30), updatedAt: ago(2), url: "https://github.com/acme/acme-web/pull/128",
       additions: 412, deletions: 38, changedFiles: 14, headRefName: "feature/login", baseRefName: "main",
       mergeable: "MERGEABLE",
-      body: "## Summary\n\nAdds a **Sign in with GitHub** flow so users can authenticate without a password.\n\n## Changes\n\n- New `/auth/github` redirect and callback routes\n- Session cookie issued after a successful token exchange\n- Login page gets a provider button and an error state\n- Unit tests for the callback handler",
+      body: "## Summary\n\nAdds a **Sign in with GitHub** flow so users can authenticate without a password.\n\n## Changes\n\n- New `/auth/github` redirect and callback routes\n- Login page gets a provider button and an error state",
       comments: [
         { author: { login: "leo-park" }, createdAt: ago(5), body: "Looks good overall. Can we add a test for the denied-consent path?" },
         { author: { login: "maya-chen" }, createdAt: ago(2), body: "Added in `auth/callback.test.ts`. Ready for another look." },

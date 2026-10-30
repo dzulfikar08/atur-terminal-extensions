@@ -41,8 +41,8 @@
       "git:read"
     ],
     "marketplace" : {
-      "author" : "ryohei",
-      "github" : "mountain1009",
+      "author" : "Atur Terminal",
+      "github" : "dzulfikar08",
       "repository" : "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories" : ["git", "productivity"],
       "icon" : "assets/marketplace-icon.svg",
@@ -56,5 +56,5 @@
     "dev" : "vite"
   },
   "type" : "module",
-  "version" : "0.1.2"
+  "version" : "0.1.3"
 }
