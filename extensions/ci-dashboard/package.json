@@ -2,7 +2,7 @@
   "name": "ci-dashboard",
   "private": true,
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "build": "vite build && node -e \"require('fs').copyFileSync('package.json','dist/package.json')\"",
     "dev": "vite",
@@ -86,7 +86,7 @@
     ],
     "marketplace": {
       "author": "Eric Marchand",
-      "github": "phimage",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": [
         "developer-tools",
