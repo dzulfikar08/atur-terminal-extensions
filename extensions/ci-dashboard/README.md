@@ -129,3 +129,7 @@ npm test
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Eric Marchand. Maintained by Atur Terminal.
