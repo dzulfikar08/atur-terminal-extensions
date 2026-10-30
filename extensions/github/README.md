@@ -37,3 +37,7 @@ npm run build
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by ryohei. Maintained by Atur Terminal.
