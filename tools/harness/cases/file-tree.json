@@ -1,0 +1,8 @@
+{
+  "extension": "file-tree",
+  "entry": "panel.html",
+  "fixtures": ["sample-project.js"],
+  "wait": "document.querySelectorAll('[data-path], .tree-row, li').length > 3",
+  "width": 520,
+  "height": 700
+}
