@@ -136,6 +136,9 @@
       await until(() => document.querySelectorAll(".sub-issue").length >= 4 && document.querySelectorAll(".comment").length >= 3);
     } else {
       await until(() => document.querySelectorAll(".issue").length >= issues.length);
+      // The full-width plus sign has no glyph in the CI fonts; show the ASCII one so the render has no tofu box.
+      const add = document.querySelector("#new");
+      if (add) add.textContent = "+";
     }
     await sleep(800);
     window.__ready = true;

@@ -5,6 +5,6 @@
   "data": { "issueId": "ACM-142" },
   "wait": "window.__ready === true",
   "width": 1280,
-  "height": 800,
+  "height": 1200,
   "compose": { "canvas": "1600x1000", "mode": "fit" }
 }
