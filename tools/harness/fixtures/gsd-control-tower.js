@@ -122,6 +122,83 @@ Last activity: ${date(1)} — Phase 1 verified
 **Goal:** Versioned REST endpoints with rate limits.
 `;
 
+  const mobileState = `---
+gsd_state_version: 1.0
+milestone: v0.4
+milestone_name: Offline Mode
+status: active
+last_updated: "${day(2)}"
+last_activity: ${date(2)}
+progress:
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 3
+  completed_plans: 0
+  percent: 0
+---
+
+# Project State
+
+## Current Position
+
+Phase: 1 of 3 — Local Cache
+Plan: Not started
+Status: Ready — roadmap approved
+Last activity: ${date(2)} — Roadmap created
+`;
+  const mobileRoadmap = `# Roadmap: acme-mobile
+
+## Phases
+
+- [ ] **Phase 1: Local Cache** - Persist recent orders on the device.
+- [ ] **Phase 2: Sync Queue** - Queue edits made offline.
+- [ ] **Phase 3: Conflict UI** - Resolve edits that collided.
+
+## Phase Details
+
+### Phase 1: Local Cache
+**Goal:** Recent orders are readable without a connection.
+
+### Phase 2: Sync Queue
+**Goal:** Offline edits are queued and replayed.
+
+### Phase 3: Conflict UI
+**Goal:** Users can resolve conflicting edits.
+`;
+  const infraState = `---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: Staging Environment
+status: complete
+last_updated: "${day(5)}"
+last_activity: ${date(5)}
+progress:
+  total_phases: 1
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
+  percent: 100
+---
+
+# Project State
+
+## Current Position
+
+Phase: 1 of 1 complete (Networking)
+Status: Complete — staging environment verified
+Last activity: ${date(5)} — Phase 1 verified
+`;
+  const infraRoadmap = `# Roadmap: acme-infra
+
+## Phases
+
+- [x] **Phase 1: Networking** - VPC, subnets, and routing.
+
+## Phase Details
+
+### Phase 1: Networking
+**Goal:** VPC, subnets, and routing for staging.
+`;
   const oauthState = `---
 gsd_state_version: 1.0
 milestone: v1.0
@@ -186,12 +263,25 @@ Last activity: ${date(3)} — Callback route implemented
       ".planning/phases/01-schema-and-migrations/01-VERIFICATION.md": verification("01-schema-and-migrations", "3/3 requirements verified"),
     },
     "w-docs-main": {},
+    "w-mobile-main": {
+      ".planning/STATE.md": mobileState,
+      ".planning/ROADMAP.md": mobileRoadmap,
+    },
+    "w-infra-main": {
+      ".planning/STATE.md": infraState,
+      ".planning/ROADMAP.md": infraRoadmap,
+      ".planning/phases/01-networking/01-01-PLAN.md": plan("01-networking", "01", "VPC layout"),
+      ".planning/phases/01-networking/01-01-SUMMARY.md": "# Summary\n",
+      ".planning/phases/01-networking/01-VERIFICATION.md": verification("01-networking", "5/5 requirements verified"),
+    },
   };
 
   const projects = [
     { id: "p-web", name: "acme-web", path: "/home/dev/acme-web", isActive: true },
     { id: "p-api", name: "acme-api", path: "/home/dev/acme-api", isActive: false },
     { id: "p-docs", name: "acme-docs", path: "/home/dev/acme-docs", isActive: false },
+    { id: "p-mobile", name: "acme-mobile", path: "/home/dev/acme-mobile", isActive: false },
+    { id: "p-infra", name: "acme-infra", path: "/home/dev/acme-infra", isActive: false },
   ];
   const worktrees = {
     "p-web": [
@@ -200,12 +290,16 @@ Last activity: ${date(3)} — Callback route implemented
     ],
     "p-api": [{ id: "w-api-main", name: "main", path: "/home/dev/acme-api", branch: "main", isPrimary: true, isActive: true }],
     "p-docs": [{ id: "w-docs-main", name: "main", path: "/home/dev/acme-docs", branch: "main", isPrimary: true, isActive: true }],
+    "p-mobile": [{ id: "w-mobile-main", name: "main", path: "/home/dev/acme-mobile", branch: "main", isPrimary: true, isActive: true }],
+    "p-infra": [{ id: "w-infra-main", name: "main", path: "/home/dev/acme-infra", branch: "main", isPrimary: true, isActive: true }],
   };
   const gitInfo = {
     "w-web-main": { branch: "main", dirty: 3, subject: "Add cart summary component", at: day(0.2) },
     "w-web-oauth": { branch: "feature/oauth-login", dirty: 0, subject: "Implement OAuth callback route", at: day(3) },
     "w-api-main": { branch: "main", dirty: 1, subject: "Add inventory migration", at: day(1) },
     "w-docs-main": { branch: "main", dirty: 0, subject: "Update contributing guide", at: day(9) },
+    "w-mobile-main": { branch: "main", dirty: 0, subject: "Create offline mode roadmap", at: day(2) },
+    "w-infra-main": { branch: "main", dirty: 0, subject: "Verify staging networking", at: day(5) },
   };
   const roots = Object.fromEntries(Object.entries(worktrees).flatMap(([, list]) => list.map((w) => [w.id, w.path])));
 
@@ -263,12 +357,10 @@ Last activity: ${date(3)} — Callback route implemented
     await sleep(600);
     if (scene === "project") {
       await until(() => document.querySelector(".ct-phase-head"));
-      const heads = [...document.querySelectorAll(".ct-phase-head")];
       const open = (needle) => [...document.querySelectorAll(".ct-phase-head")].find((b) => b.textContent.includes(needle))?.click();
       open("Checkout Flow");
       await sleep(150);
       open("Authentication");
-      void heads;
     } else if (scene === "list") {
       document.querySelector(".ct-crumb")?.click();
       await until(() => document.querySelector(".ct-row"));
