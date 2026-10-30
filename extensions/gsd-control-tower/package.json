@@ -1,6 +1,6 @@
 {
   "name": "gsd-control-tower",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "description": "Read-only Atur Terminal panel for GSD next steps, roadmap progress, and agent activity.",
@@ -45,7 +45,7 @@
         "developer-tools",
         "productivity"
       ],
-      "github": "gabeosx",
+      "github": "dzulfikar08",
       "homepage": "https://github.com/gabeosx/muxy-gsd-control-tower",
       "repository": "https://github.com/gabeosx/muxy-gsd-control-tower",
       "icon": "assets/icon.svg",
