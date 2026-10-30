@@ -153,7 +153,9 @@
       // Show Ready through Done, the columns that carry the work in flight.
       const columns = document.querySelector(".board-columns");
       const cols = document.querySelectorAll(".board-column");
-      columns.scrollLeft = cols[3].getBoundingClientRect().left - cols[0].getBoundingClientRect().left;
+      await sleep(400);
+      columns.scrollLeft = columns.scrollWidth;
+      console.log("board scroll " + columns.scrollLeft + " of " + columns.scrollWidth + ", pitch " + (cols[1].getBoundingClientRect().left - cols[0].getBoundingClientRect().left));
     } else {
       await until(() => document.querySelector(".gateway-job-list") && document.querySelector(".gateway-connection-connected"));
       await sleep(500);
