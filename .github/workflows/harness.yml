@@ -43,7 +43,7 @@ jobs:
       - name: Install WebKitGTK and a virtual display
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb python3-gi gir1.2-gtk-3.0 gir1.2-webkit2-4.1 libgl1-mesa-dri mesa-utils fonts-noto-core fonts-dejavu-core
+          sudo apt-get install -y xvfb python3-gi python3-gi-cairo python3-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1 libgl1-mesa-dri mesa-utils fonts-noto-core fonts-dejavu-core
           dpkg -l | grep -E "libwebkit2gtk-4.1-0" | awk '{print $2, $3}'
 
       - run: npm ci
