@@ -1,0 +1,11 @@
+{
+  "extension": "database",
+  "entry": "panel/connections.html",
+  "fixtures": ["database.js"],
+  "data": null,
+  "wait": "window.__ready === true",
+  "settle": 1200,
+  "width": 520,
+  "height": 450,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
