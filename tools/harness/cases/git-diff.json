@@ -2,7 +2,7 @@
   "extension": "git",
   "entry": "panel/diff-viewer.html",
   "fixtures": ["git.js"],
-  "data": { "source": "pr", "prNumber": 128 },
+  "data": { "source": "pr", "prNumber": 128, "focusPath": "src/auth/session.ts" },
   "wait": "document.querySelector('#file-count') && document.querySelector('#file-count').textContent === '5' && document.querySelectorAll('diffs-container').length > 0",
   "settle": 2500,
   "width": 1600,
