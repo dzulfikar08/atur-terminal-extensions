@@ -182,3 +182,21 @@ test("getRepositoryTextFile decodes bounded API content", async () => {
     "hello",
   );
 });
+
+test("only repository collaborators can be mentioned", async () => {
+  const { isRepositoryCollaborator, GitHubAPI } = await import("./github-pr.mjs");
+  const statuses = new Map([
+    ["/repos/o/r/collaborators/member", 204],
+    ["/repos/o/r/collaborators/stranger", 404],
+    ["/repos/o/r/collaborators/forbidden", 403],
+  ]);
+  const api = new GitHubAPI("token", async (url) => {
+    const status = statuses.get(new URL(url).pathname) ?? 500;
+    return { ok: status >= 200 && status < 300, status, text: async () => "" };
+  });
+  assert.equal(await isRepositoryCollaborator(api, "o/r", "member"), true);
+  assert.equal(await isRepositoryCollaborator(api, "o/r", "stranger"), false);
+  assert.equal(await isRepositoryCollaborator(api, "o/r", "forbidden"), false);
+  assert.equal(await isRepositoryCollaborator(api, "o/r", "bad\nname"), false);
+  assert.equal(await isRepositoryCollaborator(api, "o/r", ""), false);
+});

@@ -12,6 +12,8 @@ const PUBLISHER = process.env.GITHUB_REPOSITORY || "dzulfikar08/atur-terminal-ex
 const DRY_RUN = process.argv.includes("--dry-run");
 
 const firstParty = new Set(readJSON(path.join(repoRoot, "first-party.json")).extensions);
+// Imported extensions whose listing images are not ready: kept in the repo, not published.
+const held = new Set(readJSON(path.join(repoRoot, "held.json")).held);
 
 function fail(message) {
   console.error(`::error::${message}`);
@@ -162,6 +164,10 @@ async function main() {
   for (const name of names) {
     if (!fs.existsSync(packageJSONPath(extensionDir(name)))) {
       console.log(`skip ${name} (removed)`);
+      continue;
+    }
+    if (held.has(name) && !DRY_RUN) {
+      console.log(`::notice::${name} is held back (held.json); not published.`);
       continue;
     }
     await uploadExtension(name);
