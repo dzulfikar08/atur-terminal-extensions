@@ -1,0 +1,17 @@
+{
+  "extension": "ci-dashboard",
+  "entry": "index.html",
+  "fixtures": [
+    "ci-dashboard.js"
+  ],
+  "data": {
+    "scene": "detail"
+  },
+  "wait": "window.__ready === true",
+  "width": 520,
+  "height": 900,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "center"
+  }
+}
