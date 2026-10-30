@@ -1,0 +1,10 @@
+{
+  "extension": "database",
+  "entry": "panel/index.html",
+  "fixtures": ["database.js"],
+  "data": { "connectionId": "c-acme-dev", "scene": "structure" },
+  "wait": "window.__ready === true",
+  "settle": 1200,
+  "width": 1600,
+  "height": 1000
+}
