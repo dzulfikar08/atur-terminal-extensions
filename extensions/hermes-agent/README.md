@@ -27,7 +27,7 @@ Run **Hermes: Open Project Board** to open one of the boards available in your H
 
 Use **View board** to inspect any available board without changing your project. Use **Map to this project** only when the open board should become that project's default. The board selector stays available while a board is open. Worktrees of the same Atur Terminal project share the mapping, while other projects retain their own. The board refreshes automatically, and you can still refresh it by hand. Closing the board does not stop Kanban work in Hermes; when you reopen it, you will see the latest state. Requests started in the Agent panel stay separate and are not turned into cards.
 
-![Hermes Project Board showing the Launchpad Checklist card in Done](./assets/readme/project-board.png)
+![Hermes Project Board showing cards across the Ready, Running, Blocked, Review, and Done columns](./assets/readme/project-board.png)
 
 ## What you need
 
@@ -128,3 +128,7 @@ npm run qualify
 `npm run qualify:native` exists only to reproduce the known Atur Terminal SSH-workspace problem. It is not part of the normal release check.
 
 For version history and the draft-only marketplace handoff, see [CHANGELOG.md](CHANGELOG.md) and [RELEASING.md](RELEASING.md).
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Gabe. Maintained by Atur Terminal.

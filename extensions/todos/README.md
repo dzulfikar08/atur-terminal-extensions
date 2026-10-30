@@ -35,3 +35,7 @@ After rebuilding, click **Reload** in the Atur Terminal Extensions modal to pick
 `panels:write` · `projects:read` · `storage:read` · `storage:write` — the minimum needed to render the panel, know the active project, and persist tasks.
 
 See the [extension docs](https://github.com/dzulfikar08/atur-terminal/tree/main/docs/extensions).
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by isfk. Maintained by Atur Terminal.

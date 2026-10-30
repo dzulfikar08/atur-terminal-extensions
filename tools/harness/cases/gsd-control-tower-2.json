@@ -1,0 +1,18 @@
+{
+  "extension": "gsd-control-tower",
+  "entry": "panel/index.html",
+  "fixtures": [
+    "gsd-control-tower.js"
+  ],
+  "data": {
+    "scene": "list"
+  },
+  "wait": "window.__ready === true",
+  "settle": 1000,
+  "width": 520,
+  "height": 460,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "center"
+  }
+}
