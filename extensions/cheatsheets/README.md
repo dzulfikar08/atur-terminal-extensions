@@ -110,3 +110,7 @@ npm test          # parser / sanitizer / ref-codec unit tests
 
 Load the folder via **Load Unpacked** in Atur Terminal's Extensions modal; after a
 rebuild, click **Reload** there to pick up changes.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Nick Fay. Maintained by Atur Terminal.
