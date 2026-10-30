@@ -42,3 +42,7 @@ npm run build
 ```
 
 Then load the `dist/` folder via **Load Unpacked** in Atur Terminal's Extensions modal (or click **Reload** after rebuilding).
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Aekawan. Maintained by Atur Terminal.
