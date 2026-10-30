@@ -42,6 +42,22 @@ for (const name of names) {
   for (const e of spec.eval ?? []) args.push("--eval", e);
   console.log(`\n=== ${name}`);
   const result = spawnSync("xvfb-run", args, { stdio: "inherit", env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: "1", WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS: "1" } });
+  if (result.status === 0 && spec.compose) {
+    const c = spec.compose;
+    const composed = spawnSync(
+      "python3",
+      [
+        path.join(here, "compose.py"),
+        path.join(outDir, `${name}.png`),
+        path.join(outDir, `${name}.listing.png`),
+        "--canvas", c.canvas ?? "1600x1000",
+        "--mode", c.mode ?? "center",
+        ...(c.bg ? ["--bg", c.bg] : []),
+      ],
+      { stdio: "inherit" },
+    );
+    if (composed.status !== 0) result.status = composed.status;
+  }
   if (result.status !== 0) {
     failed += 1;
     console.log(`::error::harness case ${name} failed (exit ${result.status})`);
