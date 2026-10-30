@@ -1,0 +1,9 @@
+{
+  "extension": "newapi-usage",
+  "entry": "popover/index.html",
+  "fixtures": ["newapi-usage.js"],
+  "wait": "window.__ready === true",
+  "width": 520,
+  "height": 560,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}

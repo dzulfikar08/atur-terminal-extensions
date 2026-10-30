@@ -1,0 +1,17 @@
+{
+  "extension": "review",
+  "entry": "tabs/review.html",
+  "fixtures": [
+    "review.js"
+  ],
+  "data": {
+    "scene": "refmenu"
+  },
+  "wait": "window.__ready === true",
+  "width": 1280,
+  "height": 800,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "fit"
+  }
+}
