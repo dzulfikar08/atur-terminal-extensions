@@ -102,3 +102,7 @@ Everything runs on demand through `atur.exec`:
 | Archive / move | `himalaya message move --from <box> --to <target> <id>` |
 | Delete | `himalaya message delete --mailbox <box> <id>` |
 | Mark unread | `himalaya flag remove --mailbox <box> --flag Seen <id>` |
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Eric Marchand. Maintained by Atur Terminal.
