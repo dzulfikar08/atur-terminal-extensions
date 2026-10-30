@@ -48,3 +48,7 @@ No `bd serve` process, Dolt server, or HTTP connection is required; the one-shot
 - `panels:write` for the panel and topbar toggle.
 - `tabs:write` for opening the full Beads workspace tab.
 - `storage:read` and `storage:write` for workspace snapshots, saved view, column order, and refresh preferences.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Moiz Haider. Maintained by Atur Terminal.

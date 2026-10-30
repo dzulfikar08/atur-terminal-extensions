@@ -72,7 +72,7 @@
     ],
     "marketplace" : {
       "author" : "mountain1009",
-      "github" : "mountain1009",
+      "github" : "dzulfikar08",
       "categories" : [
         "developer-tools",
         "network"
@@ -91,5 +91,5 @@
     "dev" : "vite"
   },
   "type" : "module",
-  "version" : "0.1.0"
+  "version" : "0.1.1"
 }

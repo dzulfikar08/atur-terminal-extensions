@@ -1,6 +1,6 @@
 {
   "name": "run-deck",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "description": "Discover running services, open their pages, and stop them from a focused Atur Terminal panel.",
@@ -80,7 +80,7 @@
     ],
     "marketplace": {
       "author": "DarinRowe",
-      "github": "DarinRowe",
+      "github": "dzulfikar08",
       "categories": [
         "developer-tools",
         "productivity"
