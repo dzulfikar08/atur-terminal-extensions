@@ -126,3 +126,5 @@ rebuilding them in a webview:
   add a primitive.
 - A PR that only touches `shared/` triggers a full build + validate of every
   extension in CI, so consumer breaks surface before merge.
+
+First-party and community extensions in this repository use it through the `@atur/ui` alias.
