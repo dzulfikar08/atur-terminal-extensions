@@ -1,6 +1,6 @@
 {
   "name": "focus-timer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -84,7 +84,7 @@
     ],
     "marketplace": {
       "author": "Nick Fay",
-      "github": "n14395",
+      "github": "dzulfikar08",
       "categories": ["productivity"],
       "icon": "assets/icon.svg",
       "screenshots": [

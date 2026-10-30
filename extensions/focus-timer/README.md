@@ -104,3 +104,7 @@ for people whose editor/browser work belongs to the project too.
 
 `ai-usage` tracks tokens and cost; Focus Timer tracks time. Together they
 answer the best question in the building: *cost per hour of agent time*.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Nick Fay. Maintained by Atur Terminal.

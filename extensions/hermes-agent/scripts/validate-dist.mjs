@@ -52,7 +52,7 @@ async function parseJson(path) {
 
 function assertManifest(manifest, label) {
   assert.equal(manifest.name, "hermes-agent", `${label} must use the marketplace extension ID`);
-  assert.equal(manifest.version, "0.2.0", `${label} must use the reviewed release version`);
+  assert.equal(manifest.version, "0.2.1", `${label} must use the reviewed release version`);
   assert.equal(manifest.engines?.node, ">=20", `${label} must declare Node 20 compatibility`);
   assert.equal(Object.keys(manifest.dependencies ?? {}).length, 0, `${label} must not add runtime dependencies`);
   assert.ok(manifest["atur-terminal"] && typeof manifest["atur-terminal"] === "object", `${label} must contain a atur manifest`);
@@ -85,9 +85,9 @@ function assertManifest(manifest, label) {
   assert.deepEqual(manifest["atur-terminal"].marketplace, {
     author: "Gabe",
     categories: ["developer-tools", "productivity"],
-    github: "gabeosx",
+    github: "dzulfikar08",
     icon: "assets/icon.svg",
-    repository: "https://github.com/gabeosx/muxy-hermes-extension",
+    repository: "https://github.com/gabeosx/atur-hermes-extension",
     screenshots: REQUIRED_SCREENSHOTS,
   }, `${label} must contain the frozen listing metadata`);
   return [panel.entry, manifest["atur-terminal"].tabTypes[0].entry];

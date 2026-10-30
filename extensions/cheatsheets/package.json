@@ -1,6 +1,6 @@
 {
   "name": "cheatsheets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,7 +17,7 @@
     "description": "tldr pages and man pages, rendered — palette lookup, popover browser, copy-ready examples. Works with tlrc or nothing installed.",
     "marketplace": {
       "author": "Nick Fay",
-      "github": "n14395",
+      "github": "dzulfikar08",
       "categories": ["documentation", "developer-tools"],
       "icon": "icon.svg",
       "screenshots": [
