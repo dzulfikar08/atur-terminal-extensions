@@ -38,7 +38,7 @@ test("today maps every bucket", async () => {
 
 test("agent sessions come back grouped", async () => {
   const mcp = fakeMcp({
-    list_agent_sessions: () => ({ sessions: [{ id: "s", pane_id: "1", state: "blocked", state_at: 1, issue: { id: "i", key: "A-1", name: "n", project_id: "p", workspace_slug: "w" } }] }),
+    list_agent_sessions: () => ({ sessions: [{ id: "s", paneId: "1", state: "blocked", stateAt: 1, issue: { id: "i", key: "A-1", name: "n", projectId: "p", workspaceSlug: "w" } }] }),
   });
   const result = await createApi({ mcp }).agentSessions({ workspace: "w" });
   assert.deepEqual(mcp.calls[0], ["list_agent_sessions", { workspace: "w", active: true, limit: 100 }]);
@@ -46,7 +46,7 @@ test("agent sessions come back grouped", async () => {
 });
 
 test("a pane's session is looked up by its id; none is null", async () => {
-  const api = createApi({ mcp: fakeMcp({ get_session_issue: ({ pane_id }) => (pane_id === "77" ? { session: { id: "s", pane_id: "77", issue: null } } : { session: null }) }) });
+  const api = createApi({ mcp: fakeMcp({ get_session_issue: ({ pane_id }) => (pane_id === "77" ? { session: { id: "s", paneId: "77", issue: null } } : { session: null }) }) });
   assert.equal((await api.sessionForPane(77)).paneId, "77");
   assert.equal(await api.sessionForPane("78"), null);
 });

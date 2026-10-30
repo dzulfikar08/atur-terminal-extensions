@@ -37,9 +37,9 @@
     row("i-19", "ATUR-19", "Store listing screenshots from the CI harness", "todo", atur),
   ];
   const sessions = [
-    { id: "s1", pane_id: "77", agent: "omp", state: "working", state_at: Date.now() - 600000, updated_at: Date.now() - 60000, ended_at: null, cwd: "/home/dev/atur", title: "omp", issue: { id: "i-12", key: "ATUR-12", name: issues[0].name, project_id: "p-atur", workspace_slug: "atur", state_name: "In Progress", state_group: "started", priority: "medium", url: "https://app.diatur.com/atur/projects/p-atur/issues/12" } },
-    { id: "s2", pane_id: "78", agent: "claude", state: "blocked", state_at: Date.now() - 300000, updated_at: Date.now() - 300000, ended_at: null, cwd: "/home/dev/waqtu", title: "claude", issue: { id: "i-44", key: "WAQ-44", name: issues[4].name, project_id: "p-waqtu", workspace_slug: "waqtu", state_name: "In Progress", state_group: "started", priority: "high", url: "https://app.diatur.com/waqtu/projects/p-waqtu/issues/44" } },
-    { id: "s3", pane_id: "79", agent: "omp", state: "done", state_at: Date.now() - 1200000, updated_at: Date.now() - 1200000, ended_at: null, cwd: "/home/dev/atur-wt", title: "omp", issue: { id: "i-27", key: "ATUR-27", name: issues[2].name, project_id: "p-atur", workspace_slug: "atur", state_name: "Need Review", state_group: "started", priority: "medium", url: "https://app.diatur.com/atur/projects/p-atur/issues/27" } },
+    { id: "s1", paneId: "77", agent: "omp", state: "working", stateAt: Date.now() - 600000, updatedAt: Date.now() - 60000, endedAt: null, cwd: "/home/dev/atur", title: "omp", issue: { id: "i-12", key: "ATUR-12", name: issues[0].name, projectId: "p-atur", workspaceSlug: "atur", stateName: "In Progress", stateGroup: "started", priority: "medium", url: "https://app.diatur.com/atur/projects/p-atur/issues/12" } },
+    { id: "s2", paneId: "78", agent: "claude", state: "blocked", stateAt: Date.now() - 300000, updatedAt: Date.now() - 300000, endedAt: null, cwd: "/home/dev/waqtu", title: "claude", issue: { id: "i-44", key: "WAQ-44", name: issues[4].name, projectId: "p-waqtu", workspaceSlug: "waqtu", stateName: "In Progress", stateGroup: "started", priority: "high", url: "https://app.diatur.com/waqtu/projects/p-waqtu/issues/44" } },
+    { id: "s3", paneId: "79", agent: "omp", state: "done", stateAt: Date.now() - 1200000, updatedAt: Date.now() - 1200000, endedAt: null, cwd: "/home/dev/atur-wt", title: "omp", issue: { id: "i-27", key: "ATUR-27", name: issues[2].name, projectId: "p-atur", workspaceSlug: "atur", stateName: "Need Review", stateGroup: "started", priority: "medium", url: "https://app.diatur.com/atur/projects/p-atur/issues/27" } },
   ];
   const notifications = [
     { id: "n1", title: "Maya commented on ATUR-12: Atur panels extension", message: "Can we show the linked issue first?", issueId: "i-12", projectId: "p-atur", workspaceSlug: "atur", workspaceName: "Atur", read: false, createdAt: iso(1) },
@@ -73,7 +73,7 @@
     my_today: today,
     list_notifications: () => ({ results: notifications, total: notifications.length, unread: notifications.filter((n) => !n.read).length }),
     mark_notification_read: () => ({ ok: true }),
-    list_agent_sessions: (args) => ({ sessions: sessions.filter((s) => !args.workspace || s.issue.workspace_slug === args.workspace) }),
+    list_agent_sessions: (args) => ({ sessions: sessions.filter((s) => !args.workspace || s.issue.workspaceSlug === args.workspace) }),
     get_session_issue: ({ pane_id }) => ({ session: sessions.find((s) => s.pane_id === pane_id) || null }),
     list_states: () => states,
     get_issue: ({ issue_id }) => ({ id: issue_id, descriptionHtml: "<p>Bring Atur into the terminal: your issues, the inbox, today and the agents that need you, next to the work.</p><ul><li>Sidebar panel and a tab view</li><li>Claim, comment, change state</li><li>Mark Need Review with terminal output as evidence</li></ul>" }),

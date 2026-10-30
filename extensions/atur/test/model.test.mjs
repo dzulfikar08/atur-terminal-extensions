@@ -6,8 +6,8 @@ import {
 } from "../src/lib/model.js";
 
 const sessionRow = (over = {}) => ({
-  id: "s1", pane_id: "77", agent: "omp", state: "working", state_at: 100, updated_at: 100, ended_at: null,
-  cwd: "/home/dev/atur", title: "omp", issue: { id: "i1", key: "ATUR-12", name: "Panels", project_id: "p1", workspace_slug: "atur", state_name: "In Progress", state_group: "started", priority: "high", url: "https://app.diatur.com/atur/projects/p1/issues/12" },
+  id: "s1", paneId: "77", agent: "omp", state: "working", stateAt: 100, updatedAt: 100, endedAt: null,
+  cwd: "/home/dev/atur", title: "omp", issue: { id: "i1", key: "ATUR-12", name: "Panels", projectId: "p1", workspaceSlug: "atur", stateKey: "in_progress", stateName: "In Progress", stateGroup: "started", priority: "high", url: "https://app.diatur.com/atur/projects/p1/issues/12" },
   ...over,
 });
 
@@ -20,7 +20,7 @@ test("my_issues rows become UI issues with a key, state label and web address", 
   assert.equal(issueUrl({}), "https://app.diatur.com");
 });
 
-test("session rows are converted from snake_case and keep the issue link", () => {
+test("session rows keep the issue link and its state", () => {
   const session = normalizeSession(sessionRow());
   assert.equal(session.issue.projectId, "p1");
   assert.equal(session.issue.sequenceId, 12);
@@ -35,10 +35,10 @@ test("notifications keep read state and the issue they point to", () => {
 
 test("agents are grouped into Needs you (blocked) and Done, newest first, skipping ended or unlinked sessions", () => {
   const sessions = [
-    normalizeSession(sessionRow({ id: "a", state: "blocked", state_at: 1 })),
-    normalizeSession(sessionRow({ id: "b", state: "blocked", state_at: 9 })),
+    normalizeSession(sessionRow({ id: "a", state: "blocked", stateAt: 1 })),
+    normalizeSession(sessionRow({ id: "b", state: "blocked", stateAt: 9 })),
     normalizeSession(sessionRow({ id: "c", state: "done" })),
-    normalizeSession(sessionRow({ id: "d", state: "blocked", ended_at: 5 })),
+    normalizeSession(sessionRow({ id: "d", state: "blocked", endedAt: 5 })),
     normalizeSession(sessionRow({ id: "e", state: "blocked", issue: null })),
     normalizeSession(sessionRow({ id: "f", state: "working" })),
   ];
@@ -48,14 +48,14 @@ test("agents are grouped into Needs you (blocked) and Done, newest first, skippi
 });
 
 test("a pane with a session id matches exactly, including relay-prefixed ids", () => {
-  const sessions = [normalizeSession(sessionRow({ pane_id: "mbp~77" })), normalizeSession(sessionRow({ id: "s2", pane_id: "78" }))];
+  const sessions = [normalizeSession(sessionRow({ paneId: "mbp~77" })), normalizeSession(sessionRow({ id: "s2", paneId: "78" }))];
   assert.equal(matchSession({ sessionID: "77" }, sessions).session.id, "s1");
   assert.equal(matchSession({ sessionID: "79" }, sessions).session, null);
 });
 
 test("without a session id the working directory (and title) decide", () => {
   const sessions = [
-    normalizeSession(sessionRow({ id: "a", cwd: "/home/dev/atur", title: "omp", updated_at: 1 })),
+    normalizeSession(sessionRow({ id: "a", cwd: "/home/dev/atur", title: "omp", updatedAt: 1 })),
     normalizeSession(sessionRow({ id: "b", cwd: "/home/dev/other", title: "omp" })),
   ];
   assert.equal(matchSession({ workingDirectory: "/home/dev/atur/", title: "build" }, sessions).session.id, "a");
@@ -65,8 +65,8 @@ test("without a session id the working directory (and title) decide", () => {
 
 test("two sessions in one folder: the title breaks the tie, otherwise the newest wins and ambiguity is reported", () => {
   const sessions = [
-    normalizeSession(sessionRow({ id: "a", title: "omp: ATUR-12", updated_at: 1 })),
-    normalizeSession(sessionRow({ id: "b", title: "omp: ATUR-13", updated_at: 9 })),
+    normalizeSession(sessionRow({ id: "a", title: "omp: ATUR-12", updatedAt: 1 })),
+    normalizeSession(sessionRow({ id: "b", title: "omp: ATUR-13", updatedAt: 9 })),
   ];
   const byTitle = matchSession({ workingDirectory: "/home/dev/atur", title: "omp: ATUR-12" }, sessions);
   assert.equal(byTitle.session.id, "a");

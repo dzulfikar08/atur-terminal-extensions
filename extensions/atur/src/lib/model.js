@@ -52,7 +52,7 @@ export function normalizeIssue(row) {
   return issue;
 }
 
-/** The `issue` object inside an agent session (snake_case). */
+/** The `issue` object inside an agent session. */
 export function normalizeSessionIssue(issue) {
   if (!issue) return null;
   return {
@@ -61,28 +61,28 @@ export function normalizeSessionIssue(issue) {
     name: text(issue.name) || "Untitled",
     sequenceId: sequenceFromKey(issue.key),
     priority: issue.priority || "none",
-    projectId: issue.project_id,
+    projectId: issue.projectId,
     projectName: "",
-    workspaceSlug: issue.workspace_slug,
+    workspaceSlug: issue.workspaceSlug,
     workspaceName: "",
-    stateKey: null,
-    stateName: issue.state_name || "",
-    stateGroup: issue.state_group || null,
+    stateKey: issue.stateKey || null,
+    stateName: issue.stateName || "",
+    stateGroup: issue.stateGroup || null,
     targetDate: null,
     updatedAt: null,
-    url: issue.url || issueUrl({ workspaceSlug: issue.workspace_slug, projectId: issue.project_id, sequenceId: sequenceFromKey(issue.key) }),
+    url: issue.url || issueUrl({ workspaceSlug: issue.workspaceSlug, projectId: issue.projectId, sequenceId: sequenceFromKey(issue.key) }),
   };
 }
 
 export function normalizeSession(row) {
   return {
     id: row.id,
-    paneId: row.pane_id,
+    paneId: row.paneId,
     agent: row.agent || null,
     state: row.state || "unknown",
-    stateAt: row.state_at || null,
-    updatedAt: row.updated_at || null,
-    endedAt: row.ended_at || null,
+    stateAt: row.stateAt || null,
+    updatedAt: row.updatedAt || null,
+    endedAt: row.endedAt || null,
     cwd: row.cwd || null,
     title: row.title || null,
     issue: normalizeSessionIssue(row.issue),
