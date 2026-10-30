@@ -1,0 +1,9 @@
+{
+  "extension": "linear",
+  "entry": "panel/index.html",
+  "fixtures": ["linear.js"],
+  "wait": "window.__ready === true",
+  "width": 520,
+  "height": 900,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}

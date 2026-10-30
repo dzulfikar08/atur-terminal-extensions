@@ -13,7 +13,7 @@
         "developer-tools",
         "productivity"
       ],
-      "github" : "gabeosx",
+      "github" : "dzulfikar08",
       "icon" : "assets\/icon.svg",
       "repository" : "https:\/\/github.com\/gabeosx\/atur-hermes-extension",
       "screenshots" : [
@@ -95,5 +95,5 @@
     "validate:dist" : "node scripts/validate-dist.mjs"
   },
   "type" : "module",
-  "version" : "0.2.0"
+  "version" : "0.2.1"
 }

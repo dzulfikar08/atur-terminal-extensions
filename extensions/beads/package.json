@@ -93,14 +93,16 @@
     ],
     "marketplace": {
       "author": "Moiz Haider",
-      "github": "RanaMoizHaider",
+      "github": "dzulfikar08",
       "categories": [
         "productivity",
         "project-management"
       ],
       "icon": "icon.svg",
       "screenshots": [
-        "screenshots/screenshot-1.png"
+        "screenshots/screenshot-1.png",
+        "screenshots/screenshot-2.png",
+        "screenshots/screenshot-3.png"
       ]
     }
   },
@@ -112,5 +114,5 @@
     "test": "node --test test/*.test.mjs"
   },
   "type": "module",
-  "version": "0.2.2"
+  "version": "0.2.3"
 }

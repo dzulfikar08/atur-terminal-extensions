@@ -1,0 +1,9 @@
+{
+  "extension": "himalaya",
+  "entry": "panel/index.html",
+  "fixtures": ["himalaya.js"],
+  "wait": "window.__ready === true",
+  "width": 520,
+  "height": 900,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}

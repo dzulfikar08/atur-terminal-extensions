@@ -1,6 +1,6 @@
 {
   "name": "ai-usage",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -27,7 +27,7 @@
     ],
     "marketplace": {
       "author": "Wonjin",
-      "github": "wjchoi87",
+      "github": "dzulfikar08",
       "categories": ["productivity", "ai"],
       "icon": "assets/icon.svg",
       "screenshots": ["assets/screenshot-1.png"]

@@ -1,0 +1,9 @@
+{
+  "extension": "focus-timer",
+  "entry": "report/index.html",
+  "fixtures": ["focus-timer.js"],
+  "wait": "window.__ready === true",
+  "width": 1280,
+  "height": 800,
+  "compose": { "canvas": "1600x1000", "mode": "fit" }
+}

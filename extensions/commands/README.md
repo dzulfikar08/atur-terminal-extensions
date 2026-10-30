@@ -27,3 +27,7 @@ npm run build
 
 Then **Load Unpacked** this folder in the Atur Terminal Extensions modal, or **Reload**
 after rebuilding.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by long2ice. Maintained by Atur Terminal.
