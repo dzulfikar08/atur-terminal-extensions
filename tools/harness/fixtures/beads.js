@@ -28,11 +28,9 @@
     { id: "web-116", title: "Release checklist for 1.0", status: "open", priority: 1, issue_type: "epic", labels: ["release"], created_at: ago(10), updated_at: ago(2), dependencies: [dep("web-104"), dep("web-111"), dep("web-113")] },
   ].map((issue) => ({ dependencies: [], comment_count: 0, ...issue }));
 
-  const ready = ["web-104x", "web-106", "web-107", "web-109", "web-110", "web-113", "web-115"];
   // Ready work = open issues whose blockers are all closed.
   const byId = new Map(issues.map((i) => [i.id, i]));
   const readyIssues = issues.filter((i) => i.status === "open" && i.dependencies.every((d) => byId.get(d.depends_on_id)?.status === "closed"));
-  void ready;
 
   h.set("projects.list", async () => [{ id: "p1", name: "acme-web", path: "/home/dev/acme-web", isActive: true }]);
   h.set("worktrees.list", async () => [{ id: "w1", path: "/home/dev/acme-web", isActive: true }]);
