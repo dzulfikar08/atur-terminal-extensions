@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/open-pencil/open-pencil",
+  "tag": "v0.16.0",
+  "commit": "ffe2fc5798468988a5943c5f5737905c3c7a28b5",
+  "bun": "1.4.2"
+}

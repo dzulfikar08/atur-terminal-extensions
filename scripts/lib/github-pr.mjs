@@ -103,6 +103,24 @@ export class GitHubAPI {
     return this.request(apiPath, options);
   }
 
+  // True for a 2xx answer, false for 404; anything else throws.
+  async exists(apiPath) {
+    const response = await this.fetchImpl(`${API_ROOT}${apiPath}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${this.token}`,
+        "User-Agent": "atur-extensions-ci",
+        "X-GitHub-Api-Version": API_VERSION,
+      },
+      signal: AbortSignal.timeout(30_000),
+    });
+    await response.text();
+    if (response.ok) return true;
+    if (response.status === 404) return false;
+    throw new Error(`GitHub API GET ${apiPath.split("?")[0]} failed: HTTP ${response.status}`);
+  }
+
   post(apiPath, body) {
     return this.request(apiPath, { method: "POST", body });
   }
@@ -370,4 +388,16 @@ export function compareVersionCores(left, right) {
 
 export function repositoryAPIName(fullName) {
   return repositoryAPIPath(fullName);
+}
+
+// Whether `login` is a collaborator of `repository` ("owner/name"). Used before anyone is
+// @-mentioned: only people with access to this repository are ever notified. Fails closed:
+// an error, an invalid handle, or a token that cannot answer all mean "no".
+export async function isRepositoryCollaborator(api, repository, login) {
+  if (typeof login !== "string" || !/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/.test(login)) return false;
+  try {
+    return await api.exists(`/repos/${repository}/collaborators/${encodeURIComponent(login)}`);
+  } catch {
+    return false;
+  }
 }

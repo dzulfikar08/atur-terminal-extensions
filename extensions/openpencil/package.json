@@ -1,0 +1,64 @@
+{
+  "name": "openpencil",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenPencil design editor for Atur Terminal.",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "atur-terminal": {
+    "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description": "OpenPencil design editor: open, edit, and save .fig and .pen files in a tab.",
+    "permissions": [
+      "files:read",
+      "files:write"
+    ],
+    "events": [
+      "file.changed"
+    ],
+    "tabTypes": [
+      {
+        "id": "editor",
+        "title": "OpenPencil",
+        "entry": "index.html"
+      }
+    ],
+    "fileOpeners": [
+      {
+        "id": "design",
+        "title": "OpenPencil",
+        "tabType": "editor",
+        "patterns": [
+          "*.fig",
+          "*.pen"
+        ],
+        "singleton": false
+      }
+    ],
+    "commands": [
+      {
+        "id": "open-editor",
+        "title": "OpenPencil: New Design Tab",
+        "subtitle": "Open the OpenPencil design editor",
+        "action": {
+          "kind": "openTab",
+          "tabType": "editor"
+        }
+      }
+    ],
+    "marketplace": {
+      "author": "Joyo Digitama",
+      "github": "dzulfikar08",
+      "homepage": "https://openpencil.dev",
+      "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
+      "categories": [
+        "design"
+      ],
+      "icon": "marketplace/icon.svg",
+      "screenshots": [
+        "marketplace/screenshot-1.png"
+      ]
+    }
+  }
+}

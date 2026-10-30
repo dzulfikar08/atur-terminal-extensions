@@ -150,6 +150,26 @@ jobs:
               return;
             }
 
+            // Only people with access to this repository are ever mentioned: manifests of
+            // imported extensions can name people who have nothing to do with it. Fails closed.
+            let isCollaborator = false;
+            if (/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/.test(handle)) {
+              try {
+                await github.rest.repos.checkCollaborator({ owner, repo, username: handle });
+                isCollaborator = true;
+              } catch (e) {
+                isCollaborator = false;
+              }
+            }
+            if (!isCollaborator) {
+              await comment(
+                `Thanks for reporting an issue with **${rawName}**${verNote}. ` +
+                  `A maintainer will triage this.`,
+              );
+              core.info(`#${issue_number}: '${handle}' is not a collaborator; nobody mentioned.`);
+              return;
+            }
+
             await comment(
               `Thanks for reporting an issue with **${rawName}**${verNote}.\n\n` +
                 `@${handle} — you're listed as the author of **${rawName}**. ` +

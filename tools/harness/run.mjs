@@ -18,17 +18,19 @@ const names = fs
   .map((f) => f.replace(/\.json$/, ""))
   .filter((n) => requested.length === 0 || requested.includes(n));
 
+const engine = process.env.HARNESS_ENGINE ?? "gtk"; // "gtk" (xvfb + WebKitGTK) or "mac" (WKWebView)
+const macBinary = path.join(here, "harness-mac");
 let failed = 0;
 for (const name of names) {
   const spec = JSON.parse(fs.readFileSync(path.join(here, "cases", `${name}.json`), "utf8"));
+  const base = engine === "mac" ? [] : ["-a", "--server-args=-screen 0 1920x1200x24", "python3", path.join(here, "harness.py")];
   const args = [
-    "-a", "--server-args=-screen 0 1920x1200x24",
-    "python3", path.join(here, "harness.py"),
+    ...base,
     "--root", path.join(root, "extensions", spec.extension, "dist"),
     "--owner", spec.extension,
     "--entry", spec.entry ?? "index.html",
-    "--out", path.join(outDir, `${name}.png`),
-    "--report", path.join(outDir, `${name}.json`),
+    "--out", path.join(outDir, `${name}${engine === "mac" ? ".mac" : ""}.png`),
+    "--report", path.join(outDir, `${name}${engine === "mac" ? ".mac" : ""}.json`),
     "--width", String(spec.width ?? 1280),
     "--height", String(spec.height ?? 800),
     "--theme", spec.theme ?? "dark",
@@ -41,8 +43,11 @@ for (const name of names) {
   for (const [k, v] of Object.entries(spec.assets ?? {})) args.push("--assets", `${k}=${path.resolve(root, v)}`);
   for (const e of spec.eval ?? []) args.push("--eval", e);
   console.log(`\n=== ${name}`);
-  const result = spawnSync("xvfb-run", args, { stdio: "inherit", env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: "1", WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS: "1" } });
-  if (result.status === 0 && spec.compose) {
+  const result =
+    engine === "mac"
+      ? spawnSync(macBinary, args, { stdio: "inherit", env: { ...process.env, HARNESS_DIR: here } })
+      : spawnSync("xvfb-run", args, { stdio: "inherit", env: { ...process.env, LIBGL_ALWAYS_SOFTWARE: "1", WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS: "1" } });
+  if (result.status === 0 && spec.compose && engine !== "mac") {
     const c = spec.compose;
     const composed = spawnSync(
       "python3",

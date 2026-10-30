@@ -1,0 +1,76 @@
+diff --git a/src/app/shell/menu/files.ts b/src/app/shell/menu/files.ts
+index 0266272..9e351c4 100644
+--- a/src/app/shell/menu/files.ts
++++ b/src/app/shell/menu/files.ts
+@@ -55,6 +55,8 @@ if (IS_BROWSER && 'window' in globalThis) {
+   setOpenPencilOpenFileHandler(async (path: string) => {
+     await openBrowserFileFromURL(resolveBrowserFileURL(path))
+   })
++  // Atur Terminal's host script opens a project file here, with a handle that saves back to it.
++  ;(window.openPencil as { openDesignFile?: typeof openDesignFile }).openDesignFile = openDesignFile
+ }
+ 
+ /** Fetches a document over HTTP and opens it in a new tab. Browser builds only. */
+diff --git a/src/boot.ts b/src/boot.ts
+index 89e2826..3abbb51 100644
+--- a/src/boot.ts
++++ b/src/boot.ts
+@@ -9,7 +9,6 @@ import { preloadFonts } from '@/app/editor/fonts'
+ import { installBundledFonts } from '@/app/editor/fonts/bundled'
+ import { observeBootErrors } from '@/app/shell/support/boot'
+ import { reportBootFailure } from '@/app/shell/support/gate'
+-import { IS_TAURI } from '@/constants'
+ 
+ import App from './App.vue'
+ import router from './router'
+@@ -39,11 +38,4 @@ export async function boot(): Promise<void> {
+     recordRuntimeError(error, 'vue', info)
+     console.error(error)
+   }
+-
+-  if (!IS_TAURI) {
+-    void import('virtual:pwa-register').then(({ registerSW }) => {
+-      registerSW({ immediate: true })
+-      return undefined
+-    })
+-  }
+ }
+diff --git a/vite.config.ts b/vite.config.ts
+index 33cee0d..f01640a 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -9,7 +9,6 @@ import Components from 'unplugin-vue-components/vite'
+ import { defineConfig } from 'vite'
+ 
+ import { ensureBrandAssets } from '@open-pencil/brand-tools'
+-import { ensureDemoDocument } from '@open-pencil/demo-tools'
+ 
+ import packageJson from './package.json'
+ import { viteBuildTarget } from './src/app/shell/support/baseline'
+@@ -21,7 +20,6 @@ import {
+ } from './vite/automation'
+ import { copyCanvasKitAssetsPlugin } from './vite/canvaskit-assets'
+ import { aiIconCollection } from './vite/icons'
+-import { openPencilPwaPlugin } from './vite/pwa'
+ import { rawMarkdownPlugin } from './vite/raw-markdown'
+ import { createDevServerOptions } from './vite/server'
+ 
+@@ -29,7 +27,7 @@ const host = process.env.TAURI_DEV_HOST
+ const automationRoute = localAutomationRoute(host)
+ 
+ export default defineConfig(async ({ command }) => {
+-  await Promise.all([ensureBrandAssets(['web']), ensureDemoDocument()])
++  await ensureBrandAssets(['web'])
+   return {
+     resolve: {
+       alias: createOpenPencilAliases(__dirname)
+@@ -51,8 +49,7 @@ export default defineConfig(async ({ command }) => {
+       Icons({ compiler: 'vue3', customCollections: { ai: aiIconCollection() } }),
+       Components({ resolvers: [IconsResolver({ prefix: 'icon', customCollections: ['ai'] })] }),
+       openPencilAutomationPlugin(command, host),
+-      vue(),
+-      openPencilPwaPlugin()
++      vue()
+     ],
+     clearScreen: false,
+     build: {
