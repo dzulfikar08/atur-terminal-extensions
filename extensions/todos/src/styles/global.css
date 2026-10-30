@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--atur-background);
+  --color-foreground: var(--atur-foreground);
+  --color-muted: var(--atur-surface-solid);
+  --color-muted-foreground: var(--atur-foreground-muted);
+  --color-surface: var(--atur-surface-solid);
+  --color-primary: var(--atur-accent);
+  --color-primary-foreground: var(--atur-accent-foreground);
+  --color-accent: var(--atur-hover);
+  --color-accent-foreground: var(--atur-foreground);
+  --color-border: var(--atur-border);
+  --color-input: var(--atur-border);
+  --color-ring: var(--atur-accent);
+  --radius: 6px;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font: 13px -apple-system, "SF Pro", system-ui, sans-serif;
+  background: var(--atur-background);
+  color: var(--atur-foreground);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* ---- Drag to reorder ---- */
+/* Insert-position indicator: 2px accent line on top / bottom edge */
+.drag-before {
+  box-shadow: inset 0 2px 0 var(--atur-accent);
+}
+
+.drag-after {
+  box-shadow: inset 0 -2px 0 var(--atur-accent);
+}
+
+/* The row being dragged turns translucent */
+.dragging {
+  opacity: 0.45;
+}

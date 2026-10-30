@@ -1,0 +1,104 @@
+{
+  "name": "ai-session-history",
+  "version": "0.3.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/copy-manifest.mjs",
+    "test": "node test test/",
+    "test:js": "node test test/"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "esbuild": "^0.25.12",
+    "tailwindcss": "^4.3.0",
+    "vite": "^7.3.5"
+  },
+  "atur-terminal": {
+    "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description": "Browse and resume AI CLI sessions for the active worktree, grouped by provider",
+    "permissions": [
+      "panels:write",
+      "tabs:write",
+      "commands:exec",
+      "commands:run-script",
+      "projects:read",
+      "worktrees:read",
+      "notifications:write",
+      "storage:read",
+      "storage:write"
+    ],
+    "events": [
+      "project.switched",
+      "worktree.switched"
+    ],
+    "panels": [
+      {
+        "id": "sessions",
+        "title": "AI Sessions",
+        "icon": {
+          "symbol": "clock.arrow.circlepath"
+        },
+        "entry": "panel/index.html",
+        "position": "right",
+        "mode": "pinned",
+        "hiddenControls": [
+          "pin",
+          "position"
+        ],
+        "headerButtons": [
+          {
+            "id": "refresh",
+            "icon": {
+              "symbol": "arrow.clockwise"
+            },
+            "tooltip": "Refresh",
+            "command": "refresh-sessions"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "id": "toggle-sessions",
+        "title": "AI Sessions: Toggle Panel",
+        "defaultShortcut": "cmd+shift+h",
+        "action": {
+          "kind": "togglePanel",
+          "panel": "sessions"
+        }
+      },
+      {
+        "id": "refresh-sessions",
+        "title": "AI Sessions: Refresh"
+      },
+      {
+        "id": "resume-picker",
+        "title": "AI Sessions: Resume…",
+        "action": {
+          "kind": "runScript",
+          "script": "scripts/resume-picker.built.js"
+        }
+      }
+    ],
+    "topbarItems": [
+      {
+        "id": "sessions",
+        "icon": {
+          "symbol": "clock.arrow.circlepath"
+        },
+        "tooltip": "AI Sessions",
+        "command": "toggle-sessions"
+      }
+    ],
+    "marketplace": {
+      "author": "Appelgriebsch",
+      "github": "appelgriebsch",
+      "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
+      "categories": ["productivity", "ai"],
+      "icon": "icon.svg",
+      "screenshots": ["screenshot-1.png"]
+    }
+  }
+}

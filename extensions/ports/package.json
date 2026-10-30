@@ -1,0 +1,95 @@
+{
+  "devDependencies" : {
+    "@tailwindcss\/vite" : "^4.3.0",
+    "tailwindcss" : "^4.3.0",
+    "vite" : "^7.3.5"
+  },
+  "atur-terminal" : {
+    "$schema" : "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "background" : "background.js",
+    "commands" : [
+      {
+        "action" : {
+          "kind" : "togglePanel",
+          "panel" : "ports"
+        },
+        "defaultShortcut" : "cmd+shift+p",
+        "id" : "toggle-ports",
+        "title" : "Ports: Toggle Panel"
+      },
+      {
+        "id" : "refresh-ports",
+        "title" : "Ports: Refresh"
+      }
+    ],
+    "panels" : [
+      {
+        "entry" : "panel\/index.html",
+        "headerButtons" : [
+          {
+            "command" : "refresh-ports",
+            "icon" : {
+              "symbol" : "arrow.clockwise"
+            },
+            "id" : "refresh",
+            "tooltip" : "Refresh"
+          }
+        ],
+        "icon" : {
+          "symbol" : "antenna.radiowaves.left.and.right"
+        },
+        "id" : "ports",
+        "mode" : "pinned",
+        "position" : "right",
+        "title" : "Ports"
+      }
+    ],
+    "permissions" : [
+      "panels:write",
+      "commands:exec",
+      "projects:read"
+    ],
+    "statusBarItems" : [
+      {
+        "command" : "toggle-ports",
+        "icon" : {
+          "symbol" : "antenna.radiowaves.left.and.right"
+        },
+        "id" : "ports",
+        "side" : "right",
+        "tooltip" : "Ports"
+      }
+    ],
+    "topbarItems" : [
+      {
+        "command" : "toggle-ports",
+        "icon" : {
+          "symbol" : "antenna.radiowaves.left.and.right"
+        },
+        "id" : "ports",
+        "tooltip" : "Toggle Ports Panel"
+      }
+    ],
+    "marketplace" : {
+      "author" : "mountain1009",
+      "github" : "mountain1009",
+      "categories" : [
+        "developer-tools",
+        "network"
+      ],
+      "icon" : "icon.svg",
+      "screenshots" : [
+        "screenshot-1.png"
+      ]
+    }
+  },
+  "description" : "View and manage TCP listening ports, grouped by Atur Terminal project",
+  "name" : "ports",
+  "private" : true,
+  "scripts" : {
+    "build" : "vite build && node -e \"require('fs').copyFileSync('package.json','dist/package.json')\"",
+    "dev" : "vite"
+  },
+  "type" : "module",
+  "version" : "0.1.0"
+}

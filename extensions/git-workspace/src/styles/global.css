@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--atur-background);
+  --color-foreground: var(--atur-foreground);
+  --color-muted: var(--atur-surface);
+  --color-muted-foreground: var(--atur-foreground-muted);
+  --color-card: var(--atur-background);
+  --color-card-foreground: var(--atur-foreground);
+  --color-popover: var(--atur-background);
+  --color-popover-foreground: var(--atur-foreground);
+  --color-primary: var(--atur-accent);
+  --color-primary-foreground: var(--atur-background);
+  --color-secondary: var(--atur-surface);
+  --color-secondary-foreground: var(--atur-foreground);
+  --color-accent: var(--atur-hover);
+  --color-accent-foreground: var(--atur-foreground);
+  --color-border: var(--atur-border);
+  --color-input: var(--atur-border);
+  --color-ring: var(--atur-accent);
+  --color-diff-add: var(--atur-diff-add);
+  --color-diff-remove: var(--atur-diff-remove);
+  --color-diff-hunk: var(--atur-diff-hunk);
+  --radius: 6px;
+}
+
+:root {
+  --s1: 2px;
+  --s2: 4px;
+  --s3: 6px;
+  --s4: 8px;
+  --s5: 10px;
+  --s6: 12px;
+  --s7: 16px;
+  --s8: 20px;
+  --s9: 24px;
+  --s10: 32px;
+  --font-caption: 10px;
+  --font-footnote: 11px;
+  --font-body: 12px;
+  --font-emphasis: 13px;
+  --font-title: 14px;
+  --icon-sm: 12px;
+  --icon: 14px;
+  --control: 24px;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --row-height: 34px;
+  --lane-0: var(--atur-accent);
+  --lane-1: var(--atur-diff-add);
+  --lane-2: var(--atur-diff-remove);
+  --lane-3: var(--atur-diff-hunk);
+  --lane-4: var(--atur-foreground-muted);
+  --lane-5: var(--atur-foreground);
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font: 13px -apple-system, "SF Pro", system-ui, sans-serif;
+  background: var(--atur-background);
+  color: var(--atur-foreground);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+html:has(.popover-body),
+body.popover-body,
+body.popover-body #root {
+  height: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.panel-topbar {
+  box-sizing: content-box;
+  height: var(--atur-topbar-height, 32px);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.floating-menu {
+  position: fixed;
+  z-index: 50;
+  overflow: hidden;
+  border: 1px solid var(--atur-border);
+  border-radius: 8px;
+  background: var(--atur-background);
+  color: var(--atur-foreground);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--atur-background) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

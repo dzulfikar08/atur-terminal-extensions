@@ -1,0 +1,48 @@
+{
+  "name": "language-packs",
+  "version": "1.0.7",
+  "private": true,
+  "type": "module",
+  "description": "Community app language packs for Atur Terminal",
+  "scripts": {
+    "build": "node scripts/copy-manifest.mjs",
+    "test": "node --test scripts/catalogs.test.mjs"
+  },
+  "atur-terminal": {
+    "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description": "Community app language packs for Atur Terminal — one extension, one language folder per contributor",
+    "localizations": [
+      {
+        "id": "ko",
+        "language": "ko",
+        "title": "한국어",
+        "bundle": "localization/Korean.bundle"
+      },
+      {
+        "id": "pt-BR",
+        "language": "pt-BR",
+        "title": "Português (Brasil)",
+        "bundle": "localization/BrazilianPortuguese.bundle"
+      },
+      {
+        "id": "fa",
+        "language": "fa",
+        "title": "فارسی",
+        "bundle": "localization/Persian.bundle"
+      },
+      {
+        "id": "zh-Hans",
+        "language": "zh-Hans",
+        "title": "简体中文",
+        "bundle": "localization/SimplifiedChinese.bundle"
+      }
+    ],
+    "marketplace": {
+      "author": "Wonjin",
+      "github": "wjchoi",
+      "categories": ["localization"],
+      "icon": "icon.svg",
+      "screenshots": ["screenshots/screenshot-1.png"]
+    }
+  }
+}

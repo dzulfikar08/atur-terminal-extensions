@@ -1,0 +1,21 @@
+{
+  "name": "atur-extensions-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Validation, packaging and publishing tooling for the Atur Terminal extensions marketplace.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "pack": "node scripts/pack.mjs",
+    "publish": "node scripts/publish.mjs",
+    "test": "node --test scripts/lib/*.test.mjs shared/ui/*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

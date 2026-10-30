@@ -1,0 +1,3 @@
+{
+  "extensions": ["database", "file-tree", "files", "git", "git-workspace", "github", "openpencil"]
+}

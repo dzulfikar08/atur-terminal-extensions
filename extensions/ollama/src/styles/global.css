@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--atur-background);
+  --color-foreground: var(--atur-foreground);
+  --color-muted: var(--atur-surface);
+  --color-muted-foreground: var(--atur-foreground-muted);
+  --color-surface: var(--atur-surface);
+  --color-primary: var(--atur-accent);
+  --color-primary-foreground: var(--atur-background);
+  --color-accent: var(--atur-hover);
+  --color-accent-foreground: var(--atur-foreground);
+  --color-border: var(--atur-border);
+  --color-input: var(--atur-border);
+  --color-ring: var(--atur-accent);
+  --radius: 6px;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font: 12px -apple-system, "SF Pro", system-ui, sans-serif;
+  background: var(--atur-background);
+  color: var(--atur-foreground);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}

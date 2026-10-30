@@ -1,0 +1,18 @@
+node_modules/
+dist/
+release/
+.DS_Store
+
+# Signing secret key — NEVER commit. Only signing.pub is public.
+signing.key
+*.key
+*.log
+extensions/demo-*
+.claude/
+.agents/
+.sisyphus/
+.muxy/
+skills-lock.json
+.atur-linear/
+.linear.json
+scripts/setup-linear-mcp.sh

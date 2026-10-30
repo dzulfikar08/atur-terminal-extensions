@@ -1,0 +1,53 @@
+{
+  "name": "newapi-usage",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/build-background.mjs && node scripts/copy-manifest.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "tailwindcss": "^4.3.0",
+    "vite": "^7.3.5"
+  },
+  "atur-terminal": {
+    "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description": "Multi-site NewAPI and Sub2API usage monitor — balance, consumption, and status at a glance",
+    "background": "background.js",
+    "permissions": ["commands:exec", "panels:write", "notifications:write", "storage:read", "storage:write"],
+    "popovers": [
+      {
+        "id": "newapi-usage",
+        "title": "API Usage",
+        "entry": "popover/index.html",
+        "width": 520,
+        "height": 520
+      }
+    ],
+    "commands": [
+      {
+        "id": "open-newapi-usage",
+        "title": "API Usage: Show",
+        "action": { "kind": "openPopover", "popover": "newapi-usage" }
+      }
+    ],
+    "statusBarItems": [
+      {
+        "id": "newapi-usage",
+        "icon": { "symbol": "dollarsign.circle" },
+        "tooltip": "API Usage",
+        "side": "right",
+        "command": "open-newapi-usage"
+      }
+    ],
+    "marketplace": {
+      "author": "isfk",
+      "github": "isfk",
+      "categories": ["productivity", "ai"],
+      "icon": "assets/icon.svg",
+      "screenshots": ["assets/screenshot-1.png"]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "devDependencies" : {
+    "@tailwindcss\/vite" : "^4.3.0",
+    "tailwindcss" : "^4.3.0",
+    "vite" : "^7.3.5"
+  },
+  "atur-terminal" : {
+    "$schema" : "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description" : "Connects to Hermes with one sign-in for agent work and project boards in Atur Terminal",
+    "marketplace" : {
+      "author" : "Gabe",
+      "categories" : [
+        "developer-tools",
+        "productivity"
+      ],
+      "github" : "gabeosx",
+      "icon" : "assets\/icon.svg",
+      "repository" : "https:\/\/github.com\/gabeosx\/atur-hermes-extension",
+      "screenshots" : [
+        "assets\/screenshots\/screenshot-1.png",
+        "assets\/screenshots\/screenshot-2.png",
+        "assets\/screenshots\/screenshot-3.png",
+        "assets\/screenshots\/screenshot-4.png"
+      ]
+    },
+    "commands" : [
+      {
+        "id" : "open-hermes-gateway",
+        "title" : "Hermes: Open Agent Panel",
+        "action" : {
+          "kind" : "openPanel",
+          "panel" : "hermes-gateway"
+        }
+      },
+      {
+        "id" : "toggle-hermes-gateway",
+        "title" : "Hermes: Toggle Agent Panel",
+        "action" : {
+          "kind" : "togglePanel",
+          "panel" : "hermes-gateway"
+        }
+      },
+      {
+        "id" : "open-hermes-project-board",
+        "title" : "Hermes: Open Project Board",
+        "action" : {
+          "kind" : "openTab",
+          "tabType" : "hermes-project-board"
+        }
+      }
+    ],
+    "tabTypes" : [
+      {
+        "id" : "hermes-project-board",
+        "title" : "Hermes Project Board",
+        "entry" : "board\/index.html"
+      }
+    ],
+    "panels" : [
+      {
+        "entry" : "panel\/index.html",
+        "icon" : {
+          "symbol" : "sparkles"
+        },
+        "id" : "hermes-gateway",
+        "mode" : "pinned",
+        "position" : "right",
+        "title" : "Hermes Agent"
+      }
+    ],
+    "permissions" : [
+      "commands:exec",
+      "panels:write",
+      "projects:read",
+      "storage:read",
+      "storage:write",
+      "tabs:write"
+    ]
+  },
+  "engines" : {
+    "node" : ">=20"
+  },
+  "name" : "hermes-agent",
+  "private" : true,
+  "scripts" : {
+    "build" : "vite build && node scripts\/copy-manifest.mjs",
+    "dev" : "vite",
+    "fixture:kanban" : "node scripts\/run-kanban-fixture.mjs",
+    "qualify" : "node scripts\/qualify-release.mjs",
+    "qualify:automated" : "node scripts\/qualify-release.mjs",
+    "qualify:native" : "node scripts\/qualify-release.mjs --native-hold",
+    "qualify:native:complete" : "node scripts\/complete-native-qualification.mjs",
+    "test" : "node --test test/*.test.js",
+    "validate" : "node scripts/validate-release.mjs",
+    "validate:dist" : "node scripts/validate-dist.mjs"
+  },
+  "type" : "module",
+  "version" : "0.2.0"
+}

@@ -1,0 +1,53 @@
+# Language Packs
+
+A [Atur Terminal](https://github.com/dzulfikar08/atur-terminal) localization extension that adds community-contributed app languages via **Settings → Interface → Language** in Atur Terminal 1.x, or **Settings → Appearance → App language** in Atur Terminal 2.x.
+
+One extension, one `localizations` entry per language — anyone can add a new language by adding a bundle folder and one manifest entry, no code required.
+
+## Languages
+
+| Language | id | Bundle |
+| --- | --- | --- |
+| 한국어 (Korean) | `ko` | `localization/Korean.bundle` |
+| Português (Brasil) | `pt-BR` | `localization/BrazilianPortuguese.bundle` |
+| فارسی (Persian) | `fa` | `localization/Persian.bundle` |
+| 简体中文 (Simplified Chinese) | `zh-Hans` | `localization/SimplifiedChinese.bundle` |
+
+## Permissions
+
+None. This extension only ships resource-only localization bundles — no code runs.
+
+## How it works
+
+Each language is a resource-only Apple `.bundle` under `localization/`, containing `<language>.lproj/Localizable.strings`. One catalog serves both Atur Terminal 1.x and Atur Terminal 2.x: it holds the translations of both apps' English sources, and each app uses the keys it knows.
+
+| App | English source |
+| --- | --- |
+| Atur Terminal 1.x (`main`) | `Atur Terminal/Resources/Localization/en.lproj/Localizable.strings` |
+| Atur Terminal 2.x (`2.x`) | `crates/muxy-app/localization/en.lproj/Localizable.strings` |
+
+Missing keys fall back to English automatically. Format placeholders (`%@`, `%lld`, etc.) are kept in the same position and type as the English source — see [`docs/extensions/localizations.md`](https://github.com/dzulfikar08/atur-terminal/blob/main/docs/extensions/localizations.md) in the Atur Terminal app repo for the exact rules.
+
+In `.strings` values, use typographic quotes (`“…”`) or escape literal double
+quotes (`\"`). Unescaped double quotes terminate the value and prevent the
+entire language pack from loading.
+
+On macOS, run `npm test --prefix extensions/language-packs` from the repository
+root to parse every declared language's property lists with `plutil`. This
+syntax regression check is skipped on other platforms; it does not replace
+Atur Terminal's format-placeholder validation.
+
+## Adding a new language
+
+1. Add `localization/<Language>.bundle/<lang>.lproj/Localizable.strings` (and optionally `Localizable.stringsdict`), plus a minimal `Info.plist` with no `CFBundleExecutable`.
+2. Translate every key from both English sources, keeping format placeholders identical in position and type.
+3. Add one entry to `atur.localizations` in `package.json`:
+   ```json
+   {
+     "id": "<lang>",
+     "language": "<lang>",
+     "title": "<Language name in that language>",
+     "bundle": "localization/<Language>.bundle"
+   }
+   ```
+4. Add a row to the table above.

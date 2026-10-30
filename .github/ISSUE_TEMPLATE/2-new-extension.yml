@@ -1,0 +1,34 @@
+name: Propose a new extension
+description: Suggest an extension idea, or signal that you are working on one.
+title: "[extension] <name>"
+labels: ["extension", "proposal"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Extension name
+      description: Proposed directory name (letters, digits, dash, underscore, dot).
+      placeholder: git-dashboard
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What it does
+      description: A short description of the extension and its surfaces (tab, panel, popover, command, status bar item).
+    validations:
+      required: true
+  - type: textarea
+    id: permissions
+    attributes:
+      label: Permissions needed
+      description: Which permissions the extension requires and why.
+    validations:
+      required: true
+  - type: checkboxes
+    id: intent
+    attributes:
+      label: Intent
+      options:
+        - label: I plan to open a PR for this myself.
+        - label: This is an idea/request for someone else to build.

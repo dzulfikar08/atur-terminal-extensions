@@ -1,0 +1,11 @@
+# Every PR requires review from an Atur Terminal maintainer before merge.
+# Replace with the maintainers team or individual handles.
+*       @dzulfikar08
+
+# Tooling, schema, and CI are core-only.
+/schema/                @dzulfikar08
+/scripts/               @dzulfikar08
+/.github/               @dzulfikar08
+/DESIGN.md              @dzulfikar08
+/signing.pub            @dzulfikar08
+/first-party.json       @dzulfikar08
