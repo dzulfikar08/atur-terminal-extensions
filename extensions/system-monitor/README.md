@@ -108,3 +108,7 @@ layout:
 Before publishing (see [contributing](https://github.com/dzulfikar08/atur-terminal/tree/main/docs/extensions)):
 fill in `marketplace.author` / `marketplace.github` in `package.json` and add
 a 1600×1000 screenshot at `public/assets/screenshots/1.png`.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Nick Fay. Maintained by Atur Terminal.
