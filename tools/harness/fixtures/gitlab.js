@@ -57,7 +57,7 @@
     if (/\/merge_requests\?/.test(ep)) return json(mrs);
     if (/\/issues\?/.test(ep)) return json(issues);
     if (/\/notes/.test(ep)) return json([]);
-    if (/\/projects\/[^/?]+$/.test(ep)) return json({ id: 4242, path_with_namespace: PATH, web_url: web, default_branch: "main" });
+    if (/^projects\/[^/?]+$/.test(ep)) return json({ id: 4242, path_with_namespace: PATH, web_url: web, default_branch: "main" });
     return json([]);
   });
 
