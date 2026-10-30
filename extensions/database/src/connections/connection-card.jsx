@@ -24,7 +24,8 @@ export function ConnectionCard({ conn, panel, onOpen, onEdit, onChanged }) {
         });
         if (choice !== "Delete")
             return;
-        await deletePassword(conn.id);
+        if (conn.net)
+            await deletePassword(conn.id);
         await deleteConnection(conn.id);
         toast("Connection deleted");
         onChanged();

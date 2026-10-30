@@ -2,6 +2,7 @@ import { getConnections, setConnections, removeConnectionData } from "./storage.
 
 export const ENGINES = {
     sqlite: { label: "SQLite", defaultPort: null, binaries: ["sqlite3"], dumpBinaries: ["sqlite3"] },
+    d1: { label: "Cloudflare D1", defaultPort: null, binaries: ["wrangler"], dumpBinaries: ["wrangler"] },
     postgres: { label: "PostgreSQL", defaultPort: 5432, binaries: ["psql"], dumpBinaries: ["pg_dump"] },
     mysql: { label: "MySQL", defaultPort: 3306, binaries: ["mysql"], dumpBinaries: ["mysqldump"] },
     mariadb: { label: "MariaDB", defaultPort: 3306, binaries: ["mariadb", "mysql"], dumpBinaries: ["mariadb-dump", "mysqldump"] },
@@ -26,6 +27,8 @@ export function newConnection(engine) {
     };
     if (engine === "sqlite")
         conn.sqlite = { path: "" };
+    else if (engine === "d1")
+        conn.d1 = { database: "", remote: true, config: "", persistTo: "" };
     else
         conn.net = { host: "127.0.0.1", port: ENGINES[engine].defaultPort, user: "", database: "", sslMode: "" };
     return conn;

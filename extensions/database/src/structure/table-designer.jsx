@@ -3,6 +3,7 @@ import { Modal } from "../ui/modal.jsx";
 import { Icon } from "../ui/icon.jsx";
 import { toast } from "../ui/toast.js";
 import { quoteIdent } from "../lib/sql/quote.js";
+import { dialectOf } from "../lib/sql/dialect.js";
 
 const TYPE_SUGGESTIONS = {
     sqlite: ["INTEGER", "TEXT", "REAL", "BLOB", "NUMERIC"],
@@ -32,7 +33,7 @@ function buildSql(engine, tableName, columns) {
 
 export function TableDesignerModal({ session, onDone, onClose }) {
     const engine = session.conn.engine;
-    const newColumn = () => ({ name: "", type: TYPE_SUGGESTIONS[engine][0], pk: false, notNull: false });
+    const newColumn = () => ({ name: "", type: TYPE_SUGGESTIONS[dialectOf(engine)][0], pk: false, notNull: false });
     const [tableName, setTableName] = useState("");
     const [columns, setColumns] = useState(() => [newColumn()]);
 
@@ -78,7 +79,7 @@ export function TableDesignerModal({ session, onDone, onClose }) {
         >
             <div className="sheet-body">
                 <datalist id="db-types">
-                    {TYPE_SUGGESTIONS[engine].map((t) => (
+                    {TYPE_SUGGESTIONS[dialectOf(engine)].map((t) => (
                         <option key={t} value={t} />
                     ))}
                 </datalist>

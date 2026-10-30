@@ -8,6 +8,7 @@ const HINTS = {
     mysqldump: "brew install mysql-client && brew link --force mysql-client",
     mariadb: "brew install mariadb",
     "mariadb-dump": "brew install mariadb",
+    wrangler: "npm install -g wrangler (then run `wrangler login` or set CLOUDFLARE_API_TOKEN); wrangler must be on your PATH",
     ssh: "ssh ships with macOS and Linux",
 };
 

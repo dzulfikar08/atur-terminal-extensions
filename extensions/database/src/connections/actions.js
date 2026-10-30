@@ -4,6 +4,8 @@ import { detect } from "../lib/cli-detect.js";
 export function connectionTarget(conn) {
     if (conn.engine === "sqlite")
         return conn.sqlite.path || "no file selected";
+    if (conn.engine === "d1")
+        return `${conn.d1.database || "no database"} (${conn.d1.remote ? "remote" : "local"})`;
     const net = conn.net;
     return `${net.user ? net.user + "@" : ""}${net.host}:${net.port}${net.database ? "/" + net.database : ""}${conn.ssh?.enabled ? " via SSH" : ""}`;
 }

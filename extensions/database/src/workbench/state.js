@@ -23,7 +23,7 @@ export async function openSession(conn) {
     const detection = await driver.detect();
     if (!detection.available)
         throw new Error(`${ENGINES[conn.engine].binaries[0]} not found.\nInstall it with: ${detection.installHint}`);
-    if (conn.engine !== "sqlite" && !conn.keychain) {
+    if (conn.net && !conn.keychain) {
         const provided = await ensurePassword(conn);
         if (!provided)
             throw new Error("A password is required to connect.");
