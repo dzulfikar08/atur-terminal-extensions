@@ -1,6 +1,6 @@
 {
   "name": "himalaya",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Browse and read your email from the sidebar, powered by the Himalaya CLI",
@@ -96,7 +96,7 @@
     ],
     "marketplace": {
       "author": "Eric Marchand",
-      "github": "phimage",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": [
         "productivity",
