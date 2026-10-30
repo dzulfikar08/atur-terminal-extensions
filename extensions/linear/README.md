@@ -55,3 +55,7 @@ host consent on first use. The API key is stored locally via `atur.storage`.
 This is an **unofficial** extension and is not affiliated with, endorsed by, or
 sponsored by Linear or Atur Terminal. "Linear" and "Atur Terminal" are trademarks of their
 respective owners.
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by namgyung. Maintained by Atur Terminal.
