@@ -12,10 +12,7 @@
       { label: "Weekly", percent: 35, resetAt: inHours(96), periodDuration: 7 * 24 * 3600 },
     ] },
     { id: "cursor", state: "available", planName: "Pro", rows: [
-      { label: "Requests", percent: 54, detail: "270/500", resetAt: inHours(190), periodDuration: 30 * 24 * 3600 },
-    ] },
-    { id: "openrouter", state: "available", planName: "Credits", rows: [
-      { label: "Credits", percent: 28, detail: "$14.00/$50.00" },
+      { label: "Premium requests", percent: 54, detail: "270/500", resetAt: inHours(190), periodDuration: 30 * 24 * 3600 },
     ] },
   ];
   localStorage.setItem("ai-usage.fixture", JSON.stringify({ providers }));
