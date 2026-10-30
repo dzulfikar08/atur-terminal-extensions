@@ -7,10 +7,12 @@
   const SLUG = "acme/acme-web";
   const sha = (n) => (n.toString(16) + "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678").slice(0, 40);
 
-  h.memory.set("sources:v1:" + ROOT, {
+  const stored = {
     sources: [{ id: "s-gh", kind: "github", label: "GitHub Actions", enabled: true }],
     detectionDismissed: true,
-  });
+  };
+  h.memory.set("sources:v1:" + ROOT, stored);
+  h.memory.set("sources:v1:unknown", stored);
 
   const run = (id, number, title, workflow, status, conclusion, branch, event, hoursAgo, minutes) => ({
     databaseId: id, number, displayTitle: title, workflowName: workflow, status, conclusion,
@@ -62,7 +64,7 @@
   ];
 
   h.set("projects.list", async () => [{ id: "p1", name: "acme-web", path: ROOT, isActive: true }]);
-  h.set("git.repoInfo", async () => ({ root: ROOT, name: "acme-web" }));
+  h.set("git.repoInfo", async () => { console.log("repoInfo called"); return { root: ROOT, gitDir: ROOT + "/.git", isWorktree: false, currentBranch: "main" }; });
   h.set("git.currentBranch", async () => "main");
   h.set("git.branches", async () => ["main", "develop", "feature/login"]);
   h.set("files.stat", async () => null);
@@ -99,6 +101,7 @@
   const until = async (test) => { for (let i = 0; i < 100 && !test(); i += 1) await sleep(100); };
   window.addEventListener("load", async () => {
     await until(() => document.querySelector(".run"));
+    console.log("memory keys " + JSON.stringify([...h.memory.keys()]) + " runs " + document.querySelectorAll(".run").length);
     if (scene === "detail") {
       document.querySelector('.run[data-run="9921"]').click();
       await until(() => document.querySelector(".detail__title"));
