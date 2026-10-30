@@ -1,0 +1,113 @@
+{
+  "name": "atur",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "test": "node --test test/*.test.mjs",
+    "build": "vite build && node -e \"require('fs').copyFileSync('package.json','dist/package.json')\""
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "atur-terminal": {
+    "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
+    "description": "Atur in your terminal: your issues, inbox, today and the agents waiting on you, plus the issue linked to the active terminal. Claim, comment, change state, and mark Need Review with evidence.",
+    "panels": [
+      {
+        "id": "atur",
+        "title": "Atur",
+        "icon": {
+          "svg": "assets/icon.svg"
+        },
+        "entry": "index.html",
+        "position": "right",
+        "mode": "pinned"
+      }
+    ],
+    "tabTypes": [
+      {
+        "id": "workspace",
+        "title": "Atur",
+        "entry": "index.html",
+        "defaultData": {
+          "view": "mine"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "id": "toggle-panel",
+        "title": "Atur: Toggle Sidebar",
+        "action": {
+          "kind": "togglePanel",
+          "panel": "atur"
+        }
+      },
+      {
+        "id": "open-tab",
+        "title": "Atur: Open Issues Tab",
+        "action": {
+          "kind": "openTab",
+          "tabType": "workspace",
+          "data": {
+            "view": "mine"
+          }
+        }
+      },
+      {
+        "id": "open-agents",
+        "title": "Atur: Agents Needing You",
+        "action": {
+          "kind": "openTab",
+          "tabType": "workspace",
+          "data": {
+            "view": "agents"
+          }
+        }
+      }
+    ],
+    "topbarItems": [
+      {
+        "id": "atur-panel",
+        "icon": {
+          "svg": "assets/icon.svg"
+        },
+        "tooltip": "Toggle Atur sidebar",
+        "command": "toggle-panel"
+      }
+    ],
+    "events": [
+      "pane.focused",
+      "tab.focused",
+      "project.switched",
+      "agent.status"
+    ],
+    "permissions": [
+      "storage:read",
+      "storage:write",
+      "panes:read",
+      "agents:read",
+      "tabs:write",
+      "panels:write",
+      "browser:read",
+      "browser:write",
+      "notifications:write"
+    ],
+    "marketplace": {
+      "author": "Atur Terminal",
+      "github": "dzulfikar08",
+      "homepage": "https://app.diatur.com",
+      "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
+      "categories": [
+        "productivity",
+        "agents"
+      ],
+      "icon": "assets/marketplace-icon.svg",
+      "screenshots": [
+        "screenshots/screenshot-1.png"
+      ]
+    }
+  }
+}

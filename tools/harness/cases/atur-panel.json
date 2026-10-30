@@ -1,0 +1,10 @@
+{
+  "extension": "atur",
+  "entry": "index.html",
+  "fixtures": ["atur.js", "atur-panel.js"],
+  "wait": "window.__ready === true",
+  "settle": 800,
+  "width": 380,
+  "height": 780,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
