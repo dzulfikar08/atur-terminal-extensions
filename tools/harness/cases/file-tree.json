@@ -1,8 +1,15 @@
 {
   "extension": "file-tree",
-  "entry": "panel.html",
-  "fixtures": ["sample-project.js"],
-  "wait": "document.querySelectorAll('[data-path], .tree-row, li').length > 3",
-  "width": 520,
-  "height": 700
+  "entry": "panel.html?expanded=src,src/components,src/lib",
+  "fixtures": [
+    "acme-web.js"
+  ],
+  "wait": "(() => { if (document.querySelectorAll('.row[data-path]').length < 18) return false; const target = '.row[data-path=\"src/components/Header.tsx\"]'; if (!document.querySelector(target + '.active')) { document.querySelector(target).click(); return false; } return true; })()",
+  "settle": 1000,
+  "width": 360,
+  "height": 860,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "center"
+  }
 }
