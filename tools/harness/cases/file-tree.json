@@ -1,11 +1,18 @@
 {
   "extension": "file-tree",
   "entry": "panel.html?expanded=src,src/app,src/components,src/lib,tests",
-  "fixtures": ["acme-web.js"],
+  "fixtures": [
+    "acme-web.js"
+  ],
   "wait": "document.querySelectorAll('.row[data-path]').length > 18",
-  "eval": ["document.querySelector('.row[data-path=\"src/components/Header.tsx\"]').click()"],
+  "eval": [
+    "(() => { const r = document.querySelector('.row[data-path=\"src/components/Header.tsx\"]'); r.click(); console.log('after click active=' + (document.querySelector('.row.active') || {dataset:{}}).dataset.path + ' rows=' + document.querySelectorAll('.row[data-path]').length); return 'clicked'; })()"
+  ],
   "settle": 1000,
   "width": 420,
   "height": 860,
-  "compose": { "canvas": "1600x1000", "mode": "center" }
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "center"
+  }
 }
