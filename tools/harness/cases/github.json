@@ -1,0 +1,12 @@
+{
+  "extension": "github",
+  "entry": "index.html",
+  "fixtures": ["github.js"],
+  "wait": "document.querySelector('#repo') && document.querySelector('#repo').textContent === 'acme/acme-web'",
+  "width": 560,
+  "height": 900,
+  "eval": [
+    "(async()=>{const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));const until=async(f)=>{for(let i=0;i<80&&!f();i++)await sleep(100)};document.querySelector('[data-mode=prs]').click();await until(()=>document.querySelector('.issue'));document.querySelector('.issue[data-num=\"128\"]').click();await until(()=>document.querySelector('.detail__title'));await sleep(600);return !!document.querySelector('.detail__title')})()"
+  ],
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
