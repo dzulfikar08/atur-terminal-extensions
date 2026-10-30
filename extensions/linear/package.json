@@ -1,6 +1,6 @@
 {
   "name": "linear",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "type": "module",
   "description": "Atur Terminal extension: browse your assigned Linear issues in a side panel, open an issue's detail in a tab to view and edit it, and create issues — without leaving Atur Terminal.",
@@ -106,9 +106,8 @@
     ],
     "marketplace": {
       "author": "namgyung",
-      "github": "NamgyungKim",
-      "homepage": "https://github.com/NamgyungKim/muxy-linear-extension",
-      "repository": "https://github.com/NamgyungKim/muxy-linear-extension",
+      "github": "dzulfikar08",
+      "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": [
         "productivity",
         "git"
