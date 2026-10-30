@@ -60,10 +60,12 @@ installs the network guard above.
 
 ## Verified
 
+The screenshot in the store listing is a capture of the WebKitGTK harness run (a `.fig` file opened through the host script). The "fonts unavailable" banner appears because font downloads are blocked by the network guard; bundled fonts are used.
+
 CI loads the built extension in WebKitGTK (the engine Atur Terminal uses on Linux) behind the same
 `atur-ext://` scheme as the app, opens a `.fig` file produced by OpenPencil's own CLI through a
 mock `atur.files`, and uploads a screenshot (Actions → Harness). The repo's harness README lists
-what that does and does not cover. It has not been run in the macOS WKWebView.
+what that does and does not cover. The same case also runs in a macOS WKWebView harness (WebGL 2 available, file opened, no errors); neither harness draws Atur Terminal's own window chrome.
 
 ## Licence
 
