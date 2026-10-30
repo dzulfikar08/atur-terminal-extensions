@@ -8,8 +8,10 @@
   const BASE = "http://127.0.0.1:9119";
   const BOARD = "acme-web";
 
+  const scene = (window.atur.data && window.atur.data.scene) || "ops";
+
   // ---- saved sign-in and project board mapping (extension storage) ---------------------------
-  h.memory.set("session.dashboard.v2", {
+  if (scene !== "signin") h.memory.set("session.dashboard.v2", {
     baseUrl: BASE,
     auth: {
       version: 1,
@@ -18,7 +20,7 @@
       cookies: [["hermes_session_at", "demoaccesstoken0123456789"], ["hermes_session_rt", "demorefreshtoken0123456789"], ["hermes_session_provider", "password"]],
     },
   });
-  h.memory.set("board.mapping.v1.p-acme-web", { baseUrl: BASE, board: BOARD });
+  if (scene !== "signin") h.memory.set("board.mapping.v1.p-acme-web", { baseUrl: BASE, board: BOARD });
   h.set("projects.list", async () => [{ id: "p-acme-web", name: "acme-web", path: "/home/dev/acme-web", isActive: true }]);
 
   // ---- Dashboard HTTP API ----------------------------------------------------------------------
@@ -70,6 +72,7 @@
   ];
   const routes = {
     "/api/status": { auth_required: true, gateway_running: true, memory: { pressure: "ok" }, disk: { pressure: "ok" } },
+    "/api/auth/providers": { providers: [{ name: "password", display_name: "Password", supports_password: true }] },
     "/api/auth/me": { user_id: "u-demo", display_name: "demo-operator", email: "", provider: "password", expires_at: Math.floor(now / 1000) + 30 * 86400 },
     "/api/auth/ws-ticket": { ticket: "demoticket0123456789abcdef", ttl_seconds: 60 },
     "/api/cron/jobs": jobs,
@@ -130,19 +133,29 @@
   window.WebSocket = FakeSocket;
 
   // ---- scenes ------------------------------------------------------------------------------------
-  const scene = (window.atur.data && window.atur.data.scene) || "ops";
   const until = async (test) => { for (let i = 0; i < 150 && !test(); i += 1) await sleep(100); };
   window.addEventListener("load", async () => {
-    if (scene === "board") {
+    const type = (selector, value) => {
+      const input = document.querySelector(selector);
+      input.value = value;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    if (scene === "signin") {
+      await until(() => document.querySelector("#dashboard-url"));
+      type("#dashboard-url", BASE);
+      await sleep(100);
+      document.querySelector(".gateway-connect form button[type=submit]").click();
+      await until(() => document.querySelector("#dashboard-username"));
+      type("#dashboard-username", "demo-operator");
+      type("#dashboard-password", "demo-password");
+    } else if (scene === "board") {
       await until(() => document.querySelector(".board-card"));
     } else {
       await until(() => document.querySelector(".gateway-job-list") && document.querySelector(".gateway-connection-connected"));
       await sleep(500);
       if (scene === "run") {
         await until(() => document.querySelector("#agent-prompt") && !document.querySelector("#agent-prompt").disabled);
-        const prompt = document.querySelector("#agent-prompt");
-        prompt.value = "Review the cart summary tests and confirm the totals update when an item quantity changes.";
-        prompt.dispatchEvent(new Event("input", { bubbles: true }));
+        type("#agent-prompt", "Review the cart summary tests and confirm the totals update when an item quantity changes.");
         document.querySelector(".gateway-composer-submit").click();
         await until(() => document.querySelector(".gateway-approval"));
       }

@@ -1,0 +1,18 @@
+{
+  "extension": "hermes-agent",
+  "entry": "panel/index.html",
+  "fixtures": [
+    "hermes-agent.js"
+  ],
+  "data": {
+    "scene": "signin"
+  },
+  "wait": "window.__ready === true",
+  "settle": 1000,
+  "width": 520,
+  "height": 900,
+  "compose": {
+    "canvas": "1600x1000",
+    "mode": "center"
+  }
+}
