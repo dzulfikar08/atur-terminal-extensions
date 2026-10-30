@@ -1,6 +1,6 @@
 {
   "name": "review",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An in-app code review tab: file tree, inline git-diff highlighting, and per-line comment threads you can hand off to a coding agent.",
   "private": true,
   "type": "module",
@@ -69,7 +69,7 @@
     ],
     "marketplace": {
       "author": "Mark Huot",
-      "github": "markhuot",
+      "github": "dzulfikar08",
       "categories": ["git", "productivity", "code-review"],
       "icon": "assets/icon.svg",
       "screenshots": ["assets/screenshot-1.png"]
