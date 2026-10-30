@@ -4,6 +4,7 @@ import { Icon } from "../ui/icon.jsx";
 import { toast } from "../ui/toast.js";
 import { tableInfo } from "../workbench/state.js";
 import { qualifiedName } from "../lib/sql/quote.js";
+import { dialectOf } from "../lib/sql/dialect.js";
 import { getPref } from "../lib/storage.js";
 import { InfoTable, Section } from "./info-table.jsx";
 import { IndexDesignerModal } from "./index-designer.jsx";
@@ -77,7 +78,7 @@ export function StructureView({ session, tableRef, setStatus, reloadTables }) {
     };
 
     const truncate = () => {
-        const sql = engine === "sqlite" ? `DELETE FROM ${qualifiedName(engine, tableRef)}` : `TRUNCATE TABLE ${qualifiedName(engine, tableRef)}`;
+        const sql = dialectOf(engine) === "sqlite" ? `DELETE FROM ${qualifiedName(engine, tableRef)}` : `TRUNCATE TABLE ${qualifiedName(engine, tableRef)}`;
         runDestructive(sql, "Truncate");
     };
 

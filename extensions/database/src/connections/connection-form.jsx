@@ -5,6 +5,7 @@ import { toast } from "../ui/toast.js";
 import { ENGINES, COLORS, newConnection, saveConnection, listConnections } from "../lib/connections.js";
 import { validate, applyPassword, testConnection } from "./form-logic.js";
 import { Field, SqliteFields, NetFields, SshSection } from "./form-fields.jsx";
+import { D1Fields } from "./d1-fields.jsx";
 
 export function ConnectionFormModal({ existing, onSaved, onClose }) {
     const [conn, setConn] = useState(() => (existing ? JSON.parse(JSON.stringify(existing)) : newConnection("sqlite")));
@@ -106,7 +107,9 @@ export function ConnectionFormModal({ existing, onSaved, onClose }) {
                         ))}
                     </div>
                 </div>
-                {conn.engine === "sqlite" ? <SqliteFields conn={conn} patch={patch} /> : <NetFields conn={conn} patch={patch} password={password} setPassword={setPassword} />}
+                {conn.engine === "sqlite" ? <SqliteFields conn={conn} patch={patch} /> : null}
+                {conn.engine === "d1" ? <D1Fields conn={conn} patch={patch} /> : null}
+                {conn.net ? <NetFields conn={conn} patch={patch} password={password} setPassword={setPassword} /> : null}
                 <SshSection conn={conn} patch={patch} />
             </div>
             {status ? (

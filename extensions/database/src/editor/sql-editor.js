@@ -5,6 +5,7 @@ import { sql, PostgreSQL, MySQL, MariaSQL, SQLite } from "@codemirror/lang-sql";
 import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { searchKeymap, highlightSelectionMatches } from "@codemirror/search";
 import { aturTheme } from "./editor-theme.js";
+import { dialectOf } from "../lib/sql/dialect.js";
 
 const DIALECTS = { postgres: PostgreSQL, mysql: MySQL, mariadb: MariaSQL, sqlite: SQLite };
 
@@ -32,7 +33,7 @@ export function createSqlEditor(parent, { engine, doc = "", schema = {}, onRun, 
                     ...completionKeymap,
                     indentWithTab,
                 ]),
-                sql({ dialect: DIALECTS[engine] || SQLite, schema, upperCaseKeywords: true }),
+                sql({ dialect: DIALECTS[dialectOf(engine)] || SQLite, schema, upperCaseKeywords: true }),
                 aturTheme(),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged && onDocChange)
