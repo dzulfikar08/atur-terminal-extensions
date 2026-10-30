@@ -92,8 +92,9 @@
     const text = body === undefined ? "" : JSON.stringify(body);
     return { stdout: "HTTP/1.1 " + status + " OK\r\nContent-Type: application/json\r\n\r\n" + text + "__ATUR_TERM_HERMES_STATUS__:" + status, stderr: "", exitCode: 0 };
   };
-  h.set("exec", curl);
-  h.set("execAsync", (argv) => ({ result: curl(argv), cancel: async () => {} }));
+  // Own members of the mock host: the relay binds execAsync, which the lazy overrides do not support.
+  h.base.exec = curl;
+  h.base.execAsync = (argv) => ({ result: curl(argv), cancel: async () => {} });
 
   // ---- live gateway (WebSocket) ----------------------------------------------------------------
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
