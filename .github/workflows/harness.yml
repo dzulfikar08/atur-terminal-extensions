@@ -66,7 +66,7 @@ jobs:
           set -euo pipefail
           mkdir -p tools/harness/out
           cd extensions/openpencil/.build/open-pencil
-          bun packages/cli/src/index.ts convert tests/fixtures/pencil_simple.pen "$GITHUB_WORKSPACE/tools/harness/out/sample.fig"
+          bun packages/cli/src/index.ts convert tests/fixtures/pencil_simple.pen -o "$GITHUB_WORKSPACE/tools/harness/out/sample.fig"
           ls -l "$GITHUB_WORKSPACE/tools/harness/out/sample.fig"
 
       - name: Run harness
@@ -122,7 +122,7 @@ jobs:
           set -euo pipefail
           mkdir -p tools/harness/out
           cd extensions/openpencil/.build/open-pencil
-          bun packages/cli/src/index.ts convert tests/fixtures/pencil_simple.pen "$GITHUB_WORKSPACE/tools/harness/out/sample.fig"
+          bun packages/cli/src/index.ts convert tests/fixtures/pencil_simple.pen -o "$GITHUB_WORKSPACE/tools/harness/out/sample.fig"
 
       - name: Run harness
         env:
