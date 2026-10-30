@@ -33,7 +33,7 @@
       net: { host: "warehouse.acme.dev", port: 3306, user: "analyst", database: "analytics", sslMode: "" }, createdAt: now - 60 * 24 * HOUR, lastUsedAt: now - 120 * HOUR },
     { id: "c-marketing", name: "Marketing reports", engine: "mysql", group: "Analytics", color: "#56b6c2", keychain: true,
       net: { host: "10.0.4.12", port: 3306, user: "reports", database: "marketing", sslMode: "" }, createdAt: now - 50 * 24 * HOUR, lastUsedAt: now - 200 * HOUR },
-    { id: "c-cache", name: "Local cache", engine: "sqlite", group: "", color: "#abb2bf", keychain: false,
+    { id: "c-cache", name: "Local cache", engine: "sqlite", group: "Local", color: "#abb2bf", keychain: false,
       sqlite: { path: "/home/dev/acme-web/storage/cache.sqlite3" }, createdAt: now - 40 * 24 * HOUR, lastUsedAt: now - 400 * HOUR },
   ];
   h.memory.set("connections:v1", connections);
@@ -221,7 +221,7 @@
       )
       .join("\n") + "\n";
 
-  const tableOf = (sql) => (sql.match(/table_name = '([^']+)'/) || sql.match(/"public"\."([^"]+)"/) || sql.match(/FROM "public"\."([^"]+)"/) || [])[1];
+  const tableOf = (sql) => (sql.match(/(?:table_name|tablename) = '([^']+)'/) || sql.match(/"public"\."([^"]+)"/) || sql.match(/FROM "public"\."([^"]+)"/) || [])[1];
 
   const answer = async (sql) => {
     if (/lifetime_value/.test(sql)) { await sleep(34); return topCustomers(); }
@@ -301,6 +301,11 @@
     ],
     activeId: 2,
   });
+
+  // WebKitGTK draws native <select> text clipped inside the extension's 24px control
+  const style = document.createElement("style");
+  style.textContent = "select { padding-top: 0; padding-bottom: 0; }";
+  document.addEventListener("DOMContentLoaded", () => document.head.appendChild(style));
 
   const scene = h.data && h.data.scene;
   const text = (node) => (node.textContent || "").trim();
