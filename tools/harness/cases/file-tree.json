@@ -1,8 +1,11 @@
 {
   "extension": "file-tree",
-  "entry": "panel.html",
-  "fixtures": ["sample-project.js"],
-  "wait": "document.querySelectorAll('[data-path], .tree-row, li').length > 3",
-  "width": 520,
-  "height": 700
+  "entry": "panel.html?expanded=src,src/app,src/components,src/lib,tests",
+  "fixtures": ["acme-web.js"],
+  "wait": "document.querySelectorAll('.row[data-path]').length > 18",
+  "eval": ["document.querySelector('.row[data-path=\"src/components/Header.tsx\"]').click()"],
+  "settle": 1000,
+  "width": 420,
+  "height": 860,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
 }

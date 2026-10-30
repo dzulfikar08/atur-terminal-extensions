@@ -58,6 +58,8 @@ def main():
     ap.add_argument("--settle", type=int, default=800, help="ms to wait after the condition")
     ap.add_argument("--timeout", type=int, default=90)
     ap.add_argument("--report", help="write a JSON report here")
+    ap.add_argument("--all-frames", action="store_true",
+                    help="inject the mock into iframes too (for host pages that embed several extension pages)")
     ap.add_argument("--eval", action="append", default=[], help="JS evaluated after the wait; result printed")
     args = ap.parse_args()
 
@@ -101,7 +103,9 @@ def main():
     )
     source = preamble + "\n".join(open(p, encoding="utf-8").read() for p in scripts)
     ucm.add_script(WebKit2.UserScript.new(
-        source, WebKit2.UserContentInjectedFrames.TOP_FRAME, WebKit2.UserScriptInjectionTime.START, None, None))
+        source,
+        WebKit2.UserContentInjectedFrames.ALL_FRAMES if args.all_frames else WebKit2.UserContentInjectedFrames.TOP_FRAME,
+        WebKit2.UserScriptInjectionTime.START, None, None))
 
     view = WebKit2.WebView(web_context=ctx, user_content_manager=ucm)
     settings = view.get_settings()
