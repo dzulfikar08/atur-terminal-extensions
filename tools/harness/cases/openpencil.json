@@ -1,0 +1,24 @@
+{
+  "extension": "openpencil",
+  "entry": "index.html",
+  "fixtures": [
+    "openpencil.js"
+  ],
+  "data": {
+    "filePath": "designs/sample.fig",
+    "source": "terminal"
+  },
+  "assets": {
+    "sample.fig": "tools/harness/out/sample.fig"
+  },
+  "wait": "window.__aturOpenPencilReady === true && window.__harness.reads > 0 && !!document.querySelector('canvas')",
+  "settle": 8000,
+  "timeout": 150,
+  "width": 1600,
+  "height": 1000,
+  "eval": [
+    "(async()=>{const b=[...document.querySelectorAll('button')].find(x=>/Start designing/.test(x.textContent)); if(b) b.click(); await new Promise(r=>setTimeout(r,2500)); return 'dismissed:'+!!b})()",
+    "JSON.stringify({ isSecureContext: window.isSecureContext, webgl2: !!document.createElement('canvas').getContext('webgl2'), reads: window.__harness.reads, writes: window.__harness.writes, canvases: document.querySelectorAll('canvas').length })",
+    "(async()=>{document.dispatchEvent(new KeyboardEvent('keydown',{key:'s',code:'KeyS',ctrlKey:true,bubbles:true})); window.dispatchEvent(new KeyboardEvent('keydown',{key:'s',code:'KeyS',ctrlKey:true,bubbles:true})); await new Promise(r=>setTimeout(r,2500)); return 'after Ctrl+S writes: '+JSON.stringify(window.__harness.writes)})()"
+  ]
+}

@@ -180,6 +180,8 @@ should be taken down.
   committed as `signing.pub` and baked into the Atur Terminal app.
 - `first-party.json` lists the extensions this project maintains; the store marks them
   as first-party. Changing it needs maintainer review.
+- `held.json` lists imported community extensions that are kept in the repo but not published
+  yet (their listing images are still being replaced). Remove a name to release it.
 - To publish (or re-publish) without a code change, run the **Publish** workflow manually
   with a list of names, or `first-party`. Versions the store already has are skipped.
 - Generate a new key pair with
