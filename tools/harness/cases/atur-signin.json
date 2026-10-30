@@ -1,0 +1,10 @@
+{
+  "extension": "atur",
+  "entry": "index.html",
+  "fixtures": ["atur.js", "atur-signin.js"],
+  "wait": "window.__ready === true",
+  "settle": 500,
+  "width": 380,
+  "height": 560,
+  "compose": { "canvas": "1600x1000", "mode": "center" }
+}
