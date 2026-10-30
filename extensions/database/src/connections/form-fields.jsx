@@ -103,7 +103,7 @@ export function NetFields({ conn, patch, password, setPassword }) {
 }
 
 export function SshSection({ conn, patch }) {
-    if (conn.engine === "sqlite")
+    if (!conn.net)
         return null;
     const ssh = conn.ssh || { enabled: false, host: "", port: 22, user: "", keyPath: "" };
     const patchSsh = (p) => patch({ ssh: { ...ssh, ...p } });

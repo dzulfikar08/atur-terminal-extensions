@@ -1,6 +1,6 @@
 {
   "name": "database",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "scripts": {
     "dev": "vite",
     "test": "node --test tests/*.test.js",
@@ -28,7 +28,7 @@
   },
   "atur-terminal": {
     "$schema": "https://raw.githubusercontent.com/dzulfikar08/atur-terminal-extensions/main/schema/manifest.schema.json",
-    "description": "SQL database client — SQLite, MySQL, MariaDB, PostgreSQL",
+    "description": "SQL database client — SQLite, Cloudflare D1, MySQL, MariaDB, PostgreSQL",
     "permissions": [
       "commands:exec",
       "tabs:read",
@@ -116,8 +116,8 @@
       }
     ],
     "marketplace": {
-      "author": "Saeed Vaziry",
-      "github": "saeedvaziry",
+      "author": "Atur Terminal",
+      "github": "dzulfikar08",
       "repository": "https://github.com/dzulfikar08/atur-terminal-extensions",
       "categories": [
         "database",

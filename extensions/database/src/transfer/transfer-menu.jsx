@@ -22,7 +22,7 @@ export function TransferMenuModal({ session, tableRef, onClose }) {
                 <MenuItem icon="download" label="Export table as CSV" onSelect={run(() => exportTable(session, tableRef, "csv"))} />
                 <MenuItem icon="download" label="Export table as JSON" onSelect={run(() => exportTable(session, tableRef, "json"))} />
                 <MenuItem icon="download" label="Export table as SQL INSERTs" onSelect={run(() => exportTable(session, tableRef, "sql"))} />
-                {tableRef ? <MenuItem icon="upload" label="Import CSV into table" onSelect={run(() => importCsv(session, tableRef))} /> : null}
+                {tableRef && session.driver.capabilities.importCsv ? <MenuItem icon="upload" label="Import CSV into table" onSelect={run(() => importCsv(session, tableRef))} /> : null}
                 <MenuItem icon="save" label="Dump entire database" onSelect={run(() => dumpDatabase(session))} />
             </div>
         </Modal>

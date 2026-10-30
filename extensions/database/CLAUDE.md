@@ -1,6 +1,6 @@
 # database
 
-SQL database client extension for Atur Terminal supporting SQLite, MySQL, MariaDB, and PostgreSQL.
+SQL database client extension for Atur Terminal supporting SQLite, Cloudflare D1 (via `wrangler`), MySQL, MariaDB, and PostgreSQL.
 
 ## Stack
 

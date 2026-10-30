@@ -13,7 +13,9 @@ export function validate(conn) {
         return "Name is required";
     if (conn.engine === "sqlite" && !conn.sqlite.path.trim())
         return "Database file path is required";
-    if (conn.engine !== "sqlite") {
+    if (conn.engine === "d1" && !conn.d1.database.trim())
+        return "Database name or binding is required";
+    if (conn.net) {
         if (!conn.net.host.trim())
             return "Host is required";
         if (!conn.net.user.trim())

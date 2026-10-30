@@ -150,15 +150,25 @@ def main():
             then()
             return
         script = remaining.pop(0)
+        started = GLib.get_monotonic_time()
 
-        def on_eval(source_obj, res, _):
-            try:
-                value = view.evaluate_javascript_finish(res)
-                report["eval"].append(value.to_string())
-            except Exception as exc:  # noqa: BLE001
-                report["eval"].append("ERROR: %s" % exc)
-            run_evals(then, remaining)
-        js("Promise.resolve((async()=>{return String(await (%s))})())" % script, on_eval)
+        def poll_result():
+            def on_value(source_obj, res, _):
+                try:
+                    value = view.evaluate_javascript_finish(res)
+                    text = value.to_string()
+                except Exception as exc:  # noqa: BLE001
+                    text = "ERROR: %s" % exc
+                if text == "__pending__" and GLib.get_monotonic_time() - started < 30_000_000:
+                    GLib.timeout_add(300, lambda: (poll_result(), False)[1])
+                    return
+                report["eval"].append(text)
+                run_evals(then, remaining)
+            js("typeof window.__evalResult === 'undefined' ? '__pending__' : String(window.__evalResult)", on_value)
+
+        def on_started(source_obj, res, _):
+            poll_result()
+        js("window.__evalResult = undefined; (async () => { try { window.__evalResult = String(await (%s)); } catch (e) { window.__evalResult = 'ERROR: ' + e; } })(); 'started'" % script, on_started)
 
     def shoot():
         def done():
