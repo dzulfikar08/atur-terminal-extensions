@@ -30,3 +30,7 @@ Append `?fixture=` with encoded JSON or set localStorage key `ai-usage.fixture` 
 npm install
 npm run build
 ```
+
+## Credits
+
+Originally published in muxy-app/extensions (MIT) by Wonjin. Maintained by Atur Terminal.
