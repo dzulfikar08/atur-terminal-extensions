@@ -6,7 +6,7 @@ The canonical standalone source repository is `https://github.com/gabeosx/muxy-g
 
 ## Versioning
 
-`package.json` is the version source. The root package version in `package-lock.json` must match it before release preparation starts.
+`package.json` is the version source. `bun.lock` must be committed and current (`bun install --frozen-lockfile` succeeds) before release preparation starts.
 
 Until 1.0, use patch releases for fixes, security, documentation, and listing corrections. Use minor releases for features, permission changes, newly supported workspace shapes, or breaking changes.
 
@@ -15,16 +15,16 @@ Published `gsd-control-tower@version` pairs are immutable. Never rebuild an exis
 ## Prepare a release
 
 1. Move relevant notes from `Unreleased` into a dated version section in `CHANGELOG.md`.
-2. Update `package.json` and the root package entry in `package-lock.json` together.
+2. Update the version in `package.json`, then run `bun install` so `bun.lock` stays in sync.
 3. Review the frozen manifest, ordered listing assets, permissions, events, commands, entries, and README claims. No npm publish step or publishing lifecycle script is allowed.
 4. From a clean source tree, run:
 
    ```sh
-   npm ci
-   npm test
-   npm run build
-   npm run validate
-   npm audit --audit-level=high
+   bun install --frozen-lockfile
+   bun run test
+   bun run build
+   bun run validate
+   bun audit --audit-level=high
    ```
 
 5. Complete the native Atur Terminal matrix on the exact build being submitted. Retain only the two sanitized marketplace screenshots; do not retain credentials, private planning content, local paths, receipts, or generated qualification data.
@@ -33,11 +33,11 @@ Published `gsd-control-tower@version` pairs are immutable. Never rebuild an exis
 
 Start from a clean, tagged commit in `gabeosx/muxy-gsd-control-tower`. Use a partial sparse checkout of the authenticated `gabeosx/extensions` fork, based on current `dzulfikar08/atur-terminal-extensions/main`, and copy that reviewed source to `extensions/gsd-control-tower`.
 
-Retain `panel/`, `assets/`, `src/`, `scripts/`, `demo/`, `test/fixtures/`, reviewer-useful tests, `package.json`, `package-lock.json`, Vite configuration, documentation, `.gitignore`, and the nested `.github/workflows/ci.yml`. The nested workflow is review evidence only; GitHub does not activate it from below the repository-root workflow directory.
+Retain `panel/`, `assets/`, `src/`, `scripts/`, `demo/`, `test/fixtures/`, reviewer-useful tests, `package.json`, `bun.lock`, Vite configuration, documentation, `.gitignore`, and the nested `.github/workflows/ci.yml`. The nested workflow is review evidence only; GitHub does not activate it from below the repository-root workflow directory.
 
 Exclude `.research/`, `.agents/`, `.planning/`, `.qualification/`, `.gsd/`, `skills-lock.json`, caches, `node_modules/`, `dist/`, `.DS_Store`, credentials, receipts, local logs, and generated qualification evidence.
 
-From the copied extension run `npm ci`, `npm test`, `npm run build`, and `npm run validate`. From the upstream checkout root run:
+From the copied extension run `bun install --frozen-lockfile`, `bun run test`, `bun run build`, and `bun run validate`. From the upstream checkout root run:
 
 ```sh
 node scripts/build.mjs gsd-control-tower

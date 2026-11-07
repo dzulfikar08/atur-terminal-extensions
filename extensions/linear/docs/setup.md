@@ -10,8 +10,8 @@ Atur Terminal 안에서 Linear 이슈를 보고, 클릭 한 번으로 브랜치�
 
 ```bash
 cd extensions/linear
-npm install
-npm run build     # dist/ 생성 (package.json 자동 복사)
+bun install
+bun run build     # dist/ 생성 (package.json 자동 복사)
 ```
 
 그다음 Atur Terminal에서 아래 순서로 진행합니다.
@@ -22,7 +22,7 @@ npm run build     # dist/ 생성 (package.json 자동 복사)
 2. 목록의 `linear`를 **활성화(enable)** — 확장은 기본이 꺼짐 상태입니다
 3. 패널 열기: topbar의 Linear 아이콘 또는 팔레트(`⌘⇧P`)에서 `Linear: Toggle Sidebar`
 
-> ⚠️ **매니페스트(권한/명령)를 바꾼 경우**엔 단순 Reload로 반영되지 않습니다. **Remove from Atur Terminal → Load Unpacked** 로 다시 올리거나 Atur Terminal를 재시작하세요. 코드/화면만 바꿨을 땐 `npm run build` 후 **Reload** 로 충분합니다.
+> ⚠️ **매니페스트(권한/명령)를 바꾼 경우**엔 단순 Reload로 반영되지 않습니다. **Remove from Atur Terminal → Load Unpacked** 로 다시 올리거나 Atur Terminal를 재시작하세요. 코드/화면만 바꿨을 땐 `bun run build` 후 **Reload** 로 충분합니다.
 
 ---
 

@@ -3,7 +3,7 @@
 Harbor Notes is a fictional offline notebook app. The generator creates a local Git repository and two linked worktrees with realistic, independent GSD artifacts. No services, credentials, or fabricated agent activity are included.
 
 ```sh
-npm run demo -- /tmp/harbor-notes-demo
+bun run demo -- /tmp/harbor-notes-demo
 ```
 
 The destination must not exist; the generator refuses to overwrite it. Git identity is configured only inside this demo repository. It never changes global Git configuration or registers projects in Atur Terminal automatically.

@@ -54,9 +54,9 @@ Network: only `https://app.diatur.com` (Atur Terminal asks once per host). No pr
 ## Development
 
 ```bash
-npm install
-npm test        # node --test: PKCE, OAuth, token refresh races, MCP client, API flows, sanitizer
-npm run build
+bun install
+bun run test        # node --test: PKCE, OAuth, token refresh races, MCP client, API flows, sanitizer
+bun run build
 ```
 
 Source is plain ES modules under `src/` (`lib/` is DOM-free and unit-tested; `app.js` renders the

@@ -42,7 +42,7 @@ curl -fsSL "https://raw.githubusercontent.com/dzulfikar08/atur-terminal/${V2}/cr
    - No `CFBundleExecutable`; localization bundles must remain resource-only.
 4. Add one entry to `atur.localizations` in `package.json`. The `id`, `language`, `.lproj` directory, development region, and regional casing must agree exactly. Point `bundle` at the new bundle directory and use the native display name for `title`.
 5. Add the language to the table in `README.md`.
-6. Increment the package patch version in both `package.json` and `package-lock.json`. Published versions are immutable.
+6. Increment the package patch version in `package.json` (the extension has no dependencies, so there is no lockfile to update). Published versions are immutable.
 
 Follow the existing naming pattern: English PascalCase bundle directory names, canonical BCP 47 tags for provider IDs and `.lproj` directories, and lowercase tags in bundle identifiers.
 
@@ -71,7 +71,7 @@ plutil -lint extensions/language-packs/localization/<EnglishLanguageName>.bundle
 From the repository root, run the complete package checks:
 
 ```bash
-npm ci --ignore-scripts
+bun install --frozen-lockfile --ignore-scripts
 node scripts/build.mjs language-packs
 node scripts/validate.mjs language-packs
 node scripts/pack.mjs --dry-run language-packs

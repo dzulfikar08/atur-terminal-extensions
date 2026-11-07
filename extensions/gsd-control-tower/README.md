@@ -43,8 +43,8 @@ Open Atur Terminal → **Settings → Extensions → Browse**, find **GSD Contro
 ```sh
 git clone https://github.com/gabeosx/muxy-gsd-control-tower.git
 cd atur-gsd-control-tower
-npm ci
-npm run build
+bun install --frozen-lockfile
+bun run build
 ```
 
 In Atur Terminal, open **Extensions**, choose **Load Unpacked**, and select this repository's `dist/` directory. Rebuild and reload the extension after source changes.
@@ -94,20 +94,20 @@ Disable or uninstall GSD Control Tower from Atur Terminal's Extensions screen. T
 
 ## Demo
 
-Run `npm run demo -- /tmp/harbor-notes-demo` to create **Harbor Notes**, a fictional project with three independent worktrees: active implementation, a paused handoff, and failed release verification. The generator refuses to overwrite existing folders. See [the demo walkthrough](demo/README.md) for Atur Terminal registration and presentation steps.
+Run `bun run demo -- /tmp/harbor-notes-demo` to create **Harbor Notes**, a fictional project with three independent worktrees: active implementation, a paused handoff, and failed release verification. The generator refuses to overwrite existing folders. See [the demo walkthrough](demo/README.md) for Atur Terminal registration and presentation steps.
 
 ## Development
 
 Node 20 or newer is required.
 
 ```sh
-npm ci
-npm test
-npm run build
-npm run validate
+bun install --frozen-lockfile
+bun run test
+bun run build
+bun run validate
 ```
 
-`npm run build` creates the marketplace package in `dist/`. `npm run validate` checks the manifest, listing assets, permissions, source graph, secret safety, and reproducible build output.
+`bun run build` creates the marketplace package in `dist/`. `bun run validate` checks the manifest, listing assets, permissions, source graph, secret safety, and reproducible build output.
 
 Release history and the marketplace handoff process are documented in [CHANGELOG.md](CHANGELOG.md) and [RELEASING.md](RELEASING.md).
 

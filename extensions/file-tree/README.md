@@ -25,9 +25,9 @@ The extension does not request `files:write` and does not delete, rename, move, 
 ## Local Install
 
 ```bash
-npm install
-npm run build
-npm run install:local
+bun install
+bun run build
+bun run install:local
 ```
 
 Restart Atur Terminal or use Settings -> Extensions -> Reload Extensions.

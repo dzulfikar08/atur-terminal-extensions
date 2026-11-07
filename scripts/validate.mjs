@@ -9,6 +9,7 @@ import {
   extensionsDir,
   fetchSchema,
   listExtensionNames,
+  lockfileErrors,
   packageJSONPath,
   readJSON,
   readPackageManifest,
@@ -260,7 +261,7 @@ function validateExtension(name) {
   // top-level name + version + scripts, with the manifest body under `atur`.
   // Validate the real package as shipped; `manifest`/`atur` are the flattened
   // views the resource and cross-reference checks below read from. The lockfile
-  // requirement is enforced in code (npm-level, not in the schema).
+  // requirement (bun.lock) is enforced in code, not in the schema.
   const { manifest, atur } = readPackageManifest(dir);
 
   if (!validateManifest(pkg)) {
@@ -270,8 +271,8 @@ function validateExtension(name) {
     return report;
   }
 
-  if (!fs.existsSync(path.join(dir, "package-lock.json"))) {
-    report.error("package-lock.json is required (run `npm install` and commit the lockfile)");
+  for (const message of lockfileErrors(dir)) {
+    report.error(message);
   }
 
   if (pkg.name !== name) {

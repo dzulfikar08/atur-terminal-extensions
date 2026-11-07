@@ -27,8 +27,8 @@ Append `?fixture=` with encoded JSON or set localStorage key `ai-usage.fixture` 
 ## Build
 
 ```sh
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 ## Credits

@@ -28,8 +28,8 @@ Supports **Grok**, **Claude Code**, **Codex**, **GitHub Copilot CLI**, **Cursor 
 
 ```bash
 cd /path/to/ai-session-history
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 In Atur Terminal: **Extensions → Load Unpacked** → select this folder (or `dist/` after publish-style install). Grant permissions when prompted (`commands:exec`, `tabs:write`, etc.).
@@ -97,8 +97,8 @@ On SSH / remote Atur Terminal workspaces, `atur.exec` runs on the **remote** hos
 ## Development
 
 ```bash
-npm run build   # required for Atur Terminal Reload to pick up changes
-npm test        # Bun unit + fixture tests (no Atur Terminal runtime)
+bun run build   # required for Atur Terminal Reload to pick up changes
+bun run test        # Bun unit + fixture tests (no Atur Terminal runtime)
 ```
 
 Build copies `package.json` into `dist/` and bundles the resume-picker IIFE from shared scan modules (publish pipeline ships only `dist/`).

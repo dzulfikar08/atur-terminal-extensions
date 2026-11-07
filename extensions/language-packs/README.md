@@ -32,7 +32,7 @@ In `.strings` values, use typographic quotes (`“…”`) or escape literal dou
 quotes (`\"`). Unescaped double quotes terminate the value and prevent the
 entire language pack from loading.
 
-On macOS, run `npm test --prefix extensions/language-packs` from the repository
+On macOS, run `bun run --cwd extensions/language-packs test` from the repository
 root to parse every declared language's property lists with `plutil`. This
 syntax regression check is skipped on other platforms; it does not replace
 Atur Terminal's format-placeholder validation.

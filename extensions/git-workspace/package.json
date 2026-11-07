@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "vite build && vite build --config vite.diff-viewer.config.js && node -e \"require('fs').copyFileSync('package.json','dist/package.json')\"",
-    "deploy": "npm run build && rsync -a dist/ \"$HOME/.config/atur-terminal/extensions/git-workspace/\"",
+    "deploy": "bun run build && rsync -a dist/ \"$HOME/.config/atur-terminal/extensions/git-workspace/\"",
     "build:surfaces": "vite build",
     "dev": "vite"
   },

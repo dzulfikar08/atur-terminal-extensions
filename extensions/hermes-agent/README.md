@@ -116,16 +116,16 @@ Log out first if you want to clear the saved Dashboard session, then disable or 
 Node 20 or newer is required.
 
 ```sh
-npm ci
-npm test
-npm run build
-npm run validate
-npm run qualify
+bun install --frozen-lockfile
+bun run test
+bun run build
+bun run validate
+bun run qualify
 ```
 
-`npm run build` creates the marketplace package in `dist/`. `npm run validate` checks the package, permissions, assets, secret safety, and reproducible build output. `npm run qualify` tests the supported connection methods in a disposable lab.
+`bun run build` creates the marketplace package in `dist/`. `bun run validate` checks the package, permissions, assets, secret safety, and reproducible build output. `bun run qualify` tests the supported connection methods in a disposable lab.
 
-`npm run qualify:native` exists only to reproduce the known Atur Terminal SSH-workspace problem. It is not part of the normal release check.
+`bun run qualify:native` exists only to reproduce the known Atur Terminal SSH-workspace problem. It is not part of the normal release check.
 
 For version history and the draft-only marketplace handoff, see [CHANGELOG.md](CHANGELOG.md) and [RELEASING.md](RELEASING.md).
 

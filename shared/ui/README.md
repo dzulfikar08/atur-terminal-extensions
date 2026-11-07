@@ -120,7 +120,7 @@ rebuilding them in a webview:
   rebuild.
 - **Breaking changes** (renames, DOM-contract changes) update every consumer in
   the same PR — `grep -r "mx-<name>" extensions/` finds them all.
-- `ui.test.mjs` is the package's contract check, run by `npm test` and CI: every
+- `ui.test.mjs` is the package's contract check, run by `bun run test` and CI: every
   documented primitive and token exists, no hardcoded hex colors, and only the
   officially injected `--atur-*` variables are referenced. Extend it when you
   add a primitive.

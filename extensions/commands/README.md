@@ -21,8 +21,8 @@ restores the built-in Claude and Codex commands.
 ## Develop
 
 ```bash
-npm install --ignore-scripts
-npm run build
+bun install --ignore-scripts
+bun run build
 ```
 
 Then **Load Unpacked** this folder in the Atur Terminal Extensions modal, or **Reload**

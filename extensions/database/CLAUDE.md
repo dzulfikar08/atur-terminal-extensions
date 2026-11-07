@@ -23,7 +23,7 @@ SQL database client extension for Atur Terminal supporting SQLite, Cloudflare D1
 
 ## Building & editing
 
-Install deps with `npm install`, then `npm run build` to produce `dist/`. After rebuilding, click "Reload" in the Atur Terminal Extensions modal to pick up the changes.
+Install deps with `bun install`, then `bun run build` to produce `dist/`. After rebuilding, click "Reload" in the Atur Terminal Extensions modal to pick up the changes.
 
 ## Guides
 

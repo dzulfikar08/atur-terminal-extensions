@@ -37,8 +37,8 @@ Plain source control (status, commit, branch, diff, worktrees) uses `git` alone 
 ## Building
 
 ```sh
-npm install --ignore-scripts
-npm run build
+bun install --ignore-scripts
+bun run build
 ```
 
 Then load the `dist/` folder via **Load Unpacked** in Atur Terminal's Extensions modal (or click **Reload** after rebuilding).

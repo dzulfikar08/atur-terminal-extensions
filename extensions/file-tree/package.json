@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build && node scripts/copy-manifest.mjs",
-    "install:local": "npm run build && rm -rf ~/.config/atur-terminal/extensions/file-tree && mkdir -p ~/.config/atur-terminal/extensions && cp -R dist ~/.config/atur-terminal/extensions/file-tree"
+    "install:local": "bun run build && rm -rf ~/.config/atur-terminal/extensions/file-tree && mkdir -p ~/.config/atur-terminal/extensions && cp -R dist ~/.config/atur-terminal/extensions/file-tree"
   },
   "devDependencies": {
     "vite": "^7.3.5"

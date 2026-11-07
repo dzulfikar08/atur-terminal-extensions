@@ -16,7 +16,7 @@
 
 ## 初始设置
 
-1. 构建(`npm install && npm run build`)后,在 Atur Terminal 中 **Extensions → Load Unpacked**
+1. 构建(`bun install && bun run build`)后,在 Atur Terminal 中 **Extensions → Load Unpacked**
    选择构建后的 **`dist/`** 文件夹。
 2. 打开面板(顶栏图标或 `Linear: Toggle Sidebar`),然后打开**设置**(⚙)。点击
    **🔑 管理 API 密钥** 注册一个或多个 Linear **Personal API Key**(每个带说明),

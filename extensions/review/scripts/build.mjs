@@ -19,8 +19,8 @@
 // review.js imports the libraries through the thin adapter modules in lib/
 // (which import from the `@codemirror/*`, `@pierre/trees`, and `marked` npm
 // packages declared in package.json `dependencies`). The marketplace pipeline
-// runs `npm ci --ignore-scripts` (registry access) to install that locked tree,
-// then `npm run build` with npm_config_offline=true — so esbuild bundles
+// runs `bun install --frozen-lockfile --ignore-scripts` (registry access) to install that locked tree,
+// then `bun run --no-install build` with npm_config_offline=true — so esbuild bundles
 // everything from node_modules with NO network at build time. No vendored
 // bundles are committed: shipping minified source trips the store's
 // readable-source check, and the libs are now first-class dependencies.

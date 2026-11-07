@@ -7,7 +7,7 @@ merged to `main`, CI signs the package and publishes it to the store, where Atur
 Terminal's **Settings → Extensions** lists it.
 
 ```
-fork → add extensions/<name>/ → npm run validate → open PR → CI + review → merge → signed + published
+fork → add extensions/<name>/ → bun run validate → open PR → CI + review → merge → signed + published
 ```
 
 > **Looking for the author guide?** How to *build* an extension — every manifest field,
@@ -43,10 +43,13 @@ this repo's schema. Atur Terminal ignores it.
 ## 2. Build it
 
 Follow the [author guide](https://github.com/dzulfikar08/atur-terminal/tree/main/docs/extensions)
-in the Atur Terminal app repo. CI here enforces the same rules the app does. Your
-`package.json` needs a `build` script that produces `dist/` (including a copy of
-`package.json`) and a committed `package-lock.json`; dependencies are installed with
-`npm ci --ignore-scripts`.
+in the Atur Terminal app repo. This repo's CI adds its own packaging rules on top:
+your `package.json` needs a `build` script that produces `dist/` (including a copy
+of `package.json`), and an extension with dependencies needs a committed `bun.lock`
+(run `bun install`; `package-lock.json` and other lockfiles are rejected). CI
+installs with `bun install --frozen-lockfile --ignore-scripts` and builds with
+`bun run build`. Build scripts and the repo tooling run on Node.js 20+, so you need
+both Bun and Node.
 
 ### Shared UI (`shared/ui`)
 
@@ -64,6 +67,9 @@ skip it.
 
 - `package.json` matches the [manifest schema](schema/manifest.schema.json).
 - Directory name equals the package `name`.
+- An extension with dependencies commits a `bun.lock` that `bun install
+  --frozen-lockfile` accepts; no `package-lock.json`, `yarn.lock` or
+  `pnpm-lock.yaml`.
 - Every referenced file (`background`, tab/panel/popover `entry`, command
   `script`, SVG icons) exists and stays inside your directory.
 - Commands reference real `tabTypes` / `panels` / `popovers`; topbar and status
@@ -82,10 +88,10 @@ and declare only the permissions you actually use.
 ## 3. Validate locally
 
 ```bash
-npm install
-node scripts/validate.mjs my-extension     # one extension
-node scripts/validate.mjs                   # all extensions
-node scripts/pack.mjs --dry-run my-extension  # prove it zips + see its hash
+bun install --frozen-lockfile --ignore-scripts
+bun run build my-extension            # install + build, as CI does
+bun run validate my-extension         # one extension (omit the name for all)
+bun run pack --dry-run my-extension   # prove it zips + see its hash
 ```
 
 Validation uses the manifest schema vendored in `schema/manifest.schema.json`; the build

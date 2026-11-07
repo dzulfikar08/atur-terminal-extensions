@@ -9,7 +9,7 @@ import { promisify } from "node:util";
 const run = promisify(execFile);
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
+const bun = process.platform === "win32" ? "bun.exe" : "bun";
 const allowedManifestKeys = new Set(["$schema", "description", "commands", "marketplace", "panels", "permissions", "tabTypes"]);
 const allowedPanelKeys = new Set(["entry", "icon", "id", "mode", "position", "title"]);
 const allowedTabTypeKeys = new Set(["entry", "id", "title"]);
@@ -191,11 +191,11 @@ async function digests(files) {
 }
 
 export async function validateDist({ buildTwice = true } = {}) {
-  await run(npm, ["run", "build"], { cwd: root });
+  await run(bun, ["run", "build"], { cwd: root });
   const firstFiles = await validateBuild();
   const firstDigests = await digests(firstFiles);
   if (buildTwice) {
-    await run(npm, ["run", "build"], { cwd: root });
+    await run(bun, ["run", "build"], { cwd: root });
     const secondFiles = await validateBuild();
     assert.deepEqual(secondFiles, firstFiles, "two builds emitted different file inventories");
     assert.deepEqual(await digests(secondFiles), firstDigests, "two builds were not byte-identical");

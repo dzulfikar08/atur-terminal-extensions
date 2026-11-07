@@ -5,7 +5,7 @@
 # because the locally-installed Atur Terminal serves this extension from dist/ when it
 # exists (it resolves the tab entry to dist/tabs/review.html, and a full
 # relaunch errors if dist/ is missing). So keeping ONLY the root bundle fresh
-# isn't enough; the dev loop must refresh dist/ too. Run `npm install` once to
+# isn't enough; the dev loop must refresh dist/ too. Run `bun install` once to
 # populate node_modules, then run this after editing tabs/review.js (or a lib/
 # adapter), then Reload in Atur Terminal.
 set -euo pipefail

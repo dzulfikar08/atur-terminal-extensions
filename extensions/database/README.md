@@ -50,8 +50,8 @@ Commands run on the remote host, so the database CLIs must be installed there, f
 ## Building
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 Then use Load Unpacked in Atur Terminal's Extensions modal and Reload after each rebuild.

@@ -3,8 +3,8 @@
 An Atur Terminal extension that shows Beads issues from the active workspace as either a pinned panel or a full workspace tab.
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 Load `extensions/beads/` with Atur Terminal's **Load Unpacked** flow. After rebuilding, click **Reload** in the Extensions modal.

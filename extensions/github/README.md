@@ -32,8 +32,8 @@ Uses the [`gh`](https://cli.github.com) CLI, authenticated once via
 ## Building
 
 ```sh
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.

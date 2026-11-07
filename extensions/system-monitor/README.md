@@ -89,9 +89,9 @@ workspace is active.
 ## Development
 
 ```bash
-npm install
-npm run build   # vite build + background bundle + manifest copy → dist/
-npm test        # parser unit tests against canned fixtures
+bun install
+bun run build   # vite build + background bundle + manifest copy → dist/
+bun run test        # parser unit tests against canned fixtures
 ```
 
 After rebuilding, click **Reload** in the Atur Terminal Extensions modal. Source

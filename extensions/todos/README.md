@@ -15,11 +15,11 @@ A per-project todo list for [Atur Terminal](https://github.com/dzulfikar08/atur-
 ## Build
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 ```
 
-After rebuilding, click **Reload** in the Atur Terminal Extensions modal to pick up changes (`npm run dev` runs Vite's dev server for fast iteration).
+After rebuilding, click **Reload** in the Atur Terminal Extensions modal to pick up changes (`bun run dev` runs Vite's dev server for fast iteration).
 
 ## Layout
 

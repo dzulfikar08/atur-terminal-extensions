@@ -61,16 +61,16 @@ minified vendor bundles. The bundle is produced at build time. First install the
 dependencies, then build:
 
 ```sh
-npm install        # install the libraries into node_modules (writes the lockfile)
+bun install        # install the libraries into node_modules (writes the lockfile)
 scripts/build.sh   # bundle tabs/review.js + deps -> tabs/review.bundle.js, refresh dist/
 ```
 
 Then click **Reload** in Atur Terminal's Extensions settings.
 
-For the **marketplace**, `npm run build` assembles a self-contained `dist/` by
+For the **marketplace**, `bun run build` assembles a self-contained `dist/` by
 bundling `tabs/review.js` and its dependencies with esbuild (this is exactly
-what the store pipeline runs after `npm ci --ignore-scripts`). `dist/` is the
-only thing shipped to users — source and dev files stay behind. `npm run
+what the store pipeline runs after `bun install --frozen-lockfile --ignore-scripts`). `dist/` is the
+only thing shipped to users — source and dev files stay behind. `bun run
 preflight` runs the extension through the real `dzulfikar08/atur-terminal-extensions` tooling
 (build → validate → pack) locally before you open a PR.
 

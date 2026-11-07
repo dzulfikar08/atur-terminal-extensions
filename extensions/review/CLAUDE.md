@@ -589,8 +589,8 @@ file — see "Hunk navigation" under "Diff highlighting".)
   `atur` key (no `$schema`/`name`/`version` inside it — the validator flattens
   `{...atur, name, version}` against an `additionalProperties:false` schema). Declares the `build`
   script, the runtime libraries as `dependencies` (CodeMirror 6 packages, `@pierre/trees`,
-  `marked`), and `esbuild` as a devDep. `package-lock.json` is committed (CI requires it — the
-  marketplace build runs `npm ci` from it).
+  `marked`), and `esbuild` as a devDep. `bun.lock` is committed (CI requires it — the
+  marketplace build runs `bun install --frozen-lockfile` from it).
 - `README.md` — the marketplace/store readme (description + per-permission justification).
 - `assets/review.svg` — topbar glyph (`currentColor`, tinted by the chrome).
 - `assets/icon.svg` — the 256-canvas marketplace listing icon (self-colored).
@@ -613,29 +613,29 @@ file — see "Hunk navigation" under "Diff highlighting".)
 
 There are **two build tracks** — local dev (loads from the repo root) and marketplace (ships a
 `dist/`). They share one source (`tabs/review.js` + the `lib/` adapters) and one set of npm
-`dependencies`; the bundle is produced at build time, never committed. **Run `npm install` once**
+`dependencies`; the bundle is produced at build time, never committed. **Run `bun install` once**
 to populate `node_modules` before either track (the marketplace pipeline does this for you via
-`npm ci`).
+`bun install --frozen-lockfile`).
 
 - `scripts/build.sh` — **local dev**: rebuilds the root `tabs/review.bundle.js` from
   `tabs/review.js` (bun, IIFE — resolving the libraries from `node_modules`) **and then regenerates
   `dist/`** (it calls `scripts/build.mjs`), because the locally-installed Atur Terminal serves this extension
   from **`dist/`** (see the ⚠️ gotcha under "Editing"). **Run this after editing `review.js` (or a
   `lib/` adapter), then Reload in Atur Terminal.**
-- `scripts/build.mjs` (`npm run build`) — **marketplace**: assembles `dist/` (esbuild bundles
+- `scripts/build.mjs` (`bun run build`) — **marketplace**: assembles `dist/` (esbuild bundles
   `review.js` + its dependencies from `node_modules` → `dist/tabs/review.bundle.js`, then copies
   `review.html`, `review.css`, `assets/*`, **and `package.json`**, mirroring the root layout). The
   pipeline **requires the manifest (`package.json`) inside `dist/`** — build hard-fails otherwise
   (`build did not emit 'package.json' into 'dist/'`) — so `dist/package.json` is the one piece of
   the source tree that intentionally ships. Offline-safe at build time (esbuild reads only
-  `node_modules`): the store pipeline runs `npm ci --ignore-scripts` (registry access, installs the
-  locked dependency tree) **then** `npm run build` with `npm_config_offline=true`, so no network is
+  `node_modules`): the store pipeline runs `bun install --frozen-lockfile --ignore-scripts` (registry access, installs the
+  locked dependency tree) **then** `bun run --no-install build` with `npm_config_offline=true`, so no network is
   used during the bundle. `dist/` is **gitignored** — it's regenerated and is the *only* thing the
   marketplace packs/ships, so raw source, `lib/`, `node_modules/`, `CLAUDE.md`, `.claude/`,
   `scripts/`, etc. never reach users (only the bundled runtime + `package.json` do). **Deliberately
   single-purpose and offline** — it only emits `dist/`; the fork-simulation lives in `preflight.mjs`,
-  not here, so CI's `npm run build` stays fast and network-free.
-- `scripts/preflight.mjs` (`npm run preflight`) — **local pre-flight**: runs this extension
+  not here, so CI's `bun run build` stays fast and network-free.
+- `scripts/preflight.mjs` (`bun run preflight`) — **local pre-flight**: runs this extension
   through the *real* `dzulfikar08/atur-terminal-extensions` tooling (build → validate → pack --dry-run) without
   hand-forking. It clones (and refreshes) that repo into a cache under the OS tmpdir —
   **realpath'd**, because macOS `/tmp → /private/tmp` would otherwise break the tooling's
@@ -659,11 +659,11 @@ current. The shipped copy is rebuilt into `dist/` from source.
 
 ### Publishing to the marketplace
 
-**First, locally:** `npm run preflight` runs the whole pipeline (build → validate → pack) against
+**First, locally:** `bun run preflight` runs the whole pipeline (build → validate → pack) against
 the real tooling and reports an independent schema verdict — do this before forking.
 
 Then fork **`dzulfikar08/atur-terminal-extensions`**, copy this directory to `extensions/review/` (dir name must
-equal `package.json` `name`), and from the fork root: `npm install` (inside `extensions/review/`),
+equal `package.json` `name`), and from the fork root: `bun install` (inside `extensions/review/`),
 `node scripts/build.mjs review`, `node scripts/validate.mjs review`,
 `node scripts/pack.mjs --dry-run review`, and open a PR. CI runs the same build → validate →
 (on merge) pack/sign/upload; only `dist/` is shipped. **Blocker:** validation hard-requires
@@ -704,7 +704,7 @@ fresh. **Do NOT delete `dist/`** to "force root loading" — an in-modal *Reload
 fall back to root, but a real relaunch hard-expects `dist/` and errors without it (this cost a
 debugging session: first a new toolbar button never rendered because `dist/` was stale, then a
 relaunch broke entirely after `dist/` was removed). The empirical rule is simply: **`dist/` must
-exist and be current** — `scripts/build.sh` (or `npm run build`) ensures that. A fast way to tell
+exist and be current** — `scripts/build.sh` (or `bun run build`) ensures that. A fast way to tell
 the live tree is stale during diagnosis: drop a unique static (script-free, so no CSP issue)
 marker in `tabs/review.html`, rebuild, and check whether it appears.
 

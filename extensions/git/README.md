@@ -40,8 +40,8 @@ or `tea` in the active worktree, so they follow the remote workspace too.
 ## Building
 
 ```sh
-npm install --ignore-scripts
-npm run build
+bun install --ignore-scripts
+bun run build
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.

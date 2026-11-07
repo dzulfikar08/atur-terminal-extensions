@@ -40,9 +40,9 @@ scope on the server.
 ## Development
 
 ```bash
-npm install
-npm run dev     # vite build --watch into dist/
-npm run build   # vite build into dist/
+bun install
+bun run dev     # vite build --watch into dist/
+bun run build   # vite build into dist/
 ```
 
 Then load the extension in Atur Terminal's Extensions modal pointed at this directory.

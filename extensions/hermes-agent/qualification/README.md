@@ -1,6 +1,6 @@
 # Disposable qualification lab
 
-This lab is release infrastructure, not deployment guidance. `npm run qualify` exercises the supported `0.2.0` matrix—Docker/loopback, an actual operator-owned `ssh -L` forward, and trusted HTTPS/WebSocket—and emits `passed_supported_beta_matrix` only after cleanup is proven. `npm run qualify:native` retains the Atur Terminal SSH-workspace reproducer as an opt-in diagnostic; that topology is explicitly unsupported in `0.2.0`, and its self-authored observations cannot become release evidence. Every path fails closed and removes everything it owns. The pinned protocol fixtures below remain separate from the newer live Hermes smoke test recorded in the release notes.
+This lab is release infrastructure, not deployment guidance. `bun run qualify` exercises the supported `0.2.0` matrix—Docker/loopback, an actual operator-owned `ssh -L` forward, and trusted HTTPS/WebSocket—and emits `passed_supported_beta_matrix` only after cleanup is proven. `bun run qualify:native` retains the Atur Terminal SSH-workspace reproducer as an opt-in diagnostic; that topology is explicitly unsupported in `0.2.0`, and its self-authored observations cannot become release evidence. Every path fails closed and removes everything it owns. The pinned protocol fixtures below remain separate from the newer live Hermes smoke test recorded in the release notes.
 
 Pinned components:
 

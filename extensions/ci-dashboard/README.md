@@ -123,9 +123,9 @@ shown rather than silently hidden.
 ## Building
 
 ```sh
-npm install
-npm run build
-npm test
+bun install
+bun run build
+bun run test
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.

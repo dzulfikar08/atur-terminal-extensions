@@ -1,10 +1,10 @@
 # ports
 
-Atur Terminal extension scaffolded from a starter kit. This is an npm + Vite project.
+Atur Terminal extension scaffolded from a starter kit. This is an Bun + Vite project.
 
 ## Layout
 
-- `package.json` — npm manifest. Identity (`name`, `version`) is at the
+- `package.json` — package manifest. Identity (`name`, `version`) is at the
   top level; all Atur Terminal fields live under the `atur` key. A `build` script
   (Vite) is required.
 - `vite.config.js` — builds to `dist/`, the directory Atur Terminal installs.
@@ -20,9 +20,9 @@ extensions need no background script.
 
 ## Building & editing
 
-Install deps with `npm install`, then `npm run build` to produce
+Install deps with `bun install`, then `bun run build` to produce
 `dist/`. After rebuilding, click "Reload" in the Atur Terminal Extensions modal to
-pick up the changes. (`npm run dev` runs Vite's dev server for fast
+pick up the changes. (`bun run dev` runs Vite's dev server for fast
 iteration.)
 
 ## Skill

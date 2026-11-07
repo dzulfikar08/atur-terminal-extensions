@@ -18,7 +18,7 @@ Claude Code に渡します — ブランチ(任意で専用の git worktree)を
 
 ## セットアップ
 
-1. ビルド(`npm install && npm run build`)後、Atur Terminal で **Extensions → Load Unpacked**
+1. ビルド(`bun install && bun run build`)後、Atur Terminal で **Extensions → Load Unpacked**
    からビルド済みの **`dist/`** フォルダを選びます。
 2. パネルを開き(topbar アイコンまたは `Linear: Toggle Sidebar`)、**設定**(⚙)を
    開きます。**🔑 API キー管理** を押して Linear の **Personal API Key** を(説明付きで)

@@ -1,10 +1,10 @@
 # gitlab
 
-Atur Terminal extension. npm + Vite project.
+Atur Terminal extension. Bun + Vite project.
 
 ## Layout
 
-- `package.json` — npm manifest. Identity (`name`, `version`) is at the top
+- `package.json` — package manifest. Identity (`name`, `version`) is at the top
   level; all Atur Terminal fields live under the `atur` key.
 - `vite.config.js` — builds to `dist/`, the directory Atur Terminal installs.
 - `index.html` + `src/` — the panel.
@@ -45,8 +45,8 @@ feature to one side, check whether the other should get it too.
 
 ## Building & editing
 
-`npm install`, then `npm run build` to produce `dist/`. After rebuilding, click
-"Reload" in the Atur Terminal Extensions modal. (`npm run dev` runs Vite's dev server.)
+`bun install`, then `bun run build` to produce `dist/`. After rebuilding, click
+"Reload" in the Atur Terminal Extensions modal. (`bun run dev` runs Vite's dev server.)
 
 ## Conventions
 

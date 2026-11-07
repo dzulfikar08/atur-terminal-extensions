@@ -3,8 +3,8 @@
 Atur Terminal file explorer and editor extension built with vanilla JavaScript, Vite, Tailwind CSS, `atur.files`, and `atur.tabs`.
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 The panel entrypoint is `src/main.js`; the editor tab entrypoint is `src/editor/main.js`. Build output is written to `dist/`; reload the extension in Atur Terminal after rebuilding.

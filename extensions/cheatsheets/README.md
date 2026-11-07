@@ -103,9 +103,9 @@ only when the feature is first used, never at install:
 ## Building
 
 ```sh
-npm install
-npm run build     # vite build + background bundle + manifest copy → dist/
-npm test          # parser / sanitizer / ref-codec unit tests
+bun install
+bun run build     # vite build + background bundle + manifest copy → dist/
+bun run test          # parser / sanitizer / ref-codec unit tests
 ```
 
 Load the folder via **Load Unpacked** in Atur Terminal's Extensions modal; after a

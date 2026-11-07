@@ -38,7 +38,7 @@ This build is the editor only:
 
 ## How it is built
 
-`npm run build` (`scripts/build.mjs`):
+`bun run build` (`scripts/build.mjs`):
 
 1. fetches **exactly** the commit in `upstream.json` from `open-pencil/open-pencil` (a moving tag is
    never trusted; the build fails if the fetched commit differs),

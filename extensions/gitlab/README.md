@@ -58,9 +58,9 @@ git remote; writes go through glab's own subcommands pinned to the project with
 ## Building
 
 ```sh
-npm install
-npm run build
-npm test
+bun install
+bun run build
+bun run test
 ```
 
 Then click **Reload** in the Atur Terminal Extensions modal.

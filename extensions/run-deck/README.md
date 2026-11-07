@@ -32,8 +32,8 @@ No telemetry, uploaded process data, external font downloads, or remote code loa
 Use Node 20.19+ on the 20.x line, or Node 22.12+:
 
 ```sh
-npm ci
-npm run build
+bun install --frozen-lockfile
+bun run build
 ```
 
 Load the resulting `dist/` directory through Atur Terminal's **Extensions → Load Unpacked** for local development. Node is not needed to run the installed extension.

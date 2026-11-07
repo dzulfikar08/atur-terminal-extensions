@@ -55,8 +55,8 @@ const isValid = response?.is_active ?? response?.isValid ?? true;
 ## Installation
 
 1. Clone or download this repository
-2. Run `npm install`
-3. Run `npm run build`
+2. Run `bun install`
+3. Run `bun run build`
 4. In Atur Terminal, open Extensions → Load Unpacked → select the `dist/` folder
 5. Click **Reload** to activate
 
@@ -91,9 +91,9 @@ const isValid = response?.is_active ?? response?.isValid ?? true;
 ## Development
 
 ```bash
-npm install
-npm run dev    # Vite dev server
-npm run build  # Production build
+bun install
+bun run dev    # Vite dev server
+bun run build  # Production build
 ```
 
 Built files go to `dist/`. After rebuilding, click **Reload** in Atur Terminal Extensions.

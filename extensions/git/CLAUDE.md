@@ -10,7 +10,7 @@ Official Git extension for Atur Terminal
 
 ## Building & editing
 
-Install deps with `npm install --ignore-scripts`, then `npm run build` to produce
+Install deps with `bun install --ignore-scripts`, then `bun run build` to produce
 the bundled files in `dist/`. After rebuilding, click "Reload" in the Atur Terminal
 Extensions modal to pick up the changes.
 

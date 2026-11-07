@@ -6,7 +6,9 @@ import { fileURLToPath } from "node:url";
 import {
   buildOutputDir,
   extensionDir,
+  hasDependencies,
   listExtensionNames,
+  lockfileErrors,
   packageJSONPath,
   readPackageManifest,
   referencedBuildFiles,
@@ -30,7 +32,7 @@ function run(command, args, cwd, env) {
 
 // Build a single extension: install the locked dependency tree without running
 // any lifecycle scripts (the key supply-chain mitigation), then run the Vite
-// `build` script. Returns true on success.
+// `build` script with Bun. Returns true on success.
 function buildExtension(name) {
   const dir = extensionDir(name);
 
@@ -38,8 +40,9 @@ function buildExtension(name) {
     fail(name, "package.json not found");
     return false;
   }
-  if (!fs.existsSync(path.join(dir, "package-lock.json"))) {
-    fail(name, "package-lock.json is required (run `npm install` and commit the lockfile)");
+  const lockErrors = lockfileErrors(dir);
+  if (lockErrors.length > 0) {
+    for (const message of lockErrors) fail(name, message);
     return false;
   }
 
@@ -56,12 +59,18 @@ function buildExtension(name) {
   }
 
   try {
-    // Install with registry access but no lifecycle scripts.
-    run("npm", ["ci", "--ignore-scripts"], dir, process.env);
-    // Run the build with npm in offline mode so it can't pull additional
-    // packages at build time. This constrains npm's own network use; it is a
-    // speed-bump, not a sandbox (build tooling can still make network calls).
-    run("npm", ["run", "build"], dir, { ...process.env, npm_config_offline: "true" });
+    // Install the exact locked tree (fail if bun.lock is out of date) with
+    // registry access but no lifecycle scripts. An extension without
+    // dependencies has nothing to install.
+    if (hasDependencies(dir)) {
+      run("bun", ["install", "--frozen-lockfile", "--ignore-scripts"], dir, process.env);
+    }
+    // Run the build so it can't pull additional packages at build time:
+    // `--no-install` turns off Bun's runtime auto-install, and
+    // npm_config_offline keeps any npm/npx a build script calls offline. This
+    // constrains the package managers' own network use; it is a speed-bump,
+    // not a sandbox (build tooling can still make network calls).
+    run("bun", ["run", "--no-install", "build"], dir, { ...process.env, npm_config_offline: "true" });
   } catch (err) {
     fail(name, `build failed: ${err.message}`);
     return false;

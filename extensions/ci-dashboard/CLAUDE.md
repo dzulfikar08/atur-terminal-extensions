@@ -1,10 +1,10 @@
 # ci-dashboard
 
-Atur Terminal extension. npm + Vite project.
+Atur Terminal extension. Bun + Vite project.
 
 ## Layout
 
-- `package.json` — npm manifest; Atur Terminal fields live under the `atur` key.
+- `package.json` — package manifest; Atur Terminal fields live under the `atur` key.
 - `index.html` + `src/` — the panel.
   - `model.js` — the normalized `Run` / `Job` shape every provider maps onto,
     plus status normalization and duration/since-green helpers. Nothing above
@@ -44,8 +44,8 @@ root, so it follows the repo rather than the picker's cwd.
 
 ## Building & editing
 
-`npm install`, then `npm run build` to produce `dist/`. After rebuilding, click
-"Reload" in the Atur Terminal Extensions modal. `npm test` runs the unit and curl
+`bun install`, then `bun run build` to produce `dist/`. After rebuilding, click
+"Reload" in the Atur Terminal Extensions modal. `bun run test` runs the unit and curl
 integration tests.
 
 ## Conventions

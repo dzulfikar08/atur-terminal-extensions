@@ -45,19 +45,19 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "24"
-          cache: "npm"
 
-      # Some extensions (openpencil) build their bundled web app with Bun.
+      # Extensions and tooling install with Bun. Keep it on the version
+      # extensions/openpencil/upstream.json pins for the OpenPencil build.
       - name: Setup Bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: "1.4.2"
 
       - name: Install tooling
-        run: npm ci
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Test trusted tooling
-        run: npm test
+        run: bun run test
 
       - name: Determine changed extensions
         id: changed
@@ -97,13 +97,13 @@ jobs:
           fi
 
       - name: Build changed extensions
-        run: node scripts/build.mjs ${{ steps.changed.outputs.names }}
+        run: bun run build ${{ steps.changed.outputs.names }}
 
       - name: Validate changed extensions
-        run: node scripts/validate.mjs ${{ steps.changed.outputs.names }}
+        run: bun run validate ${{ steps.changed.outputs.names }}
 
       - name: Dry-run pack (prove deterministic zip + hash)
-        run: node scripts/pack.mjs --dry-run ${{ steps.changed.outputs.names }}
+        run: bun run pack --dry-run ${{ steps.changed.outputs.names }}
 
   pr-meta:
     name: Enforce version bump and PR title

@@ -18,7 +18,7 @@ Code에 넘깁니다 — 브랜치(선택적으로 별도 git worktree)를 만�
 
 ## 초기 설정
 
-1. 빌드(`npm install && npm run build`) 후, Atur Terminal에서 **Extensions → Load Unpacked**로
+1. 빌드(`bun install && bun run build`) 후, Atur Terminal에서 **Extensions → Load Unpacked**로
    빌드된 **`dist/`** 폴더를 선택합니다.
 2. 패널을 열고(topbar 아이콘 또는 `Linear: Toggle Sidebar`) **설정**(⚙)을 엽니다.
    **🔑 API 키 관리**를 눌러 Linear **Personal API Key**를 (설명과 함께) 하나 이상

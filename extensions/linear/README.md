@@ -18,7 +18,7 @@ worktree) and launches your agent CLI seeded with an issue-aware prompt.
 
 ## Setup
 
-1. Build (`npm install && npm run build`), then in Atur Terminal open **Extensions →
+1. Build (`bun install && bun run build`), then in Atur Terminal open **Extensions →
    Load Unpacked** and pick the built **`dist/`** folder.
 2. Open the panel (topbar icon or `Linear: Toggle Sidebar`), then open
    **Settings** (⚙). Click **🔑 Manage API keys** to register one or more Linear

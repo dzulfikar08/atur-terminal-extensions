@@ -61,6 +61,33 @@ export function readPackageManifest(dir) {
   };
 }
 
+// Extensions are installed with Bun from a committed text lockfile (`bun.lock`).
+export const lockfileName = "bun.lock";
+const foreignLockfiles = ["package-lock.json", "npm-shrinkwrap.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb"];
+const dependencyFields = ["dependencies", "devDependencies", "optionalDependencies", "peerDependencies"];
+
+export function hasDependencies(dir) {
+  const pkg = readJSON(packageJSONPath(dir));
+  return dependencyFields.some((field) => Object.keys(pkg[field] ?? {}).length > 0);
+}
+
+// Returns the lockfile errors for an extension directory (empty when it is
+// fine). An extension that declares dependencies must commit `bun.lock`; one
+// with no dependencies has nothing to lock (Bun deletes an empty lockfile).
+// Other package managers' lockfiles are rejected so there is one source of truth.
+export function lockfileErrors(dir) {
+  const errors = [];
+  for (const file of foreignLockfiles) {
+    if (fs.existsSync(path.join(dir, file))) {
+      errors.push(`${file} is not used here: delete it and commit bun.lock (run \`bun install\`)`);
+    }
+  }
+  if (hasDependencies(dir) && !fs.existsSync(path.join(dir, lockfileName))) {
+    errors.push("bun.lock is required (run `bun install` and commit the lockfile)");
+  }
+  return errors;
+}
+
 function iconSVGPath(icon) {
   if (icon && typeof icon === "object" && typeof icon.svg === "string") return icon.svg;
   return null;

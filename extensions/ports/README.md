@@ -24,8 +24,8 @@ A background worker runs `lsof -iTCP -sTCP:LISTEN` every 5 s and resolves each p
 ## Development
 
 ```bash
-npm install
-npm run build   # or: npm run dev
+bun install
+bun run build   # or: bun run dev
 ```
 
 After rebuilding, click **Reload** in the Atur Terminal Extensions modal to pick up changes.

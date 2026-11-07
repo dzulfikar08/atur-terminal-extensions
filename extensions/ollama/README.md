@@ -69,9 +69,9 @@ Settings → Extensions → Permissions.
 ## Development
 
 ```sh
-npm install
-npm run build   # emits dist/ and copies package.json into it
-npm test        # parser + launch-command unit tests
+bun install
+bun run build   # emits dist/ and copies package.json into it
+bun run test        # parser + launch-command unit tests
 ```
 
 Load the checkout with **Load Unpacked** in Settings → Extensions, then press **Reload**

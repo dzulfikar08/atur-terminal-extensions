@@ -12,7 +12,7 @@ import { filesUnder, validateBuilt, validateDist } from "./validate-dist.mjs";
 const run = promisify(execFile);
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
+const bun = process.platform === "win32" ? "bun.exe" : "bun";
 const ENTRYPOINTS = ["src/main.js"];
 const EXCLUDED_COPY_ROOTS = new Set([
   ".git", ".research", ".agents", ".planning", ".qualification", ".gsd", "dist", "node_modules", ".npm-cache",
@@ -101,34 +101,44 @@ export async function scanReleaseSecrets(base = root) {
   return Object.freeze(scanned);
 }
 
-async function npmAudit() {
+// bun.lock is JSONC (trailing commas); it records the workspace, not its version.
+function parseBunLock(source) {
+  return JSON.parse(source.replace(/,(\s*[}\]])/g, "$1"));
+}
+
+async function bunAudit() {
   let output = "";
   try {
-    ({ stdout: output } = await run(npm, ["audit", "--json"], { cwd: root, maxBuffer: 4 * 1024 * 1024 }));
+    ({ stdout: output } = await run(bun, ["audit", "--json"], { cwd: root, maxBuffer: 4 * 1024 * 1024 }));
   } catch (error) {
     output = error.stdout ?? "";
   }
   let report;
-  try { report = JSON.parse(output); } catch { throw new Error("npm_audit_unreadable"); }
-  assert.equal(report.metadata?.vulnerabilities?.high ?? 0, 0, "npm audit contains high vulnerabilities");
-  assert.equal(report.metadata?.vulnerabilities?.critical ?? 0, 0, "npm audit contains critical vulnerabilities");
+  try { report = JSON.parse(output); } catch { throw new Error("bun_audit_unreadable"); }
+  // bun audit --json maps each vulnerable package to its advisories.
+  const severities = Object.values(report ?? {}).flat().map((advisory) => advisory?.severity);
+  const vulnerabilities = {
+    high: severities.filter((severity) => severity === "high").length,
+    critical: severities.filter((severity) => severity === "critical").length,
+  };
+  assert.equal(vulnerabilities.high, 0, "bun audit contains high vulnerabilities");
+  assert.equal(vulnerabilities.critical, 0, "bun audit contains critical vulnerabilities");
   return Object.freeze({ high: 0, critical: 0 });
 }
 
 export async function validateReleaseGovernance() {
   const [manifestText, lockText, changelog, releasing, readme, workflow] = await Promise.all([
     readFile(resolve(root, "package.json"), "utf8"),
-    readFile(resolve(root, "package-lock.json"), "utf8"),
+    readFile(resolve(root, "bun.lock"), "utf8"),
     readFile(resolve(root, "CHANGELOG.md"), "utf8"),
     readFile(resolve(root, "RELEASING.md"), "utf8"),
     readFile(resolve(root, "README.md"), "utf8"),
     readFile(resolve(root, ".github/workflows/ci.yml"), "utf8"),
   ]);
   const manifest = JSON.parse(manifestText);
-  const lock = JSON.parse(lockText);
+  const lock = parseBunLock(lockText);
   assert.equal(manifest.private, true, "package must remain npm-private");
-  assert.equal(lock.version, manifest.version, "package-lock version must match package.json");
-  assert.equal(lock.packages?.[""]?.version, manifest.version, "root lockfile version must match package.json");
+  assert.equal(lock.workspaces?.[""]?.name, manifest.name, "bun.lock must belong to this package");
   assert.equal(Object.keys(manifest.dependencies ?? {}).length, 0, "runtime dependencies are forbidden");
   assert.equal(Object.keys(manifest.scripts ?? {}).some((name) => /^(?:prepublish|prepublishOnly|publish|postpublish)$/.test(name)), false, "npm publication lifecycle scripts are forbidden");
   assert.equal(manifest["atur-terminal"]?.marketplace?.repository, "https://github.com/gabeosx/muxy-gsd-control-tower", "marketplace source repository changed");
@@ -139,7 +149,7 @@ export async function validateReleaseGovernance() {
     assert.match(releasing, new RegExp(`^## ${heading}`, "m"), `release guide lacks ${heading}`);
   }
   for (const contract of [
-    /package\.json.*version source/i, /package-lock\.json.*match/i,
+    /package\.json.*version source/i, /bun\.lock.*current/i,
     /patch releases for fixes, security, documentation, and listing/i,
     /minor releases for features, permission changes/i,
     /gsd-control-tower@version.*immutable/i, /gsd-control-tower-vX\.Y\.Z/,
@@ -158,8 +168,9 @@ export async function validateReleaseGovernance() {
   assert.equal([...workflow.matchAll(/^\s*permissions:/gm)].length, 1, "job-level permissions are forbidden");
   assert.match(workflow, /actions\/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09\s+# v5/);
   assert.match(workflow, /actions\/setup-node@a0853c24544627f65ddf259abe73b1d18a591444\s+# v5/);
-  for (const command of ["npm ci", "npm test", "npm run validate"]) assert.ok(workflow.includes(command), `CI must run ${command}`);
-  assert.doesNotMatch(workflow, /secrets\.|permissions:\s*write|npm publish|\bdeploy\b/i, "CI must not receive secrets or publication authority");
+  assert.match(workflow, /oven-sh\/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6\s+# v2/);
+  for (const command of ["bun install --frozen-lockfile", "bun run test", "bun run validate"]) assert.ok(workflow.includes(command), `CI must run ${command}`);
+  assert.doesNotMatch(workflow, /secrets\.|permissions:\s*write|(?:npm|bun) publish|\bdeploy\b/i, "CI must not receive secrets or publication authority");
   return Object.freeze({ version: manifest.version });
 }
 
@@ -190,9 +201,9 @@ async function distFingerprint(copyRoot) {
 async function qualifyCleanCopy(parent, index) {
   const copyRoot = resolve(parent, `copy-${index}`);
   await cp(root, copyRoot, { recursive: true, filter: copyFilter });
-  await runChecked(npm, ["ci", "--no-audit", "--no-fund"], { cwd: copyRoot, label: `copy_${index}_npm_ci` });
-  await runChecked(npm, ["test"], { cwd: copyRoot, label: `copy_${index}_test` });
-  await runChecked(npm, ["run", "build"], { cwd: copyRoot, label: `copy_${index}_build` });
+  await runChecked(bun, ["install", "--frozen-lockfile", "--ignore-scripts"], { cwd: copyRoot, label: `copy_${index}_bun_install` });
+  await runChecked(bun, ["run", "test"], { cwd: copyRoot, label: `copy_${index}_test` });
+  await runChecked(bun, ["run", "build"], { cwd: copyRoot, label: `copy_${index}_build` });
   await runChecked(process.execPath, ["scripts/validate-dist.mjs", "--built-only"], { cwd: copyRoot, label: `copy_${index}_dist` });
   return distFingerprint(copyRoot);
 }
@@ -219,9 +230,9 @@ export async function validateRelease({ structuralOnly = false } = {}) {
   const governance = await validateReleaseGovernance();
   const graph = await validateImportReachability();
   await scanReleaseSecrets(root);
-  const audit = await npmAudit();
+  const audit = await bunAudit();
   if (structuralOnly) return Object.freeze({ governance, graph, audit, distribution: null, cleanCopies: null });
-  await runChecked(npm, ["test"], { cwd: root, label: "canonical_test" });
+  await runChecked(bun, ["run", "test"], { cwd: root, label: "canonical_test" });
   const distribution = await validateDist();
   await scanReleaseSecrets(dist);
   const cleanCopies = await validateCleanCopies();

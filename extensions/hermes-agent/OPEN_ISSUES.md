@@ -16,7 +16,7 @@ On Atur Terminal 1.5.0 (945), an extension command approved inside an SSH worksp
 - The extension displays a bounded unsupported-workspace message.
 - It does not move cookies or request bodies into argv, weaken TLS, or add a topology-specific transport workaround.
 - Users can run Atur Terminal locally and connect through an operator-owned `ssh -L` forward or a trusted HTTPS Dashboard address.
-- The opt-in `npm run qualify:native` command remains available to reproduce and requalify the native path.
+- The opt-in `bun run qualify:native` command remains available to reproduce and requalify the native path.
 
 ### Acceptance criteria
 

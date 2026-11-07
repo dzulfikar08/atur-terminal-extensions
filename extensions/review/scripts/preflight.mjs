@@ -3,9 +3,9 @@
 // dzulfikar08/atur-terminal-extensions tooling (build → validate → pack) exactly as CI will,
 // without hand-forking anything.
 //
-//   npm run preflight
+//   bun run preflight
 //
-// Why this is separate from `npm run build`: build.mjs is what CI invokes — it
+// Why this is separate from `bun run build`: build.mjs is what CI invokes — it
 // must stay offline, single-purpose (emit dist/), and fast. This script is the
 // opposite: it reaches out to the network, clones the marketplace tooling, and
 // drives it against a staged copy of us. Different job, different script.
@@ -17,7 +17,7 @@
 //      guard (so main() silently no-ops and you get a green-looking no-op).
 //   2. Stage this extension into <cache>/extensions/<name>/ (copy, minus
 //      node_modules/ dist/ .git/ — the things that are regenerated or huge).
-//   3. npm install the tooling, then run build.mjs / validate.mjs /
+//   3. bun install the tooling, then run build.mjs / validate.mjs /
 //      pack.mjs --dry-run for our name.
 //   4. Independently validate our RAW package.json against the authoritative
 //      schema (dzulfikar08/atur-terminal). The tooling on main currently flattens the
@@ -88,8 +88,8 @@ fs.cpSync(extRoot, stageDir, {
 console.log(`staged ${name} -> ${stageDir}`);
 
 // 3. Install tooling deps + run build / validate / pack.
-step("npm install (tooling)");
-run("npm", ["install"], { cwd: cache });
+step("bun install (tooling)");
+run("bun", ["install", "--frozen-lockfile", "--ignore-scripts"], { cwd: cache });
 
 const tool = (script, ...args) => path.join(cache, "scripts", script);
 let toolingFailed = false;

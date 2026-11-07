@@ -43,7 +43,6 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "24"
-          cache: "npm"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
@@ -51,7 +50,7 @@ jobs:
           bun-version: "1.4.2"
 
       - name: Install tooling
-        run: npm ci
+        run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Check publishing is configured
         id: configured
@@ -118,19 +117,19 @@ jobs:
 
       - name: Test tooling
         if: steps.changed.outputs.names != ''
-        run: npm test
+        run: bun run test
 
       - name: Build changed extensions
         if: steps.changed.outputs.names != ''
         env:
           NAMES: ${{ steps.changed.outputs.names }}
-        run: node scripts/build.mjs $NAMES
+        run: bun run build $NAMES
 
       - name: Validate changed extensions
         if: steps.changed.outputs.names != ''
         env:
           NAMES: ${{ steps.changed.outputs.names }}
-        run: node scripts/validate.mjs $NAMES
+        run: bun run validate $NAMES
 
       - name: Pack, sign, and upload
         if: steps.changed.outputs.names != ''
@@ -139,4 +138,4 @@ jobs:
           EXTENSIONS_PUBLISH_URL: https://extensions.diatur.com/api/publish
           EXTENSIONS_PUBLISH_TOKEN: ${{ secrets.EXTENSIONS_PUBLISH_TOKEN }}
           EXTENSIONS_SIGNING_KEY: ${{ secrets.EXTENSIONS_SIGNING_KEY }}
-        run: node scripts/publish.mjs $NAMES
+        run: bun run publish $NAMES

@@ -6,7 +6,7 @@ excludeAgent: "cloud-agent"
 # Atur Terminal extension code review
 
 Use these instructions only when reviewing a pull request that changes an Atur Terminal
-extension. Atur Terminal extensions are npm and Vite projects under `extensions/<name>/`.
+extension. Atur Terminal extensions are Bun and Vite projects under `extensions/<name>/`.
 Their manifest is the `atur` object in `package.json`, authored code normally
 lives in `src/`, and the marketplace publishes only `dist/`.
 
@@ -33,7 +33,7 @@ that passed.
 - Prefer the structured `window.atur` APIs over shell commands for supported
   operations. Code must work in the active local or remote workspace instead
   of assuming paths or tools on the reviewer's computer.
-- Require `package-lock.json` and readable source. Do not treat generated
+- Require `bun.lock` (for extensions with dependencies) and readable source. Do not treat generated
   `dist/` bundles or lockfile churn as authored-code style problems.
 
 ## Design

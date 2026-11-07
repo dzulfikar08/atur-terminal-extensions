@@ -9,7 +9,7 @@ import { promisify } from "node:util";
 const run = promisify(execFile);
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
+const bun = process.platform === "win32" ? "bun.exe" : "bun";
 
 const PERMISSIONS = [
   "projects:read", "worktrees:read", "agents:read", "files:read", "git:read",
@@ -187,10 +187,10 @@ async function validateBuilt() {
 }
 
 export async function validateDist({ buildTwice = true } = {}) {
-  await run(npm, ["run", "build"], { cwd: root, maxBuffer: 8 * 1024 * 1024 });
+  await run(bun, ["run", "build"], { cwd: root, maxBuffer: 8 * 1024 * 1024 });
   const first = await validateBuilt();
   if (buildTwice) {
-    await run(npm, ["run", "build"], { cwd: root, maxBuffer: 8 * 1024 * 1024 });
+    await run(bun, ["run", "build"], { cwd: root, maxBuffer: 8 * 1024 * 1024 });
     const second = await validateBuilt();
     assert.deepEqual(second.files, first.files, "canonical builds produced different inventories");
     assert.deepEqual(second.digests, first.digests, "canonical builds were not byte-identical");

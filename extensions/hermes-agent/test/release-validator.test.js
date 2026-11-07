@@ -59,7 +59,7 @@ test("release documents define the immutable source-first marketplace handoff", 
     assert.match(releasing, new RegExp(`^## ${heading}`, "m"));
   }
   assert.match(releasing, /package\.json.*version source/i);
-  assert.match(releasing, /package-lock\.json.*match/i);
+  assert.match(releasing, /bun\.lock.*current/i);
   assert.match(releasing, /patch.*fixes.*security.*documentation.*listing/i);
   assert.match(releasing, /minor.*features.*permission.*deployment/i);
   assert.match(releasing, /hermes-agent@version.*immutable/i);
@@ -70,7 +70,7 @@ test("release documents define the immutable source-first marketplace handoff", 
   assert.match(releasing, /Do not commit or push directly to `dzulfikar08\/atur-terminal-extensions`/i);
   assert.match(releasing, /No npm publish step/i);
   assert.match(releasing, /stops at a draft pull request/i);
-  for (const command of ["npm test", "npm run validate", "npm run qualify", "npm ci", "node scripts/validate.mjs hermes-agent", "node scripts/pack.mjs --dry-run hermes-agent"]) {
+  for (const command of ["bun run test", "bun run validate", "bun run qualify", "bun install --frozen-lockfile", "node scripts/validate.mjs hermes-agent", "node scripts/pack.mjs --dry-run hermes-agent"]) {
     assert.ok(releasing.includes(command), `release guide must include ${command}`);
   }
   for (const excluded of ["dist/", ".planning/", ".qualification/", ".agents/", ".gsd/", "node_modules/", "receipts", "credentials", "generated qualification data", "local caches/logs", "skills-lock.json"]) {
@@ -86,15 +86,14 @@ test("release documents define the immutable source-first marketplace handoff", 
 test("release governance bounds CI, versions, copy exclusions, and publication authority", async () => {
   const [manifestSource, lockSource, workflow, validator] = await Promise.all([
     readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readFile(new URL("../package-lock.json", import.meta.url), "utf8"),
+    readFile(new URL("../bun.lock", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8"),
     readFile(new URL("../scripts/validate-release.mjs", import.meta.url), "utf8"),
   ]);
   const manifest = JSON.parse(manifestSource);
-  const lockfile = JSON.parse(lockSource);
+  const lockfile = JSON.parse(lockSource.replace(/,(\s*[}\]])/g, "$1"));
   assert.equal(manifest.private, true);
-  assert.equal(lockfile.version, manifest.version);
-  assert.equal(lockfile.packages[""].version, manifest.version);
+  assert.equal(lockfile.workspaces[""].name, manifest.name);
   assert.equal(Object.keys(manifest.scripts).some((name) => /^(?:prepublish|prepublishOnly|publish|postpublish)$/.test(name)), false);
   assert.match(validator, /EXCLUDED_COPY_ROOTS.*\.qualification/s);
   assert.match(validator, /validateReleaseGovernance/);
@@ -105,10 +104,10 @@ test("release governance bounds CI, versions, copy exclusions, and publication a
   assert.match(workflow, /node-version:\s*20/);
   assert.match(workflow, /uses:\s*actions\/checkout@11bd71901bbe5b1630ceea73d27597364c9af683\s+# v4/);
   assert.match(workflow, /uses:\s*actions\/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\s+# v4/);
-  for (const command of ["npm ci", "npm test", "npm run validate"]) assert.ok(workflow.includes(command));
+  for (const command of ["bun install --frozen-lockfile", "bun run test", "bun run validate"]) assert.ok(workflow.includes(command));
   assert.match(workflow, /if:\s*github\.event_name == 'workflow_dispatch'/);
-  assert.match(workflow, /npm run qualify/);
-  assert.doesNotMatch(workflow, /secrets\.|permissions:\s*write|npm publish|deploy/i);
+  assert.match(workflow, /bun run qualify/);
+  assert.doesNotMatch(workflow, /secrets\.|permissions:\s*write|(?:npm|bun) publish|deploy/i);
 
   const governance = await validateReleaseGovernance();
   assert.equal(governance.version, manifest.version);

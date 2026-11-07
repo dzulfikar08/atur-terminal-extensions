@@ -19,7 +19,7 @@ Pinned command launcher for Atur Terminal — run claude/codex and custom comman
 
 ## Building & editing
 
-`npm install --ignore-scripts`, then `npm run build` to emit `dist/`. After
+`bun install --ignore-scripts`, then `bun run build` to emit `dist/`. After
 rebuilding, click **Reload** in the Atur Terminal Extensions modal.
 
 ## Guides

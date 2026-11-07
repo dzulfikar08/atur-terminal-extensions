@@ -4,7 +4,7 @@ This guide prepares a reviewable Atur Terminal marketplace contribution. It does
 
 ## Versioning
 
-`package.json` is the version source. The root package version in `package-lock.json` must match it before release preparation starts.
+`package.json` is the version source. `bun.lock` must be committed and current (`bun install --frozen-lockfile` succeeds) before release preparation starts.
 
 Until 1.0, use patch releases for fixes, security, documentation, and listing corrections. Use minor releases for features, permission changes, newly supported deployment shapes, or breaking changes.
 
@@ -13,15 +13,15 @@ Published `hermes-agent@version` pairs are immutable. A correction never rebuild
 ## Prepare a release
 
 1. Move the relevant notes from `Unreleased` into a dated version section in `CHANGELOG.md`.
-2. Update the version in both `package.json` and the root package entry in `package-lock.json`.
+2. Update the version in `package.json`, then run `bun install` so `bun.lock` stays in sync.
 3. Review the manifest, listing assets, permissions, and `README.md`; do not add a publishing lifecycle script.
 4. Run the local gates from a clean working tree:
 
    ```sh
-   npm ci
-   npm test
-   npm run validate
-   npm run qualify
+   bun install --frozen-lockfile
+   bun run test
+   bun run validate
+   bun run qualify
    ```
 
 5. Retain the local output and qualification cleanup result with the review record. Do not retain credentials, disposable keys, or generated qualification data.
@@ -50,9 +50,9 @@ Exclude `dist/`, `.planning/`, `.qualification/`, `.agents/`, `.gsd/`, `node_mod
 From the copied extension, run:
 
 ```sh
-npm ci
-npm test
-npm run build
+bun install --frozen-lockfile
+bun run test
+bun run build
 ```
 
 From the upstream checkout root, run Atur Terminal's authoritative package checks:
